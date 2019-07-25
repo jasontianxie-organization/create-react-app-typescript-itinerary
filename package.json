@@ -57,6 +57,7 @@
     "terser-webpack-plugin": "1.2.3",
     "ts-pnp": "1.1.2",
     "typescript": "3.5.3",
+    "typescript-tslint-plugin": "^0.5.4",
     "url-loader": "1.1.2",
     "webpack": "4.29.6",
     "webpack-dev-server": "3.2.1",
@@ -132,5 +133,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "tslint": "^5.18.0"
   }
 }
