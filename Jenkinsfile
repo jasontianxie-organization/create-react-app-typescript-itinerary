@@ -18,7 +18,7 @@ node {
         echo 'test is finished' 
     }
     stage('Deploy') { 
-         sshCommand remote: remote, command: "&& docker stop itinerary-reactCreateApp-docker-container || true \
+         sshCommand remote: remote, command: "docker stop itinerary-reactCreateApp-docker-container || true \
          && docker rm itinerary-reactCreateApp-docker-container || true \
          && cd /var/jenkins_node/workspace/create-react-app-typescript-itinerary/build \
          && docker build --rm --no-cache=true  -t itinerary-reactCreateApp-docker-image \
