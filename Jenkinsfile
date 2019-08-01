@@ -19,7 +19,7 @@ node {
          && docker rm itinerary-reactCreateApp-docker-container || true \
          && cd /var/jenkins_node/workspace/create-react-app-typescript-itinerary/build \
          && docker build --rm --no-cache=true  -t itinerary-reactCreateApp-docker-image \
-         && docker rmi $(docker images -f \"dangling=true\" -q) \
+         && docker rmi \$\(docker images -f \"dangling\=true\" -q\) \
          && docker run -d  --name itinerary-reactCreateApp-docker-container -p 3333:3333  itinerary-reactCreateApp-docker-image"
     }
 }
