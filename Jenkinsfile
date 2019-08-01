@@ -21,8 +21,8 @@ node {
          sshCommand remote: remote, command: "docker stop itinerary-createreactapp-docker-container || true \
          && docker rm itinerary-createreactapp-docker-container || true \
          && cd /var/jenkins_node/workspace/create-react-app-typescript-itinerary/build \
-         && docker build --rm --no-cache=true  -t itinerary-createreactapp-docker-image \
+         && docker build --rm --no-cache=true -t itinerary-createreactapp-docker-image \
          && docker rmi \$(docker images -f \"dangling=true\" -q) \
-         && docker run -d  --name itinerary-createreactapp-docker-container -p 3333:3333  itinerary-createreactapp-docker-image"
+         && docker run -d --name itinerary-createreactapp-docker-container -p 3333:3333 itinerary-createreactapp-docker-image"
     }
 }
