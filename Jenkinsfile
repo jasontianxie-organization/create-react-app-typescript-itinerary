@@ -7,8 +7,8 @@ node {
     remote.password = '1986TIGER_snake'
     remote.allowAnyHosts = true  
     stage('Build') { 
-         sshCommand remote: remote, command: "cd /var/jenkins_node/workspace/create-react-app-typescript-itinerary \
-         && nvm use v10.15.3 \
+         sshCommand remote: remote, command: "&& nvm use v10.15.3 \
+         cd /var/jenkins_node/workspace/create-react-app-typescript-itinerary \
          && npm install \
          && npm run build"
     }
