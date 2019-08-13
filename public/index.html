@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,width=device-width,user-scalable=no">
     <meta name="theme-color" content="#000000" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -23,6 +23,14 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script type="text/javascript">
+      window.onresize = function () {
+          document.documentElement.style.fontSize = (document.documentElement.clientWidth > 1200 ? document.documentElement.clientWidth : 1200) / 1920 * 100 + 'px';
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+          document.documentElement.style.fontSize = (document.documentElement.clientWidth > 1200 ? document.documentElement.clientWidth : 1200) / 1920 * 100 + 'px';
+        }, false);
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.
