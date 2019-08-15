@@ -445,10 +445,11 @@ module.exports = function(webpackEnv) {
               test: sassModuleRegex,
               use: getStyleLoaders(
                 {
+                  localIdentName: "[name]-[local]-[hash:base64:6]",
                   importLoaders: 2,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                   modules: true,
-                  getLocalIdent: getCSSModuleLocalIdent,
+                  // getLocalIdent: getCSSModuleLocalIdent,
                 },
                 'sass-loader'
               ),
