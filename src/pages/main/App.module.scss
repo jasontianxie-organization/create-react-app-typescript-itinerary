@@ -1,0 +1,23 @@
+@import '~@/variables';
+
+.app {
+  text-align: center;
+}
+
+.app-header {
+  width: 100%;
+  height: 4rem;
+  background: $main-color;
+}
+
+:global(.ant-carousel .slick-slide) {
+  text-align: center;
+  height: 4rem;
+  line-height: 4rem;
+  background: $main-color;
+  overflow: hidden;
+}
+
+:gloabal(.ant-carousel .slick-slide h3) {
+  color: $white;
+}
