@@ -1,6 +1,7 @@
+import "./react-app-env.d.ts";
 import React from "react";
 import ReactDOM from "react-dom";
-import "@/index";
+import "./index.scss";
 import App from "@/pages/main/App";
 import * as serviceWorker from "./serviceWorker";
 
