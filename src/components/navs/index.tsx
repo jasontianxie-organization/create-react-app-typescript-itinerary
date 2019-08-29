@@ -1,17 +1,13 @@
 import React from "react";
 import {default as Item, INavsItemProps} from "./navsItem";
-import "./index.scss";
+import "./index.module.scss";
 
-// interface INavsItemProps {
-//     navTitle: string;
-//     show?: boolean;
-// }
 interface IChildren {
     props: INavsItemProps;
 }
 
 interface INavsProps {
-    children: any[];
+    children: IChildren[];
 }
 
 interface INavsState {
@@ -35,10 +31,10 @@ class Navs extends React.Component<INavsProps, INavsState> {
         const {indexToShow} = this.state;
         return (
             <>
-                <ul>
+                <ul styleName="titleWrap">
                 {children.map((child: any, index: number) => {
                     return (
-                        <li key={index} onClick={() => this.clickTitle(index + 1)}>
+                        <li key={index} onClick={() => this.clickTitle(index + 1)} styleName="title">
                             {child.props.navTitle}
                         </li>
                     );
