@@ -1,7 +1,8 @@
 import React from "react";
 
-interface INavsItemProps {
+export interface INavsItemProps {
     navTitle: string;
+    show?: boolean;
 }
 
 class NavsItem extends React.Component<INavsItemProps, any> {
@@ -10,8 +11,9 @@ class NavsItem extends React.Component<INavsItemProps, any> {
         this.state = {};
     }
     public render() {
+        const {show} = this.props;
         return (
-            <div>
+            <div style={{display: show ? "block" : "none"}}>
                 {this.props.children}
             </div>
         );

@@ -27,7 +27,7 @@ const App: React.FC = () => {
         <div styleName="nav">
           <Navs>
             <NavsItem navTitle="1">1</NavsItem>
-            <NavsItem navTitle="2">1</NavsItem>
+            <NavsItem navTitle="2">2</NavsItem>
           </Navs>
           <Button>看别人</Button>
           <Button>自己去</Button>
