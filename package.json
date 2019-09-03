@@ -10,6 +10,7 @@
     "@types/react": "16.8.23",
     "@types/react-css-modules": "^4.6.2",
     "@types/react-dom": "16.8.5",
+    "@types/react-transition-group": "^4.2.2",
     "@typescript-eslint/eslint-plugin": "1.6.0",
     "@typescript-eslint/parser": "1.6.0",
     "antd": "^3.21.4",

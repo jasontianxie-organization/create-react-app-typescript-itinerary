@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.module.scss";
 import {Carousel, Button} from "antd";
+import { Transition } from "react-transition-group";
 // import Navs from "@/components/navs";
 
 // const NavsItem = Navs.Item;
