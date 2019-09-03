@@ -41,7 +41,7 @@ class App extends React.Component<any, any> {
             <Button>自己去</Button>
             <Button>写游记</Button>
           </div>
-          <CSSTransition timeout={2000} in={this.state.inProps} classNames="search"appear={true}>
+          <CSSTransition timeout={2000} in={this.state.inProps} classNames="search">
             <div styleName="search-detail">
               this is the animation test
             </div>

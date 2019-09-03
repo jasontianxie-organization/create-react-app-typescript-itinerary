@@ -47,7 +47,6 @@
 
 :global(.search-enter-done) {
   height: 100px;
-  // transition: height 0ms;
 }
 
 :global(.search-exit) {
@@ -61,5 +60,4 @@
 
 :global(.search-exit-done) {
   height: 0;
-  // transition: height 0ms;
 }
