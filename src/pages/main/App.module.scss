@@ -30,3 +30,36 @@
 .nav {
 
 }
+
+.search-detail {
+  height: 0;
+  background: $main-color;
+}
+
+:global(.search-enter) {
+  height: 0;
+}
+
+:global(.search-enter-active) {
+  height: 100px;
+  transition: height 2000ms;
+}
+
+:global(.search-enter-done) {
+  height: 100px;
+  // transition: height 0ms;
+}
+
+:global(.search-exit) {
+  height: 100px;
+}
+
+:global(.search-exit-active) {
+  height: 0;
+  transition: height 2000ms;
+}
+
+:global(.search-exit-done) {
+  height: 0;
+  // transition: height 0ms;
+}
