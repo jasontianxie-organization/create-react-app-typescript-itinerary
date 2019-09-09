@@ -24,6 +24,7 @@
 
 .content {
   margin: 0 auto;
+  padding: 0 .3rem;
   overflow: auto;
 }
 
@@ -61,4 +62,10 @@
 
 :global(.search-exit-done) {
   height: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    padding: 0;
+  }
 }
