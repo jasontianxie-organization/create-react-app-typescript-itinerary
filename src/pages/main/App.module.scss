@@ -25,7 +25,6 @@
 .content {
   margin: 0 auto;
   padding: 0 .3rem;
-  overflow: auto;
 }
 
 .nav {
@@ -44,7 +43,7 @@
 
 :global(.search-enter-active) {
   height: 100px;
-  transition: height 2000ms;
+  transition: height 1000ms;
 }
 
 :global(.search-enter-done) {
@@ -57,11 +56,15 @@
 
 :global(.search-exit-active) {
   height: 0;
-  transition: height 2000ms;
+  transition: height 1000ms;
 }
 
 :global(.search-exit-done) {
   height: 0;
+}
+
+.list {
+
 }
 
 @media screen and (max-width: 768px) {
