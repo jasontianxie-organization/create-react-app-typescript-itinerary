@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.module.scss";
-import { Carousel, Button, List, Avatar, Icon } from "antd";
+import { Carousel, Button, List, Avatar, Icon, Input } from "antd";
 import { CSSTransition } from "react-transition-group";
 // import Navs from "@/components/navs";
+
+const {Search} = Input;
 
 const listData: any[] = [];
 for (let i = 0; i < 23; i++) {
@@ -64,7 +66,7 @@ class App extends React.Component<any, any> {
             </div>
             <CSSTransition timeout={500} in={this.state.inProps} classNames="search">
               <div styleName="search-detail">
-                this is the animation test
+                <Search placeholder="input search text" onSearch={(value: string) => console.log(value)} enterButton />
               </div>
             </CSSTransition>
           </div>
