@@ -38,35 +38,41 @@
 .search-detail {
   position: absolute;
   z-index: 1;
-  width: 100%;
+  width: 0;
   opacity: 0;
   overflow: hidden;
   background: $main-color;
 }
 
 :global(.search-enter) {
+  width: 0;
   opacity: 0;
 }
 
 :global(.search-enter-active) {
   opacity: 1;
+  width: 100%;
   transition: opacity 500ms;
 }
 
 :global(.search-enter-done) {
+  width: 100%;
   opacity: 1;
 }
 
 :global(.search-exit) {
+  width: 100%;
   opacity: 1;
 }
 
 :global(.search-exit-active) {
+  width: 100%;
   opacity: 0;
   transition: opacity 500ms;
 }
 
 :global(.search-exit-done) {
+  width: 0;
   opacity: 0;
 }
 
