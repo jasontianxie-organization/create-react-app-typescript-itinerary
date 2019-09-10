@@ -56,16 +56,18 @@ class App extends React.Component<any, any> {
           </Carousel>
         </header>
         <div styleName="content">
-          <div styleName="nav">
-            <Button onClick={() => this.toggleSearch()}>看别人</Button>
-            <Button>自己去</Button>
-            <Button>写游记</Button>
-          </div>
-          <CSSTransition timeout={1000} in={this.state.inProps} classNames="search">
-            <div styleName="search-detail">
-              this is the animation test
+          <div styleName="content-header">
+            <div styleName="nav">
+              <Button onClick={() => this.toggleSearch()}>看别人</Button>
+              <Button>自己去</Button>
+              <Button>写游记</Button>
             </div>
-          </CSSTransition>
+            <CSSTransition timeout={500} in={this.state.inProps} classNames="search">
+              <div styleName="search-detail">
+                this is the animation test
+              </div>
+            </CSSTransition>
+          </div>
           <div styleName="list">
             <List
               itemLayout="vertical"

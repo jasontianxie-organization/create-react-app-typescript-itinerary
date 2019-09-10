@@ -27,11 +27,18 @@
   padding: 0 1rem;
 }
 
+.content-header {
+  position: relative;
+}
+
 .nav {
 
 }
 
 .search-detail {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
   height: 0;
   overflow: hidden;
   background: $main-color;
@@ -43,7 +50,7 @@
 
 :global(.search-enter-active) {
   height: 100px;
-  transition: height 1000ms;
+  transition: height 500ms;
 }
 
 :global(.search-enter-done) {
@@ -56,7 +63,7 @@
 
 :global(.search-exit-active) {
   height: 0;
-  transition: height 1000ms;
+  transition: height 500ms;
 }
 
 :global(.search-exit-done) {
