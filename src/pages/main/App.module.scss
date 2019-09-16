@@ -36,12 +36,42 @@
 }
 
 .search-detail {
+  padding: .1rem .2rem;
   position: absolute;
   z-index: 1;
   width: 0;
   opacity: 0;
   overflow: hidden;
-  background: $main-color;
+  background: $white;
+}
+
+.search-input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  :global(.ant-input-search) {
+    margin-right: 10px;
+    flex: none;
+    max-width: 350px;
+  }
+
+  .tag-wrap {
+    display: flex;
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  :global(.ant-tag) {
+    flex: none;
+    margin: 4px;
+    align-self: center;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 :global(.search-enter) {

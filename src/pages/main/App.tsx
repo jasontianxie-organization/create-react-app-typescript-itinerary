@@ -1,11 +1,10 @@
 import React from "react";
 import "./App.module.scss";
-import { Carousel, Button, List, Avatar, Icon, Input } from "antd";
+import { Carousel, Button, List, Avatar, Icon, Input, Tag } from "antd";
 import { CSSTransition } from "react-transition-group";
-// import Navs from "@/components/navs";
-
 const {Search} = Input;
 
+// 模拟假数据
 const listData: any[] = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
@@ -19,6 +18,9 @@ for (let i = 0; i < 23; i++) {
   });
 }
 
+const tagData: string[] = ["重庆", "chengduchengduchengduchengduchengduchengduchengdu", "zhejiang", "qingdao", "tailand"];
+// 模拟假数据
+
 const IconText = ({ type, text }: any) => (
   <span>
     <Icon type={type} style={{ marginRight: 8 }} />
@@ -26,8 +28,6 @@ const IconText = ({ type, text }: any) => (
   </span>
 );
 
-// const NavsItem = Navs.Item;
-// const App: React.FC = () => {
 class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -66,7 +66,12 @@ class App extends React.Component<any, any> {
             </div>
             <CSSTransition timeout={500} in={this.state.inProps} classNames="search">
               <div styleName="search-detail">
-                <Search placeholder="input search text" onSearch={(value: string) => console.log(value)} enterButton />
+                <div styleName="search-input">
+                  <Search placeholder="input search text" onSearch={(value: string) => console.log(value)} enterButton />
+                  <div styleName="tag-wrap">
+                    {tagData.map((data, i) => <Tag key={i} color="blue" title={data}>{data}</Tag>)}
+                  </div>
+                </div>
               </div>
             </CSSTransition>
           </div>
