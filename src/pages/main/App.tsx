@@ -60,8 +60,8 @@ class App extends React.Component<any, any> {
         <div styleName="content">
           <div styleName="content-header">
             <div styleName="nav">
-              <Button onClick={() => this.toggleSearch()}>看别人</Button>
-              <Button>自己去</Button>
+              <Button onClick={() => this.toggleSearch()}>找游记</Button>
+              <Button>做行程</Button>
               <Button>写游记</Button>
             </div>
             <CSSTransition timeout={500} in={this.state.inProps} classNames="search">
