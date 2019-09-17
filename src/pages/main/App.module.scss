@@ -42,7 +42,7 @@
 }
 
 .search-detail {
-  padding: .1rem .2rem;
+  padding: .3rem .2rem;
   position: absolute;
   z-index: 1;
   width: 0;
@@ -78,6 +78,26 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+.search-tip {
+  display: flex;
+  flex-direction: column;
+
+  .tip-title {
+    padding: 10px 0;
+  }
+
+  .tip-wrap {
+    flex: auto;
+    flex-wrap: wrap;
+
+    .tips {
+      margin: 0 5px;
+      color: $main-color;
+      cursor: pointer;
+    }
   }
 }
 

@@ -19,6 +19,9 @@ for (let i = 0; i < 23; i++) {
 }
 
 const tagData: string[] = ["重庆", "chengduchengduchengduchengduchengduchengduchengdu", "zhejiang", "qingdao", "tailand"];
+const hot: string[] = ["新疆", "西藏", "苏梅岛", "马尔代夫", "三亚", "重庆", "荷兰", "澳大利亚"];
+const month: string[] = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
+const type: string[] = ["亲子", "父母", "情侣", "独自一人", "毕业旅行", "自驾"];
 // 模拟假数据
 
 const IconText = ({ type, text }: any) => (
@@ -70,6 +73,24 @@ class App extends React.Component<any, any> {
                   <Search placeholder="input search text" onSearch={(value: string) => console.log(value)} enterButton />
                   <div styleName="tag-wrap">
                     {tagData.map((data, i) => <Tag key={i} color="blue" title={data}>{data}</Tag>)}
+                  </div>
+                </div>
+                <div styleName="search-tip">
+                  <span styleName="tip-title">热门</span>
+                  <div styleName="tip-wrap">
+                    {hot.map((i, index) => <span key={index} styleName="tips">{i}</span>)}
+                  </div>
+                </div>
+                <div styleName="search-tip">
+                  <span styleName="tip-title">月份</span>
+                  <div styleName="tip-wrap">
+                    {month.map((i, index) => <span key={index} styleName="tips">{i}</span>)}
+                  </div>
+                </div>
+                <div styleName="search-tip">
+                  <span styleName="tip-title">类型</span>
+                  <div styleName="tip-wrap">
+                    {type.map((i, index) => <span key={index} styleName="tips">{i}</span>)}
                   </div>
                 </div>
               </div>
