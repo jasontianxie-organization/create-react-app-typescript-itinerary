@@ -32,7 +32,13 @@
 }
 
 .nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
+  :global(.ant-btn) {
+    margin: 10px;
+  }
 }
 
 .search-detail {
@@ -43,6 +49,7 @@
   opacity: 0;
   overflow: hidden;
   background: $white;
+  box-shadow: 0 2px 5px 0 $main-color;
 }
 
 .search-input {
