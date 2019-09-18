@@ -9,11 +9,11 @@ const listData: any[] = [];
 for (let i = 0; i < 23; i++) {
   listData.push({
     href: "http://ant.design",
-    title: `ant design part ${i}`,
-    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:
-      "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-    content:
+    title: `ant design part ${i}`, // 文章标题
+    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png", // 作者头像
+    description: // 文章标签，就是搜索框里面的热门、月份、类型等标签
+      "标签1，标签2，标签3，重庆，三个人，亲子游",
+    content: // 文章内容摘要
       "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure),to help people create their product prototypes beautifully and efficiently.",
   });
 }
@@ -104,7 +104,7 @@ class App extends React.Component<any, any> {
                 onChange: (page: number) => {
                   console.log(page);
                 },
-                pageSize: 3,
+                pageSize: 10,
               }}
               dataSource={listData}
               footer={

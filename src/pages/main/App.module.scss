@@ -1,7 +1,7 @@
 @import '~@/variables';
 
 .app {
-  text-align: center;
+  // text-align: center;
 }
 
 .app-header {
@@ -50,6 +50,7 @@
   overflow: hidden;
   background: $white;
   box-shadow: 0 2px 5px 0 $main-color;
+  text-align: center;
 }
 
 .search-input {
@@ -130,6 +131,7 @@
 
 :global(.search-exit-done) {
   width: 0;
+  height: 0;
   opacity: 0;
 }
 
