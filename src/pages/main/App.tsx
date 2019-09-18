@@ -2,6 +2,7 @@ import React from "react";
 import "./App.module.scss";
 import { Carousel, Button, List, Avatar, Icon, Input, Tag } from "antd";
 import { CSSTransition } from "react-transition-group";
+import Footer from "@/components/footer";
 const {Search} = Input;
 
 // 模拟假数据
@@ -139,6 +140,7 @@ class App extends React.Component<any, any> {
             />
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
