@@ -136,7 +136,9 @@
 }
 
 .list {
-
+  :global(.ant-list-item) {
+    padding: 16px;
+  }
 }
 
 @media screen and (max-width: 768px) {
