@@ -20,7 +20,9 @@
     "jsx": "preserve",
     "plugins": [
       { "name": "typescript-tslint-plugin" }
-    ]
+    ],
+    "baseUrl": "src",
+    "paths":{"@/*": ["./*"]}
   },
   "include": [
     "src"
