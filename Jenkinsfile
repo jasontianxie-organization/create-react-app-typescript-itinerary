@@ -1,5 +1,5 @@
 node {
-    checkout scm
+    // checkout scm
     def remote = [:]
     remote.name = '129.28.183.129'
     remote.host = '129.28.183.129'
