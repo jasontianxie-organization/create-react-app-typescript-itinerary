@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.module.scss";
+import intl from "react-intl-universal";
 import { Carousel, Button, List, Avatar, Icon, Input, Tag } from "antd";
 import { CSSTransition } from "react-transition-group";
 import Footer from "@/components/footer";
@@ -24,8 +25,8 @@ const hot: string[] = ["新疆", "西藏", "苏梅岛", "马尔代夫", "三亚"
 const month: string[] = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
 const type: string[] = ["亲子", "父母", "情侣", "独自一人", "毕业旅行", "自驾"];
 // 模拟假数据
-
-const IconText = ({ type, text }: any) => (
+interface IParams {type: any; text: any; }
+const IconText = ({ type, text }: IParams) => (
   <span>
     <Icon type={type} style={{ marginRight: 8 }} />
     {text}
@@ -64,9 +65,9 @@ class App extends React.Component<any, any> {
         <div styleName="content">
           <div styleName="content-header">
             <div styleName="nav">
-              <Button onClick={() => this.toggleSearch()}>找游记</Button>
-              <Button>做行程</Button>
-              <Button>写游记</Button>
+              <Button onClick={() => this.toggleSearch()}>{intl.get("pages.main.navHeader.searchItinerary")}</Button>
+              <Button>{intl.get("pages.main.navHeader.schedule")}</Button>
+              <Button>{intl.get("pages.main.navHeader.recordItinerary")}</Button>
             </div>
             <CSSTransition timeout={500} in={this.state.inProps} classNames="search">
               <div styleName="search-detail">
