@@ -4,9 +4,11 @@ node {
     remote.name = '129.28.183.129'
     remote.host = '129.28.183.129'
     remote.allowAnyHosts = true  
-    withCredentials([usernamePassword(credentialsId: '06416c52-21b1-4ea3-a6a9-8880a932ccf9', passwordVariable: 'password', usernameVariable: 'username')]) {
-        remote.user = username
-        remote.password = password
+    withCredentials([usernamePassword(credentialsId: 'credential', passwordVariable: 'username', usernameVariable: 'password')]) {
+        remote.user = '$username'
+        remote.password = '$password'
+        echo '$username'
+        echo '$password'
         stage('Build') { 
          sshCommand remote: remote, command: ". ~/.nvm/nvm.sh \
          && nvm use v10.15.3 \
