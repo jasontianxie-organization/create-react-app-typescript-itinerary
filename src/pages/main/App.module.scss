@@ -44,6 +44,7 @@
 .search-detail {
   padding: .3rem .2rem;
   position: absolute;
+  left: 16px;
   z-index: 1;
   width: 0;
   opacity: 0;
@@ -109,22 +110,22 @@
 
 :global(.search-enter-active) {
   opacity: 1;
-  width: 100%;
+  width: calc(100% - 32px);
   transition: opacity 500ms;
 }
 
 :global(.search-enter-done) {
-  width: 100%;
+  width: calc(100% - 32px);
   opacity: 1;
 }
 
 :global(.search-exit) {
-  width: 100%;
+  width: calc(100% - 32px);
   opacity: 1;
 }
 
 :global(.search-exit-active) {
-  width: 100%;
+  width: calc(100% - 32px);
   opacity: 0;
   transition: opacity 500ms;
 }
