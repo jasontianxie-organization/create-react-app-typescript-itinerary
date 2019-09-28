@@ -4,7 +4,7 @@ node {
     remote.name = '129.28.183.129'
     remote.host = '129.28.183.129'
     remote.allowAnyHosts = true  
-    withCredentials([usernamePassword(credentialsId: 'credential06416c52-21b1-4ea3-a6a9-8880a932ccf9', passwordVariable: 'username', usernameVariable: 'password')]) {
+    withCredentials([usernamePassword(credentialsId: '06416c52-21b1-4ea3-a6a9-8880a932ccf9', passwordVariable: 'username', usernameVariable: 'password')]) {
         remote.user = '$username'
         remote.password = '$password'
         echo '$username'
