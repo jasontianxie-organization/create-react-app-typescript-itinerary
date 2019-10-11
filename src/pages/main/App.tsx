@@ -49,16 +49,16 @@ class App extends React.Component<any, any> {
         <header styleName="app-header">
           <Carousel autoplay>
             <div>
-              <h3>1</h3>
+              <img src="/public/mainPageSlidePics/15380434541828.jpeg"/>
             </div>
             <div>
-              <h3>2</h3>
+              <img src="/public/mainPageSlidePics/15381044615697.jpeg"/>
             </div>
             <div>
-              <h3>3</h3>
+              <img src="/public/mainPageSlidePics/15381045921996.jpeg"/>
             </div>
             <div>
-              <h3>4</h3>
+              <img src="/public/mainPageSlidePics/15381046688621.jpeg"/>
             </div>
           </Carousel>
         </header>
