@@ -3,6 +3,7 @@ node {
     def remote = [:]
     remote.name = '129.28.183.129'
     remote.host = '129.28.183.129'
+    remote.port = 65500
     remote.allowAnyHosts = true
     remote.timeoutSec = 60  
     remote.retryCount = 3
