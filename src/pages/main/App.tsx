@@ -49,16 +49,16 @@ class App extends React.Component<any, any> {
         <header styleName="app-header">
           <Carousel autoplay>
             <div>
-              <img src="/public/mainPageSlidePics/15380434541828.jpeg" alt="no pic" width="100%" height="100%"/>
+              <div className="slide-item" style={{backgroundImage: "url(/public/mainPageSlidePics/15380434541828.jpeg)"}}></div>
             </div>
             <div>
-              <img src="/public/mainPageSlidePics/15381044615697.jpeg" alt="no pic" width="100%" height="100%"/>
+              <div className="slide-item" style={{backgroundImage: "url(/public/mainPageSlidePics/15381044615697.jpeg)"}}></div>
             </div>
             <div>
-              <img src="/public/mainPageSlidePics/15381045921996.jpeg" alt="no pic" width="100%" height="100%"/>
+              <div className="slide-item" style={{backgroundImage: "url(/public/mainPageSlidePics/15381045921996.jpeg)"}}></div>
             </div>
             <div>
-              <img src="/public/mainPageSlidePics/15381046688621.jpeg" alt="no pic" width="100%" height="100%"/>
+              <div className="slide-item" style={{backgroundImage: "url(/public/mainPageSlidePics/15381046688621.jpeg)"}}></div>
             </div>
           </Carousel>
         </header>

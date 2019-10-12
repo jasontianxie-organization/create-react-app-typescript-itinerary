@@ -16,9 +16,13 @@
   line-height: 6.4rem;
   background: $main-color;
   overflow: hidden;
+  color: $white;
 }
 
-:gloabal(.ant-carousel .slick-slide h3) {
+:global(.ant-carousel .slick-slide .slide-item) {
+  height: 6.4rem;
+  background-position: center;
+  background-size: cover;
   color: $white;
 }
 
