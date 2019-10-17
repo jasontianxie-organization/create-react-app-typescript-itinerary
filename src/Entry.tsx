@@ -1,5 +1,7 @@
 import React from "react";
 import App from "@/pages/main/App";
+import NewItinerary from "@/pages/newItinerary/index";
+import {Route} from "react-router-dom";
 import intl from "react-intl-universal";
 
 import en_US from "@/i18n/en_US";
@@ -33,7 +35,12 @@ class Entry extends React.Component<any, any> {
       }
     public render() {
         return (
-            this.state.initDone && <App />
+            this.state.initDone && (
+              <>
+                <Route exact path="/" component={App}/>
+                <Route path="/newItinerary" component={NewItinerary}/>
+              </>
+            )
         );
     }
 }

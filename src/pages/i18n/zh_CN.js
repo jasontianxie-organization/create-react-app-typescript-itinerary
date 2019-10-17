@@ -6,6 +6,9 @@ export default {
                 schedule: "做行程",
                 recordItinerary: "写游记"
             }
+        },
+        newItinerary: {
+            content: "new itinerary page"
         }
     }
 }
