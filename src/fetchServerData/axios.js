@@ -1,9 +1,9 @@
 import axios from 'axios'
 // import router from '@/router'
-import {LoadingBar} from 'axel-ui'
+import {loadingBarRef} from '@/Entry'
 
-const $http = axios.create({
-  baseURL: '/api',
+const request = axios.create({
+  // baseURL: '/api',
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json'
@@ -19,20 +19,20 @@ class HttpError extends Error {
 }
 
 // http request timeout 60s
-$http.defaults.timeout = 90 * 1000
+request.defaults.timeout = 90 * 1000
 // http request interceptors
-$http.interceptors.request.use(config => {
+request.interceptors.request.use(config => {
   // config.params = {...config.params, t: Date.now()}
-  LoadingBar.start()
+  loadingBarRef.current.startRequest()
   return config
 }, e => Promise.reject(e))
 
 // http response interceptors
-$http.interceptors.response.use(res => {
-  LoadingBar.finish()
+request.interceptors.response.use(res => {
+  loadingBarRef.current.endRequest()
   return res.data
 }, e => {
-  LoadingBar.error()
+  loadingBarRef.current.error()
   if (e && e.response) {
     let {status = '', data = {}} = e.response || {}
     // let {auth = false} = router.currentRoute.meta
@@ -55,5 +55,5 @@ $http.interceptors.response.use(res => {
 
 export {
   axios,
-  $http
+  request
 }
