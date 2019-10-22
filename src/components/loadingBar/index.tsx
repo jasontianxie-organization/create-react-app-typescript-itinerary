@@ -11,18 +11,27 @@ class LoadingBar extends React.Component<any, any> {
             if (width > 95) {
                 clearInterval(Interval);
             }
+            this.showProgress({...this.state, width, show: true});
         }, 200);
-        this.setState({})
       }
     public endRequest() {
-        
+        this.showProgress({color: "#1890ff", width: 100, show: true});
+        this.hideLoadingBar();
     }
     public error() {
-        
+        this.showProgress({color: "#ff4d4f", width: 100, show: true});
+        this.hideLoadingBar();
+    }
+    public showProgress(data) {
+        this.setState(data);
+    }
+    public hideLoadingBar() {
+        this.setState({color: "#1890ff", width: 0, show: false});
     }
     public render() {
+        const {color, width, show} = this.state;
         return (
-            <div styleName="loading-bar"></div>
+            <div styleName="loading-bar" style={{backgroundColor: color, width, display: show ? "block" : "none"}}></div>
         );
     }
 }
