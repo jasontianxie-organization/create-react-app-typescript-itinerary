@@ -1,6 +1,7 @@
 import React from "react";
 import App from "@/pages/main/App";
 import NewItinerary from "@/pages/newItinerary/index";
+import LoadingBar from "@/components/loadingBar";
 import {Route} from "react-router-dom";
 import intl from "react-intl-universal";
 
@@ -14,10 +15,15 @@ const locales = {
     en_US,
     zh_CN,
   };
+export const loadingBarRef = React.createRef();
 
 class Entry extends React.Component<any, any> {
-    public state = {initDone: false};
-
+    private myRef: any;
+    public constructor(props: any) {
+      super(props);
+      this.state = {initDone: false};
+      this.myRef = loadingBarRef;
+    }
     public componentDidMount() {
         this.loadLocales();
       }
@@ -37,6 +43,7 @@ class Entry extends React.Component<any, any> {
         return (
             this.state.initDone && (
               <>
+                <LoadingBar ref={this.myRef}/>
                 <Route exact path="/" component={App}/>
                 <Route path="/newItinerary" component={NewItinerary}/>
               </>
