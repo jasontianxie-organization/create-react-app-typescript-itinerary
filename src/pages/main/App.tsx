@@ -46,14 +46,10 @@ class App extends React.Component<any, any> {
     this.setState({inProps: !this.state.inProps});
   }
   public getData() {
-    request.get("/api/public/mainPageSlidePics/15380434541828.jpeg").then(() => {
-      console.log("fail");
-    });
-    request.get("/public/mainPageSlidePics/15380434541828.jpeg").then(() => {
-      request.get("/public/mainPageSlidePics/15380434541828.jpeg").then(() => {
-        console.log("success");
-      });
-    });
+    request.get("/api/mainPageSlideData").then((data) => {
+      console.log(data);
+    },
+    (err) => console.log(err));
   }
   public render() {
     return (
