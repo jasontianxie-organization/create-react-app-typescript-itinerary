@@ -44,8 +44,8 @@ class Entry extends React.Component<any, any> {
             this.state.initDone && (
               <>
                 <LoadingBar ref={this.myRef}/>
-                <Route exact path="/" component={App}/>
-                <Route path="/newItinerary" component={NewItinerary}/>
+                <Route exact path="/" component={() => <App/>}/>
+                <Route path="/newItinerary" component={() => <NewItinerary/>}/>
               </>
             )
         );
