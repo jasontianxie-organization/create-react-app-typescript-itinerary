@@ -5,6 +5,7 @@ import { Carousel, Button, List, Avatar, Icon, Input, Tag } from "antd";
 import { CSSTransition } from "react-transition-group";
 import Footer from "@/components/footer";
 import {request} from "@/fetchServerData/axios";
+import { connect } from "react-redux";
 const {Search} = Input;
 
 // 模拟假数据
@@ -45,14 +46,10 @@ class App extends React.Component<any, any> {
     this.setState({inProps: !this.state.inProps});
   }
   public getData() {
-    request.get("/api/public/mainPageSlidePics/15380434541828.jpeg").then(() => {
-      console.log("fail");
-    });
-    request.get("/public/mainPageSlidePics/15380434541828.jpeg").then(() => {
-      request.get("/public/mainPageSlidePics/15380434541828.jpeg").then(() => {
-        console.log("success");
-      });
-    });
+    request.get("/api/mainPageSlideData").then((data) => {
+      console.log(data);
+    },
+    (err) => console.log(err));
   }
   public render() {
     return (
@@ -158,4 +155,16 @@ class App extends React.Component<any, any> {
   }
 }
 
-export default App;
+function mapStateToProps(state: any) {
+  return {
+    value: state.count,
+  };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    onIncreaseClick: () => dispatch({}),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
