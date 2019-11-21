@@ -8,7 +8,7 @@ export default {
             }
         },
         newItinerary: {
-            content: "new itinerary page"
+            content: "新建行程"
         }
     }
 }
