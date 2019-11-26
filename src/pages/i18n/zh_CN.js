@@ -8,7 +8,8 @@ export default {
             }
         },
         newItinerary: {
-            content: "新建行程"
+            content: "新建行程",
+            uploadBotton: "点击上传文件"
         }
     }
 }
