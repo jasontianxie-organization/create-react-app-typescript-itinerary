@@ -2,7 +2,7 @@ import React from "react";
 import "./index.module.scss";
 import intl from "react-intl-universal";
 import UploadModal from "@/components/upload";
-import { Button} from "antd";
+import { Button } from "antd";
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
@@ -15,13 +15,13 @@ class NewItinerary extends React.Component<any, any> {
     public handleCancel = () => {
       this.setState({ uploadModalVisible: false });
     }
-    public handleCreate = () => {
+    public handleUpload = () => {
       const { form } = this.formRef.props;
       form.validateFields((err: any, values: any) => {
         if (err) {
           return;
         }
-        console.log("Received values of form: ", values);
+        // console.log("Received values of form: ", values);
         form.resetFields();
         this.setState({ uploadModalVisible: false });
       });
@@ -36,7 +36,7 @@ class NewItinerary extends React.Component<any, any> {
               wrappedComponentRef={this.saveFormRef}
               visible={this.state.uploadModalVisible}
               onCancel={this.handleCancel}
-              onCreate={this.handleCreate}
+              onUpload={this.handleUpload}
             />
             <div>{intl.get("pages.newItinerary.content")}</div>
         </div>);
