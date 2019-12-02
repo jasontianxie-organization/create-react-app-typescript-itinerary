@@ -3,6 +3,7 @@ import "./index.module.scss";
 import intl from "react-intl-universal";
 import UploadModal from "@/components/upload";
 import { Button } from "antd";
+import { connect } from "react-redux";
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
@@ -22,6 +23,7 @@ class NewItinerary extends React.Component<any, any> {
           return;
         }
         // console.log("Received values of form: ", values);
+        this.props.uploadFile({destUrl: "/api/uploads/parts", file: values})
         form.resetFields();
         this.setState({ uploadModalVisible: false });
       });
@@ -43,4 +45,16 @@ class NewItinerary extends React.Component<any, any> {
     }
 }
 
-export default NewItinerary;
+function mapStateToProps(state: any) {
+    return {
+      uploadList: state.uploadList,
+    };
+  }
+  
+  function mapDispatchToProps(dispatch: any) {
+    return {
+      uploadFile: (combinedFile: any) => dispatch({type:'UPLOAD_FILE', payload: combinedFile}),
+    };
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewItinerary);

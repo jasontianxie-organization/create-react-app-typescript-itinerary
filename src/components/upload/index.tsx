@@ -42,7 +42,7 @@ const UploadModal = Form.create<IUserFormProps>({ name: "form_in_modal" })(
           >
             <Form layout="vertical">
               <Form.Item label="upload file">
-                {getFieldDecorator("file", {
+                {getFieldDecorator("antdFile", {
                   rules: [{ required: true, message: "Please select a file!"}],
                 })(<Upload {...props}>
                     <Button>
