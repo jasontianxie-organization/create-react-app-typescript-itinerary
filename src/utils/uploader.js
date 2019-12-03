@@ -11,7 +11,7 @@ export default class Uploader {
         this.upload(file, destUrl)
     }
     upload(file, destUrl) {
-        let filename = file.name,
+        let fileName = file.name,
              fileSize = file.size,
             //  totalPieces = Math.ceil(file.size/this.options.chunkSize),
              start = this.options.chunkStart,
@@ -24,15 +24,17 @@ export default class Uploader {
                 if (start < fileSize) {
                     var chunk = file.slice(start,end); //切割文件
                     var formData = new FormData();
-                    formData.append("file", chunk, filename + pieceNumber);
+                    formData.append("file", chunk, fileName + pieceNumber);
                     formData.append("fileId", fileId);
                     formData.append("pieceNumber", pieceNumber);
                     request.post(destUrl, formData).then(() => {
                         start = end;
                         uploadChunk()
                     })
-                } else { //所有切片上传成功
-                    alert("上传成功")
+                } else { //所有切片上传成功后，发送合并分片的请求
+                    request.post("/api/uploads/merge", {fileId, fileName}).then((data) => {
+                        console.log(data);
+                    }, err => console.log(err))
                 }
              };
         uploadChunk()
