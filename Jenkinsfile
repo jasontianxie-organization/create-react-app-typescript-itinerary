@@ -16,7 +16,8 @@ node {
          && cd /var/jenkins_node/workspace/create-react-app-typescript-itinerary \
          && npm install \
          && npm run build \
-         && cp -r ./build/ ~/web/itinerary/front-end/"
+         && rm -rf ~/web/itinerary/front-end \
+         && cp -r ./build ~/web/itinerary/front-end"
         }
         stage('Test') { 
             echo 'test is running' 
