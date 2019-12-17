@@ -2,6 +2,7 @@ import React from "react";
 import "./index.module.scss";
 import intl from "react-intl-universal";
 import UploadModal from "@/components/upload";
+import ItineraryEditor from "@/components/itineraryEditor";
 import { Button } from "antd";
 import { connect } from "react-redux";
 
@@ -40,6 +41,7 @@ class NewItinerary extends React.Component<any, any> {
               onCancel={this.handleCancel}
               onUpload={this.handleUpload}
             />
+            <ItineraryEditor/>
             <div>{intl.get("pages.newItinerary.content")}</div>
         </div>);
     }

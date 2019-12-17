@@ -93,7 +93,7 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
     public render() {
         return (
         <div styleName="edit-wrap">
-            <div onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</div>
+            <Button onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</Button>
             <div contentEditable={true} styleName = "edit" ref={this.textInput}
             onPaste={(e) => this.insertPicOrPaste(e)} onClick={(e) => this.click(e)}
             onKeyUp={(e) => this.keyup(e)}
