@@ -1,9 +1,9 @@
 import * as React from "react";
 import "./index.scss";
 import axios from "axios";
-import { config } from "../../../src/common/ajaxConfig.js";
+// import { config } from "../../../src/common/ajaxConfig.js";
 import { Button } from "antd";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 type PropsStyle = (input: string) => void;
 
@@ -31,29 +31,29 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
         } else { // 如果是用户粘贴内容
             e.preventDefault(); // 不使用默认的粘贴方法，而是使用下面的range来插入内容
             str = window.clipboardData && window.clipboardData.getData ?
-            window.clipboardData.getData("Text") // ie浏览器，getData("Text")只会获取纯文本，除了Text，还有其他参数吗？？
-            : e.clipboardData.getData("Text"); // 非ie浏览器，getData("Text")只会获取纯文本
+            window.clipboardData.getData("Text") // ie浏览器，getData("Text")只会获取纯文本（只允许用户粘贴纯文本，安全考虑），除了Text，还有其他参数吗？？
+            : e.clipboardData.getData("Text"); // 非ie浏览器，getData("Text")只会获取纯文本（只允许用户粘贴纯文本，安全考虑）
             str = str.replace(/</g, "&lt;").replace(/>/g, "&gt;"); // 将script标签替换成文本
         }
-        if (!window.getSelection) {// ie 浏览器
+        if (!window.getSelection) {// 如果是ie 浏览器
             this.textInput.current.focus();
-            range.pasteHTML(str); //这个方法只有ie浏览器有
-            range.collapse(false);
-            range.select();
+            range.pasteHTML(str); // 这个方法只有ie浏览器有
+            range.collapse(false); // 折叠到range的终点，https://developer.mozilla.org/zh-CN/docs/Web/API/Range/collapse
+            range.select(); // 需要这个方法吗？
         } else {
-            const hasR = range.createContextualFragment(str); //上面的range.pasteHTML这个方法只有ie浏览器有，其他浏览器的range智能用insertNode方法插入dom节点（或者dom片段Fragment），所以我们这里是创建了一个fragment片段
+            const hasR = range.createContextualFragment(str); // 上面的range.pasteHTML这个方法只有ie浏览器有，其他浏览器的range智能用insertNode方法插入dom节点（或者dom片段Fragment），所以我们这里是创建了一个fragment片段
             let hasRlastChild = hasR.lastChild;
 
             this.textInput.current.focus();
             range.collapse(false);
             while (hasRlastChild && hasRlastChild.nodeName.toLowerCase() === "br"
-            && hasRlastChild.previousSibling && hasRlastChild.previousSibling.nodeName.toLowerCase() === "br") { //对fragment片段进行处理
+            && hasRlastChild.previousSibling && hasRlastChild.previousSibling.nodeName.toLowerCase() === "br") { // 对fragment片段进行处理
                 const element: any = hasRlastChild;
                 hasRlastChild = hasRlastChild.previousSibling;
                 hasR.removeChild(element);
             }
-            range.insertNode(hasR); //因为没有pasteHTML这个方法，所以使用insertNode来插入fragment片段
-            if (hasRlastChild) { //把光标设置到最后
+            range.insertNode(hasR); // 因为没有pasteHTML这个方法，所以使用insertNode来插入fragment片段
+            if (hasRlastChild) { // 把光标设置到最后
                 range.setEndAfter(hasRlastChild);
                 range.setStartAfter(hasRlastChild);
             }
@@ -61,8 +61,8 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
             selection.addRange(range);
         }
     }
-    public input(e: any) { //当用户输入内容后，光标会随着移动，所以需要重新获取光标的位置。
-        const selection = window.getSelection ? window.getSelection() : document.selection; //window.getSelection是Chrome，FF，等主流浏览器方法，document.selection是IE方法
+    public input(e: any) { // 当用户输入内容后，光标会随着移动，所以需要重新获取光标的位置。
+        const selection = window.getSelection ? window.getSelection() : document.selection; // window.getSelection是Chrome，FF，等主流浏览器方法，document.selection是IE方法
         const range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
         this.setState({ selection, range });
     }
@@ -82,12 +82,13 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
         this.setState({ selection, range });
     }
     public submit() {
-        axios.post(config.mainDomain + "/itineraries", {userId: Cookies.get("userid"), contentHtml: this.textInput.current.innerHTML}).then((response) => {
-           console.log("success");
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+        console.log(this.textInput.current.innerHTML);
+        // axios.post(config.mainDomain + "/itineraries", {userId: Cookies.get("userid"), contentHtml: this.textInput.current.innerHTML}).then((response) => {
+        //    console.log("success");
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        // });
     }
     public render() {
         return (
