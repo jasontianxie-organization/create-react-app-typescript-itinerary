@@ -1,24 +1,8 @@
-$black: #000;
-$white-opacity: rgba(0, 255, 255, .1);
-$green-blue-opacity: rgba(0, 255, 255, .1);
-
 .edit-wrap {
-  color: $black;
-  font-size: 14px;
-  height: 100%;
-  width: 100%;
 }
 
 .edit {
-  background: $white-opacity;
-  border: solid 1px;
-  border-color: $green-blue-opacity;
-  max-height: 100%;
-  min-height: 500px;
-  padding: 10px;
-  width: 500px;
 }
 
 .edit-submit {
-  margin-top: 15px;
 }

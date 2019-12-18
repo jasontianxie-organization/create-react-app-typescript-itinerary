@@ -1,9 +1,6 @@
 import * as React from "react";
 import "./index.scss";
-import axios from "axios";
-// import { config } from "../../../src/common/ajaxConfig.js";
 import { Button } from "antd";
-// import Cookies from "js-cookie";
 
 type PropsStyle = (input: string) => void;
 
@@ -18,7 +15,7 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
             range: null,
         };
     }
-    public insertPicOrPaste(e: any) {
+    public insertPicOrPaste(e: any) { // 只允许用户粘贴纯文本，安全考虑
         let str = "";
         const {selection, range} = this.state;
 
@@ -41,23 +38,10 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
             range.collapse(false); // 折叠到range的终点，https://developer.mozilla.org/zh-CN/docs/Web/API/Range/collapse
             range.select(); // 需要这个方法吗？
         } else {
-            const hasR = range.createContextualFragment(str); // 上面的range.pasteHTML这个方法只有ie浏览器有，其他浏览器的range智能用insertNode方法插入dom节点（或者dom片段Fragment），所以我们这里是创建了一个fragment片段
-            let hasRlastChild = hasR.lastChild;
-
-            this.textInput.current.focus();
-            range.collapse(false);
-            while (hasRlastChild && hasRlastChild.nodeName.toLowerCase() === "br"
-            && hasRlastChild.previousSibling && hasRlastChild.previousSibling.nodeName.toLowerCase() === "br") { // 对fragment片段进行处理
-                const element: any = hasRlastChild;
-                hasRlastChild = hasRlastChild.previousSibling;
-                hasR.removeChild(element);
-            }
-            range.insertNode(hasR); // 因为没有pasteHTML这个方法，所以使用insertNode来插入fragment片段
-            if (hasRlastChild) { // 把光标设置到最后
-                range.setEndAfter(hasRlastChild);
-                range.setStartAfter(hasRlastChild);
-            }
+            const fragment = range.createContextualFragment(str); // 上面的range.pasteHTML这个方法只有ie浏览器有，其他浏览器的range智能用insertNode方法插入dom节点（或者dom片段Fragment），所以我们这里是创建了一个fragment片段
+            range.insertNode(fragment); // 因为没有pasteHTML这个方法，所以使用insertNode来插入fragment片段
             selection.removeAllRanges();
+            range.collapse(false);
             selection.addRange(range);
         }
     }
@@ -73,7 +57,10 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
             this.setState({ selection, range });
         }
     }
-    public focus(bool: any) {
+    public focus(bool: boolean, e?: any) {
+        if(e && e.relatedTarget && e.relatedTarget.className.includes('ant-btn')) {
+            return;
+        }
         this.setState({ focused: bool });
     }
     public click(e: any) {
@@ -95,9 +82,12 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
         <div styleName="edit-wrap">
             <Button onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</Button>
             <div contentEditable={true} styleName = "edit" ref={this.textInput}
-            onPaste={(e) => this.insertPicOrPaste(e)} onClick={(e) => this.click(e)}
-            onKeyUp={(e) => this.keyup(e)}
-            onFocus={() => this.focus(true)} onInput={(e) => this.input(e)}>
+                onPaste={(e) => this.insertPicOrPaste(e)}
+                onClick={(e) => this.click(e)}
+                onKeyUp={(e) => this.keyup(e)}
+                onFocus={() => this.focus(true)}
+                onBlur={(e) => this.focus(false, e)}
+                onInput={(e) => this.input(e)}>
             </div>
             <Button type="primary" styleName = "edit-submit" onClick={() => this.submit()}>保存</Button>
         </div>
