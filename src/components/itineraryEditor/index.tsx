@@ -30,7 +30,7 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
             str = window.clipboardData && window.clipboardData.getData ?
             window.clipboardData.getData("Text") // ie浏览器，getData("Text")只会获取纯文本（只允许用户粘贴纯文本，安全考虑），除了Text，还有其他参数吗？？
             : e.clipboardData.getData("Text"); // 非ie浏览器，getData("Text")只会获取纯文本（只允许用户粘贴纯文本，安全考虑）
-            str = str.replace(/</g, "&lt;").replace(/>/g, "&gt;"); // 将script标签替换成文本
+            str = str.replace(/</g, "&lt;").replace(/>/g, "&gt;"); // 用户粘贴的内容中如果有<这种html标签，就替换成html实体。如果不是粘贴的，而是用户手动输入的<符号，那么浏览器会自动转换成html实体
         }
         if (!window.getSelection) {// 如果是ie 浏览器
             this.textInput.current.focus();
