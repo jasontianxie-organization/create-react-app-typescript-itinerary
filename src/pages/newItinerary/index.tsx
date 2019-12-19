@@ -33,17 +33,22 @@ class NewItinerary extends React.Component<any, any> {
       this.formRef = formRef;
     }
     public render() {
-        return (<div>
-            <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>
-            <UploadModal
-              wrappedComponentRef={this.saveFormRef}
-              visible={this.state.uploadModalVisible}
-              onCancel={this.handleCancel}
-              onUpload={this.handleUpload}
-            />
-            <ItineraryEditor/>
-            <div>{intl.get("pages.newItinerary.content")}</div>
-        </div>);
+        return (<div styleName="new-itinerary">
+                      <div styleName="wrap">
+                        <div styleName="content"></div>
+                        <div styleName="abstract"></div>
+                        <div styleName="map"></div>
+                      </div>
+                     {/* <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>
+                     <UploadModal
+                      wrappedComponentRef={this.saveFormRef}
+                      visible={this.state.uploadModalVisible}
+                      onCancel={this.handleCancel}
+                      onUpload={this.handleUpload}
+                    />
+                    <ItineraryEditor/>
+                    <div>{intl.get("pages.newItinerary.content")}</div> */}
+                </div>);
     }
 }
 

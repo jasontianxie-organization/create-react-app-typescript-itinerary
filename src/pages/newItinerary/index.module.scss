@@ -1,0 +1,36 @@
+@import '~@/variables';
+
+.new-itinerary {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.wrap{
+  display: flex;
+  flex: auto;
+  max-width: 1024px;
+  background: $grayColor;
+  flex-wrap: wrap;
+}
+.content{
+  width: 680px;
+  background-color: red;
+  flex: auto;
+}
+.abstract{
+  min-width: 340px;
+  background-color: green;
+  flex: auto;
+}
+.map{
+
+}
+@media screen and (max-width: 1024px) {
+    .content {
+      height: calc(100% - 3.56rem);
+    }
+    .abstract {
+      height: 3.56rem;
+    }
+}
