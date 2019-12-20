@@ -1,36 +1,116 @@
 @import '~@/variables';
 
-.new-itinerary {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+@media screen and (min-width: 1200px) {
+  .new-itinerary {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .wrap{
+    display: flex;
+    flex: auto;
+    background: $grayColor;
+  }
+  .abstract{
+    width: 240px;
+    flex-shrink: 0;
+    background-color: green;
+  }
+  .content{
+    width: 680px;
+    background-color: red;
+    flex: 4 0 auto;
+  }
+  .map{
+    flex: 1 1 500px;
+    background-color: yellow;
+  }
 }
-.wrap{
-  display: flex;
-  flex: auto;
-  max-width: 1024px;
-  background: $grayColor;
-  flex-wrap: wrap;
+@media screen and (min-width: 920px) and (max-width: 1200px) {
+  .new-itinerary {
+    width: 1200px;
+    height: 100%;
+    overflow: auto;
+  }
+  .wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .abstract{
+    width: 240px;
+    height: 100%;
+    background-color: green;
+  }
+  .content{
+    width: 680px;
+    height: 100%;
+    background-color: red;
+  }
+  .map{
+    width: 280px;
+    height: 100%;
+    background-color: yellow;
+  }
 }
-.content{
-  width: 680px;
-  background-color: red;
-  flex: auto;
+@media screen and (min-width: 680px) and (max-width: 920px) {
+  .new-itinerary {
+    width: 920px;
+    height: 100%;
+    overflow: auto;
+  }
+  .wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  .abstract{
+    width: 240px;
+    height: 100%;
+    background-color: green;
+  }
+  .content{
+    width: 680px;
+    height: 100%;
+    background-color: red;
+  }
+  .map{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    display: none;
+  }
 }
-.abstract{
-  min-width: 340px;
-  background-color: green;
-  flex: auto;
-}
-.map{
-
-}
-@media screen and (max-width: 1024px) {
-    .content {
-      height: calc(100% - 3.56rem);
-    }
-    .abstract {
-      height: 3.56rem;
-    }
+@media screen and (max-width: 680px) {
+  .new-itinerary {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  .wrap{
+    display: flex;
+    flex: auto;
+    background: $grayColor;
+  }
+  .abstract{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    display: none;
+  }
+  .content{
+    flex: auto;
+    background-color: red;
+  }
+  .map{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    display: none;
+  }
 }

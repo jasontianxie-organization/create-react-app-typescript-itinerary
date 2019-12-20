@@ -35,8 +35,8 @@ class NewItinerary extends React.Component<any, any> {
     public render() {
         return (<div styleName="new-itinerary">
                       <div styleName="wrap">
-                        <div styleName="content"></div>
                         <div styleName="abstract"></div>
+                        <div styleName="content"></div>
                         <div styleName="map"></div>
                       </div>
                      {/* <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>
