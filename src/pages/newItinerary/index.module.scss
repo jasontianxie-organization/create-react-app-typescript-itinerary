@@ -1,5 +1,24 @@
 @import '~@/variables';
 
+.title {
+
+}
+.add-new {
+
+}
+.save-title {
+  cursor: pointer;
+}
+.preview {
+  display: flex;
+  flex-direction: column;
+}
+.pre-title {
+
+}
+.main {
+
+}
 @media screen and (min-width: 1200px) {
   .new-itinerary {
     display: flex;
@@ -10,16 +29,17 @@
   .wrap{
     display: flex;
     flex: auto;
-    background: $grayColor;
+    // background: $grayColor;
   }
   .abstract{
-    width: 240px;
+    width: 220px;
     flex-shrink: 0;
     background-color: green;
   }
   .content{
-    width: 680px;
-    background-color: red;
+    width: 700px;
+    padding: 0 10px;
+    // background-color: red;
     flex: 4 0 auto;
   }
   .map{
@@ -39,14 +59,15 @@
     height: 100%;
   }
   .abstract{
-    width: 240px;
+    width: 220px;
     height: 100%;
     background-color: green;
   }
   .content{
-    width: 680px;
+    width: 700px;
     height: 100%;
-    background-color: red;
+    padding: 0 10px;
+    // background-color: red;
   }
   .map{
     width: 280px;
@@ -54,7 +75,7 @@
     background-color: yellow;
   }
 }
-@media screen and (min-width: 680px) and (max-width: 920px) {
+@media screen and (min-width: 700px) and (max-width: 920px) {
   .new-itinerary {
     width: 920px;
     height: 100%;
@@ -66,14 +87,15 @@
     height: 100%;
   }
   .abstract{
-    width: 240px;
+    width: 220px;
     height: 100%;
     background-color: green;
   }
   .content{
-    width: 680px;
+    width: 700px;
     height: 100%;
-    background-color: red;
+    padding: 0 10px;
+    // background-color: red;
   }
   .map{
     position: fixed;
@@ -83,7 +105,7 @@
     display: none;
   }
 }
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 700px) {
   .new-itinerary {
     display: flex;
     justify-content: center;
@@ -93,7 +115,6 @@
   .wrap{
     display: flex;
     flex: auto;
-    background: $grayColor;
   }
   .abstract{
     position: fixed;
@@ -104,7 +125,8 @@
   }
   .content{
     flex: auto;
-    background-color: red;
+    padding: 0 10px;
+    // background-color: red;
   }
   .map{
     position: fixed;
