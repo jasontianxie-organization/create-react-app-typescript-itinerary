@@ -58,7 +58,7 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
         }
     }
     public focus(bool: boolean, e?: any) {
-        if(e && e.relatedTarget && e.relatedTarget.className.includes('ant-btn')) {
+        if(e && e.relatedTarget && e.relatedTarget.className.includes("ant-btn")) {
             return;
         }
         this.setState({ focused: bool });

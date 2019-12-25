@@ -1,7 +1,7 @@
 @import '~@/variables';
 
 .title {
-
+  margin-bottom: 15px;
 }
 .add-new {
 
@@ -10,14 +10,23 @@
   cursor: pointer;
 }
 .preview {
+  // flex: auto;
+  height: calc(100% - 32px);
   display: flex;
   flex-direction: column;
 }
 .pre-title {
 
 }
-.main {
+.main-wrap {
+  flex: auto;
+  overflow: hidden;
+  padding: 20px 0;
 
+  .main {
+    height: 100%;
+    overflow: auto;
+  }
 }
 @media screen and (min-width: 1200px) {
   .new-itinerary {
@@ -37,8 +46,10 @@
     background-color: green;
   }
   .content{
+    display: flex;
+    flex-direction: column;
     width: 700px;
-    padding: 0 10px;
+    padding: 20px 10px;
     // background-color: red;
     flex: 4 0 auto;
   }
@@ -64,9 +75,11 @@
     background-color: green;
   }
   .content{
+    display: flex;
+    flex-direction: column;
     width: 700px;
     height: 100%;
-    padding: 0 10px;
+    padding: 20px 10px;
     // background-color: red;
   }
   .map{
@@ -92,9 +105,11 @@
     background-color: green;
   }
   .content{
+    display: flex;
+    flex-direction: column;
     width: 700px;
     height: 100%;
-    padding: 0 10px;
+    padding: 20px 10px;
     // background-color: red;
   }
   .map{
@@ -124,8 +139,10 @@
     display: none;
   }
   .content{
+    display: flex;
+    flex-direction: column;
     flex: auto;
-    padding: 0 10px;
+    padding: 20px 10px;
     // background-color: red;
   }
   .map{

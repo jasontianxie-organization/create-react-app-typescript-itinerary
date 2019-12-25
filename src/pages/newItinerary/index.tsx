@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
+    public mainRef: any;
     public state = {
       uploadModalVisible: false,
     };
@@ -32,8 +33,14 @@ class NewItinerary extends React.Component<any, any> {
     public saveFormRef = (formRef: any) => {
       this.formRef = formRef;
     }
+    public getMain = (mainRef: any) => {
+      this.mainRef = mainRef;
+    }
     public saveTitle() {
-      console.log("title saved")
+      console.log("title saved");
+    }
+    public componentDidMount() {
+      this.mainRef.style.width = 2 * this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
     }
     public render() {
         return (<div styleName="new-itinerary">
@@ -41,14 +48,89 @@ class NewItinerary extends React.Component<any, any> {
                         <div styleName="abstract"></div>
                         <div styleName="content">
                           <div styleName="title">
-                            <Input addonAfter={<span styleName="save-title" onClick={() => this.saveTitle()}>保存标题</span>}/>
+                            <Input
+                            placeholder={intl.get("pages.newItinerary.placeholder_title")}
+                            addonAfter={
+                              <span styleName="save-title" onClick={() => this.saveTitle()}>
+                                {intl.get("pages.newItinerary.btn_save")}
+                              </span>}/>
                           </div>
                           <div styleName="preview">
                             <div styleName="pre-title">
-                              <Button>添加一个景点/途经点</Button>
-                              <Button>添加一条线路</Button>
+                              <Button type="primary">{intl.get("pages.newItinerary.btn_add")}</Button>
                             </div>
-                            <div styleName="main"></div>
+                            <div styleName="main-wrap">
+                              <div styleName="main" ref={this.getMain}>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                this is a test<br/>
+                                </div>
+                            </div>
                           </div>
                           <div styleName="add-new"></div>
                         </div>
