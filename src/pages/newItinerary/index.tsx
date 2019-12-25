@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
     public mainRef: any;
+    public mainWrapRef: any;
     public state = {
       uploadModalVisible: false,
     };
@@ -36,11 +37,18 @@ class NewItinerary extends React.Component<any, any> {
     public getMain = (mainRef: any) => {
       this.mainRef = mainRef;
     }
+    public getMainWrap = (mainWrapRef: any) => {
+      this.mainWrapRef = mainWrapRef;
+    }
     public saveTitle() {
       console.log("title saved");
     }
+    public setMainWidth() {
+      this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
+    }
     public componentDidMount() {
-      this.mainRef.style.width = 2 * this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
+      this.setMainWidth();
+      window.addEventListener("resize", () => this.setMainWidth.call(this));
     }
     public render() {
         return (<div styleName="new-itinerary">
@@ -59,7 +67,7 @@ class NewItinerary extends React.Component<any, any> {
                             <div styleName="pre-title">
                               <Button type="primary">{intl.get("pages.newItinerary.btn_add")}</Button>
                             </div>
-                            <div styleName="main-wrap">
+                            <div styleName="main-wrap" ref={this.getMainWrap}>
                               <div styleName="main" ref={this.getMain}>
                                 this is a test<br/>
                                 this is a test<br/>
