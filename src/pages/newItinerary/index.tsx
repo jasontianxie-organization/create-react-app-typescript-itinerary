@@ -10,6 +10,7 @@ class NewItinerary extends React.Component<any, any> {
     public formRef: any;
     public mainRef: any;
     public mainWrapRef: any;
+    public resizeTimer: any = null;
     public state = {
       uploadModalVisible: false,
     };
@@ -48,7 +49,14 @@ class NewItinerary extends React.Component<any, any> {
     }
     public componentDidMount() {
       this.setMainWidth();
-      window.addEventListener("resize", () => this.setMainWidth.call(this));
+      window.addEventListener("resize", () => {
+        if (this.resizeTimer) {
+          clearTimeout(this.resizeTimer);
+        }
+        this.resizeTimer = setTimeout(() => {
+              this.setMainWidth();
+          }, 100);
+      });
     }
     public render() {
         return (<div styleName="new-itinerary">
