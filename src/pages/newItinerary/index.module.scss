@@ -34,23 +34,23 @@
     width: 100%;
     height: 100%;
   }
-  .wrap{
+  .wrap {
     display: flex;
     flex: auto;
   }
-  .abstract{
+  .abstract {
     width: 220px;
     flex-shrink: 0;
     background-color: green;
   }
-  .content{
+  .content {
     display: flex;
     flex-direction: column;
     width: 700px;
     padding: 20px 10px;
     flex: 4 0 auto;
   }
-  .map{
+  .map {
     flex: 1 1 500px;
     background-color: yellow;
   }
@@ -66,19 +66,19 @@
     width: 100%;
     height: 100%;
   }
-  .abstract{
+  .abstract {
     width: 220px;
     height: 100%;
     background-color: green;
   }
-  .content{
+  .content {
     display: flex;
     flex-direction: column;
     width: 700px;
     height: 100%;
     padding: 20px 10px;
   }
-  .map{
+  .map {
     width: 280px;
     height: 100%;
     background-color: yellow;
@@ -95,19 +95,19 @@
     width: 100%;
     height: 100%;
   }
-  .abstract{
+  .abstract {
     width: 220px;
     height: 100%;
     background-color: green;
   }
-  .content{
+  .content {
     display: flex;
     flex-direction: column;
     width: 700px;
     height: 100%;
     padding: 20px 10px;
   }
-  .map{
+  .map {
     width: 100%;
     height: 100%;
     background-color: yellow;
@@ -121,20 +121,20 @@
     width: 100%;
     height: 100%;
   }
-  .wrap{
+  .wrap {
     display: flex;
     width: 100%;
   }
-  .abstract{
+  .abstract {
     display: none;
   }
-  .content{
+  .content {
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 20px 10px;
   }
-  .map{
+  .map {
     display: none;
   }
 }

@@ -27,7 +27,7 @@ class NewItinerary extends React.Component<any, any> {
           return;
         }
         // console.log("Received values of form: ", values);
-        this.props.uploadFile({destUrl: "/api/uploads/parts", file: values})
+        this.props.uploadFile({destUrl: "/api/uploads/parts", file: values});
         form.resetFields();
         this.setState({ uploadModalVisible: false });
       });
@@ -170,11 +170,11 @@ function mapStateToProps(state: any) {
       uploadList: state.uploadList,
     };
   }
-  
-  function mapDispatchToProps(dispatch: any) {
-    return {
-      uploadFile: (combinedFile: any) => dispatch({type:'UPLOAD_FILE', payload: combinedFile}),
-    };
-  }
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    uploadFile: (combinedFile: any) => dispatch({type: "UPLOAD_FILE", payload: combinedFile}),
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewItinerary);
