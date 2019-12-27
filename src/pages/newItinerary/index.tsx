@@ -46,6 +46,7 @@ class NewItinerary extends React.Component<any, any> {
     }
     public setMainWidth() {
       this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
+      this.mainRef.style.height = this.mainWrapRef.offsetHeight + "px";
     }
     public componentDidMount() {
       this.setMainWidth();
