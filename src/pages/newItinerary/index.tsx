@@ -1,8 +1,8 @@
 import React from "react";
 import "./index.module.scss";
 import intl from "react-intl-universal";
-import UploadModal from "@/components/upload";
-import ItineraryEditor from "@/components/itineraryEditor";
+import NewSpots from "@/components/newSpots";
+// import ItineraryEditor from "@/components/itineraryEditor";
 import { Button, Input } from "antd";
 import { connect } from "react-redux";
 
@@ -19,6 +19,9 @@ class NewItinerary extends React.Component<any, any> {
     }
     public handleCancel = () => {
       this.setState({ uploadModalVisible: false });
+    }
+    public handleSave() {
+
     }
     public handleUpload = () => {
       const { form } = this.formRef.props;
@@ -81,7 +84,7 @@ class NewItinerary extends React.Component<any, any> {
                           </div>
                           <div styleName="preview">
                             <div styleName="pre-title">
-                              <Button type="primary">{intl.get("pages.newItinerary.btn_add")}</Button>
+                              <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.btn_add")}</Button>
                             </div>
                             <div styleName="main-wrap" ref={this.getMainWrap}>
                               <div styleName="main" ref={this.getMain}>
@@ -97,9 +100,15 @@ class NewItinerary extends React.Component<any, any> {
                         </div>
                         <div styleName="map"></div>
                       </div>
+                      <NewSpots
+                        wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
+                        visible={this.state.uploadModalVisible}
+                        onCancel={this.handleCancel}
+                        onSave={this.handleSave}
+                      />
                      {/* <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>
                      <UploadModal
-                      wrappedComponentRef={this.saveFormRef}
+                      wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
                       visible={this.state.uploadModalVisible}
                       onCancel={this.handleCancel}
                       onUpload={this.handleUpload}

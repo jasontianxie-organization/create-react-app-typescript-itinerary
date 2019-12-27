@@ -13,7 +13,6 @@ interface IUserFormProps extends FormComponentProps {
   }
 
 const UploadModal = Form.create<IUserFormProps>({ name: "form_in_modal" })(
-    // eslint-disable-next-line
     class extends React.Component<IUserFormProps, any> {
     public state = {
       uploadFileName: "null",
