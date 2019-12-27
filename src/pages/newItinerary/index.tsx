@@ -45,15 +45,15 @@ class NewItinerary extends React.Component<any, any> {
       console.log("title saved");
     }
     public generate() {
-      let test: string = "";
-      for (let i = 0; i < 20; i++) {
-        test += "this is a test "
+      let num: number[] = [];
+      for (let i = 0; i < 30; i++) {
+        num[i] = i;
       }
-      return test;
+      return num;
     }
     public setMainWidth() {
       this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
-      this.mainRef.style.height = this.mainWrapRef.offsetHeight + "px";
+      this.mainRef.style.height = this.mainWrapRef.clientHeight - 40 + "px"; //这里的40px是main-wrap的padding值
     }
     public componentDidMount() {
       this.setMainWidth();
@@ -86,7 +86,9 @@ class NewItinerary extends React.Component<any, any> {
                             <div styleName="main-wrap" ref={this.getMainWrap}>
                               <div styleName="main" ref={this.getMain}>
                                 {
-                                  this.generate()
+                                  this.generate().map((i) => {
+                                    return <p key={i}>this is a test</p>
+                                  })
                                 }
                                 </div>
                             </div>
