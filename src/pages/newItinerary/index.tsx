@@ -44,6 +44,13 @@ class NewItinerary extends React.Component<any, any> {
     public saveTitle() {
       console.log("title saved");
     }
+    public generate() {
+      let test: string = "";
+      for (let i = 0; i < 20; i++) {
+        test += "this is a test "
+      }
+      return test;
+    }
     public setMainWidth() {
       this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
       this.mainRef.style.height = this.mainWrapRef.offsetHeight + "px";
@@ -78,74 +85,9 @@ class NewItinerary extends React.Component<any, any> {
                             </div>
                             <div styleName="main-wrap" ref={this.getMainWrap}>
                               <div styleName="main" ref={this.getMain}>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
-                                this is a test<br/>
+                                {
+                                  this.generate()
+                                }
                                 </div>
                             </div>
                           </div>
