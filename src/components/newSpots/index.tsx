@@ -1,7 +1,7 @@
 
 import React from "react";
 import "./index.module.scss";
-import { Modal, Form, Upload, Button, Icon } from "antd";
+import { Modal, Form, Row, Col, Upload, Button, Icon } from "antd";
 import { FormComponentProps } from "antd/es/form";
 
 interface IUserFormProps extends FormComponentProps {
@@ -30,15 +30,34 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         //   };
         return (
           <Modal
+            width="680px"
             visible={visible}
             title="Create a new collection"
             okText="Create"
             onCancel={onCancel}
             onOk={onSave}
           >
-            <Form layout="vertical">
+            <Form>
               <Form.Item>
+                <span>地点名称</span>
               </Form.Item>
+              <Row>
+                <Col span={8}>
+                  <Form.Item label="第1级" labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                    <span>国家</span>
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
+                  <Form.Item label="第1级" labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                    <span>国家</span>
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
+                  <Form.Item label="第1级" labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                    <span>国家</span>
+                  </Form.Item>
+                </Col>
+              </Row>
             </Form>
           </Modal>
         );
