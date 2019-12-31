@@ -58,6 +58,23 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                   </Form.Item>
                 </Col>
               </Row>
+              <Row>
+                <Col span={8}>
+                  <Form.Item label="第1级" labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                    <span>国家</span>
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
+                  <Form.Item label="第1级" labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                    <span>国家</span>
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
+                  <Form.Item label="第1级" labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                    <span>国家</span>
+                  </Form.Item>
+                </Col>
+              </Row>
             </Form>
           </Modal>
         );
