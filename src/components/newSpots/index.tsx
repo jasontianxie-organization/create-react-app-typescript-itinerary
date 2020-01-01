@@ -97,7 +97,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                   </Col>
                   <Col span={8}>
                     <Form.Item label={intl.get("components.newSpots.spotName")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                      {getFieldDecorator("spotName")(
+                      {getFieldDecorator("spotName", {rules: [{ required: true, message: intl.get("components.newSpots.spotNameReminder")}]})(
                         <Input/>,
                       )}
                     </Form.Item>
