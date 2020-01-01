@@ -12,16 +12,16 @@ class NewItinerary extends React.Component<any, any> {
     public mainWrapRef: any;
     public resizeTimer: any = null;
     public state = {
-      uploadModalVisible: false,
+      newSpotsModalVisible: false,
     };
     public showModal = () => {
-      this.setState({ uploadModalVisible: true });
+      this.setState({ newSpotsModalVisible: true });
     }
     public handleCancel = () => {
-      this.setState({ uploadModalVisible: false });
+      this.setState({ newSpotsModalVisible: false });
     }
     public handleSave() {
-
+      this.setState({ newSpotsModalVisible: false });
     }
     public handleUpload = () => {
       const { form } = this.formRef.props;
@@ -32,7 +32,7 @@ class NewItinerary extends React.Component<any, any> {
         // console.log("Received values of form: ", values);
         this.props.uploadFile({destUrl: "/api/uploads/parts", file: values});
         form.resetFields();
-        this.setState({ uploadModalVisible: false });
+        this.setState({ newSpotsModalVisible: false });
       });
     }
     public saveFormRef = (formRef: any) => {
@@ -48,7 +48,7 @@ class NewItinerary extends React.Component<any, any> {
       console.log("title saved");
     }
     public generate() {
-      let num: number[] = [];
+      const num: number[] = [];
       for (let i = 0; i < 30; i++) {
         num[i] = i;
       }
@@ -56,7 +56,7 @@ class NewItinerary extends React.Component<any, any> {
     }
     public setMainWidth() {
       this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
-      this.mainRef.style.height = this.mainWrapRef.clientHeight - 40 + "px"; //这里的40px是main-wrap的padding值
+      this.mainRef.style.height = this.mainWrapRef.clientHeight - 40 + "px"; // 这里的40px是main-wrap的padding值
     }
     public componentDidMount() {
       this.setMainWidth();
@@ -90,7 +90,7 @@ class NewItinerary extends React.Component<any, any> {
                               <div styleName="main" ref={this.getMain}>
                                 {
                                   this.generate().map((i) => {
-                                    return <p key={i}>this is a test</p>
+                                    return <p key={i}>this is a test</p>;
                                   })
                                 }
                                 </div>
@@ -102,14 +102,14 @@ class NewItinerary extends React.Component<any, any> {
                       </div>
                       <NewSpots
                         wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
-                        visible={this.state.uploadModalVisible}
-                        onCancel={this.handleCancel}
-                        onSave={this.handleSave}
+                        visible={this.state.newSpotsModalVisible}
+                        onCancel={() => this.handleCancel()}
+                        onSave={() => this.handleSave()}
                       />
                      {/* <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>
                      <UploadModal
                       wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
-                      visible={this.state.uploadModalVisible}
+                      visible={this.state.newSpotsModalVisible}
                       onCancel={this.handleCancel}
                       onUpload={this.handleUpload}
                     />
