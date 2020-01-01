@@ -45,11 +45,11 @@ class MySelect extends React.Component<IMyselectProps, IMyselectStates> {
         })}
       </Menu>
     );
-    return (
+    return this.props.dropDownData.length ? (
       <Dropdown overlay={menu} trigger={["click"]}>
         <Input value={this.state.inputValue} onChange={(e) => this.changeInput(e)}/>
       </Dropdown>
-    );
+    ) : <Input value={this.state.inputValue} onChange={(e) => this.changeInput(e)}/>;
   }
   }
 
