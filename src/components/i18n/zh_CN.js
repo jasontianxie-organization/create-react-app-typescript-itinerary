@@ -10,7 +10,9 @@ export default {
             level4: "第4级",
             level5: "第5级",
             spotName: "地名",
-            spotNameReminder: "请输入地名"
+            spotNameReminder: "请输入地名",
+            save: "保存",
+            createNewSpot: "创建一个新的地点"
         }
     }
 }

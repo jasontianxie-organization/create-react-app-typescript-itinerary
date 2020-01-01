@@ -48,8 +48,8 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
             <Modal
               width="680px"
               visible={visible}
-              title="Create a new collection"
-              okText="Create"
+              title={intl.get("components.newSpots.createNewSpot")}
+              okText={intl.get("components.newSpots.save")}
               onCancel={onCancel}
               onOk={() => this.handleSubmit()}
             >
