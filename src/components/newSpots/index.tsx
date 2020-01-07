@@ -19,7 +19,7 @@ interface IUserFormStates {
 
 const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
     class extends React.Component<IUserFormProps, IUserFormStates> {
-      public state = {
+      public state: IUserFormStates = {
         level1DropDownData: [{id: 0, data: []}],
         level2DropDownData: [{id: 0, data: []}],
         level3DropDownData: [{id: 0, data: []}],
@@ -39,7 +39,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         if (data.id) { // 如果有id表示使用户点击选择的，如果没有id，表示用户没有点击下拉菜单中的选项
           console.log("query", data.id, data.value, data.level);
           request.get(`/public/address/${data.id}.json`).then((res) => {
-            const dropDownData = (this.state as any)[`level${data.level}DropDownData`].concat([{id: data.id, data: res}]);
+            const dropDownData = this.state[`level${data.level}DropDownData`].concat([{id: data.id, data: res}]);
             this.setState({...this.state, [`level${data.level}DropDownData`]: dropDownData});
           });
         }
