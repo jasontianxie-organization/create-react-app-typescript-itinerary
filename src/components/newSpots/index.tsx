@@ -5,6 +5,7 @@ import { Modal, Form, Row, Col, Upload, Button, Icon, Input } from "antd";
 import MySelect from "@/components/mySelect";
 import { FormComponentProps } from "antd/es/form";
 import intl from "react-intl-universal";
+import {request} from "@/fetchServerData/axios";
 
 interface IUserFormProps extends FormComponentProps {
     wrappedComponentRef: any;
@@ -12,9 +13,12 @@ interface IUserFormProps extends FormComponentProps {
     onCancel: any;
     onSave: any;
   }
+interface IUserFormStates {
+    [index: string]: any[];
+  }
 
 const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
-    class extends React.Component<IUserFormProps, any> {
+    class extends React.Component<IUserFormProps, IUserFormStates> {
       public state = {
         level1DropDownData: [{id: 0, data: []}],
         level2DropDownData: [{id: 0, data: []}],
@@ -32,14 +36,21 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         });
       }
       public queryNextDropDownData(data: any) {
-        if (data.id) {
-          console.log("query", data.id, data.value);
+        if (data.id) { // 如果有id表示使用户点击选择的，如果没有id，表示用户没有点击下拉菜单中的选项
+          console.log("query", data.id, data.value, data.level);
+          request.get(`/public/address/${data.id}.json`).then((res) => {
+            const dropDownData = (this.state as any)[`level${data.level}DropDownData`].concat([{id: data.id, data: res}]);
+            this.setState({...this.state, [`level${data.level}DropDownData`]: dropDownData});
+          });
         }
       }
       public componentWillMount() {
-        setTimeout(() => {
-          this.setState({...this.state, level1DropDownData: [{id: 0, data: [{id: 1, value: "one"}, {id: 2, value: "two"}]}]});
-        }, 6000);
+        request.get("/public/address/1.json").then((data) => {
+          this.setState({...this.state, level1DropDownData: [{id: 0, data}]});
+        });
+        // setTimeout(() => {
+        //   this.setState({...this.state, level1DropDownData: [{id: 0, data: [{id: 1, value: "one"}, {id: 2, value: "two"}]}]});
+        // }, 6000);
       }
       public render() {
           const { visible, onCancel, onSave, form } = this.props;
