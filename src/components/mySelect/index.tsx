@@ -4,7 +4,7 @@ import "./index.module.scss";
 // import intl from "react-intl-universal";
 import { Input, Dropdown, Menu } from "antd";
 
-type OnChange = (val: {id?: number, value: string}) => any;
+type OnChange = (val: {id?: number, name: string}) => any;
 
 interface IMyselectProps {
   value?: any; // 设置默认值
@@ -31,16 +31,16 @@ class MySelect extends React.Component<IMyselectProps, IMyselectStates> {
       this.props.onChange(val);
     }, 500);
   }
-  public dropDownClick(val: {id: number, value: string}) {
-    this.setState({inputValue: val.value});
+  public dropDownClick(val: {id: number, name: string}) {
+    this.setState({inputValue: val.name});
     this.props.onChange(val);
   }
   public render() {
     const menu = (
       <Menu>
-        {this.props.dropDownData.map((item: {id: number, value: string}, index: number) => {
+        {this.props.dropDownData.map((item: {id: number, name: string}, index: number) => {
           return (<Menu.Item key={index}>
-                    <div onClick={() => this.dropDownClick({id: item.id, value: item.value})}>{item.value}</div>
+                    <div onClick={() => this.dropDownClick({id: item.id, name: item.name})}>{item.name}</div>
                   </Menu.Item>);
         })}
       </Menu>

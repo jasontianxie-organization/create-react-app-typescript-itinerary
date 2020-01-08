@@ -25,6 +25,11 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         level3DropDownData: [{id: 0, data: []}],
         level4DropDownData: [{id: 0, data: []}],
         level5DropDownData: [{id: 0, data: []}],
+        level1DropDownCurrentData: [],
+        level2DropDownCurrentData: [],
+        level3DropDownCurrentData: [],
+        level4DropDownCurrentData: [],
+        level5DropDownCurrentData: [],
       };
       public handleSubmit() {
         // e.preventDefault();
@@ -37,20 +42,25 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
       }
       public queryNextDropDownData(data: any) {
         if (data.id) { // 如果有id表示使用户点击选择的，如果没有id，表示用户没有点击下拉菜单中的选项
-          console.log("query", data.id, data.value, data.level);
-          request.get(`/public/address/${data.id}.json`).then((res) => {
-            const dropDownData = this.state[`level${data.level}DropDownData`].concat([{id: data.id, data: res}]);
-            this.setState({...this.state, [`level${data.level}DropDownData`]: dropDownData});
+          const cachedData = this.state[`level${data.level + 1}DropDownData`].filter((item) => {
+            return item.id === data.id;
           });
+          if (cachedData.length) {
+            this.setState({...this.state, [`level${data.level + 1}DropDownCurrentData`]: cachedData[0].data});
+          } else {
+            request.get(`/public/address/${data.id}.json`).then((res: any) => {
+              const dropDownData = this.state[`level${data.level + 1}DropDownData`].concat([{id: data.id, data: res}]);
+              this.setState({...this.state, [`level${data.level + 1}DropDownData`]: dropDownData, [`level${data.level + 1}DropDownCurrentData`]: res});
+            }).catch((err) => {
+              console.log(err);
+            });
+          }
         }
       }
       public componentWillMount() {
-        request.get("/public/address/1.json").then((data) => {
-          this.setState({...this.state, level1DropDownData: [{id: 0, data}]});
+        request.get("/public/address/1.json").then((data: any) => {
+          this.setState({...this.state, level1DropDownData: [{id: 0, data}], level1DropDownCurrentData: data});
         });
-        // setTimeout(() => {
-        //   this.setState({...this.state, level1DropDownData: [{id: 0, data: [{id: 1, value: "one"}, {id: 2, value: "two"}]}]});
-        // }, 6000);
       }
       public render() {
           const { visible, onCancel, onSave, form } = this.props;
@@ -72,21 +82,21 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                   <Col span={8}>
                     <Form.Item label={intl.get("components.newSpots.level1")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
                       {getFieldDecorator("level1")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 1, ...val})} dropDownData={this.state.level1DropDownData[0].data}/>,
+                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 1, ...val})} dropDownData={this.state.level1DropDownCurrentData}/>,
                       )}
                     </Form.Item>
                   </Col>
                   <Col span={8}>
                     <Form.Item label={intl.get("components.newSpots.level2")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
                       {getFieldDecorator("level2")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 2, ...val})} dropDownData={this.state.level2DropDownData[0].data}/>,
+                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 2, ...val})} dropDownData={this.state.level2DropDownCurrentData}/>,
                       )}
                     </Form.Item>
                   </Col>
                   <Col span={8}>
                     <Form.Item label={intl.get("components.newSpots.level3")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
                       {getFieldDecorator("level3")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 3, ...val})} dropDownData={this.state.level3DropDownData[0].data}/>,
+                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 3, ...val})} dropDownData={this.state.level3DropDownCurrentData}/>,
                       )}
                     </Form.Item>
                   </Col>
@@ -95,14 +105,14 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                   <Col span={8}>
                     <Form.Item label={intl.get("components.newSpots.level4")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
                       {getFieldDecorator("level4")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 4, ...val})} dropDownData={this.state.level4DropDownData[0].data}/>,
+                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 4, ...val})} dropDownData={this.state.level4DropDownCurrentData}/>,
                       )}
                     </Form.Item>
                   </Col>
                   <Col span={8}>
                     <Form.Item label={intl.get("components.newSpots.level5")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
                       {getFieldDecorator("level5")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownData[0].data}/>,
+                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownCurrentData}/>,
                       )}
                     </Form.Item>
                   </Col>
