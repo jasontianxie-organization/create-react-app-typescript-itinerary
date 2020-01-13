@@ -1,11 +1,14 @@
 
 import React from "react";
 import "./index.module.scss";
-import { Modal, Form, Row, Col, Upload, Button, Icon, Input } from "antd";
+import { Modal, Form, Row, Col, Upload, Button, Icon, Input, DatePicker } from "antd";
 import MySelect from "@/components/mySelect";
 import { FormComponentProps } from "antd/es/form";
 import intl from "react-intl-universal";
 import {request} from "@/fetchServerData/axios";
+import moment from "moment";
+import "moment/locale/zh-cn";
+moment.locale("zh-cn");
 
 interface IUserFormProps extends FormComponentProps {
     wrappedComponentRef: any;
@@ -74,57 +77,65 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
               onCancel={onCancel}
               onOk={() => this.handleSubmit()}
             >
-              <Form>
-                <Form.Item>
-                  <span>地点名称</span>
-                </Form.Item>
-                <Row>
-                  <Col span={8}>
-                    <Form.Item label={intl.get("components.newSpots.level1")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                      {getFieldDecorator("level1")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 1, ...val})} dropDownData={this.state.level1DropDownCurrentData}/>,
+              <div styleName="new-spot-modal">
+                <Form>
+                  <Form.Item>
+                    <span styleName="label-spot">地点名称</span>
+                  </Form.Item>
+                  <Row>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.level1")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("level1")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 1, ...val})} dropDownData={this.state.level1DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.level2")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("level2")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 2, ...val})} dropDownData={this.state.level2DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.level3")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("level3")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 3, ...val})} dropDownData={this.state.level3DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.level4")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("level4")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 4, ...val})} dropDownData={this.state.level4DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.level5")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("level5")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.spotName")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("spotName", {rules: [{ required: true, message: intl.get("components.newSpots.spotNameReminder")}]})(
+                          <Input/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Form.Item>
+                    <span styleName="label-time">时间</span>
+                    {getFieldDecorator("spotTime", {rules: [{ required: true, message: intl.get("components.newSpots.spotNameReminder")}]})(
+                        <DatePicker showTime placeholder="Select Time"/>,
                       )}
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label={intl.get("components.newSpots.level2")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                      {getFieldDecorator("level2")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 2, ...val})} dropDownData={this.state.level2DropDownCurrentData}/>,
-                      )}
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label={intl.get("components.newSpots.level3")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                      {getFieldDecorator("level3")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 3, ...val})} dropDownData={this.state.level3DropDownCurrentData}/>,
-                      )}
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={8}>
-                    <Form.Item label={intl.get("components.newSpots.level4")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                      {getFieldDecorator("level4")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 4, ...val})} dropDownData={this.state.level4DropDownCurrentData}/>,
-                      )}
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label={intl.get("components.newSpots.level5")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                      {getFieldDecorator("level5")(
-                        <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownCurrentData}/>,
-                      )}
-                    </Form.Item>
-                  </Col>
-                  <Col span={8}>
-                    <Form.Item label={intl.get("components.newSpots.spotName")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                      {getFieldDecorator("spotName", {rules: [{ required: true, message: intl.get("components.newSpots.spotNameReminder")}]})(
-                        <Input/>,
-                      )}
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Form>
+                  </Form.Item>
+                </Form>
+              </div>
             </Modal>
           );
         }
