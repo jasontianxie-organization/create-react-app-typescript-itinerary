@@ -9,3 +9,7 @@
 .label-time {
   margin-right: 40px;
 }
+:global(.editable-content) {
+  height: 300px;
+  overflow-y: auto;
+}

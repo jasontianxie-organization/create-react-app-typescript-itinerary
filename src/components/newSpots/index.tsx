@@ -80,7 +80,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
               <div styleName="new-spot-modal">
                 <Form>
                   <Form.Item>
-                    <span styleName="label-spot">地点名称</span>
+                    <span styleName="label-spot">{intl.get("components.newSpots.label_spot_name")}</span>
                   </Form.Item>
                   <Row>
                     <Col span={8}>
@@ -121,17 +121,22 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                       </Form.Item>
                     </Col>
                     <Col span={8}>
-                      <Form.Item label={intl.get("components.newSpots.spotName")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
-                        {getFieldDecorator("spotName", {rules: [{ required: true, message: intl.get("components.newSpots.spotNameReminder")}]})(
+                      <Form.Item label={intl.get("components.newSpots.spot_name")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("spotName", {rules: [{ required: true, message: intl.get("components.newSpots.reminder_spot_name")}]})(
                           <Input/>,
                         )}
                       </Form.Item>
                     </Col>
                   </Row>
                   <Form.Item>
-                    <span styleName="label-time">时间</span>
-                    {getFieldDecorator("spotTime", {rules: [{ required: true, message: intl.get("components.newSpots.spotNameReminder")}]})(
+                    <span styleName="label-time">{intl.get("components.newSpots.label_spot_time")}</span>
+                    {getFieldDecorator("spotTime", {rules: [{ required: true, message: intl.get("components.newSpots.reminder_spot_time")}]})(
                         <DatePicker showTime placeholder="Select Time"/>,
+                      )}
+                  </Form.Item>
+                  <Form.Item>
+                    {getFieldDecorator("spotDiscription")(
+                        <div contentEditable={true} className="editable-content"></div>,
                       )}
                   </Form.Item>
                 </Form>
