@@ -15,6 +15,10 @@ export default {
             createNewSpot: "创建一个新的地点",
             label_spot_name: "地点名称",
             label_spot_time: "时间",
+            label_spot_coordinate: "坐标",
+            label_spot_latitute: "纬度",
+            label_spot_longitude: "经度",
+            label_spot_selectFromMap: "地图选点",
             reminder_spot_time: "请选择时间"
         }
     }

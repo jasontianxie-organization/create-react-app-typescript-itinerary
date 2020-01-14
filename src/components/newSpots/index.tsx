@@ -129,7 +129,33 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                     </Col>
                   </Row>
                   <Form.Item>
-                    <span styleName="label-time">{intl.get("components.newSpots.label_spot_time")}</span>
+                    <span>坐标</span>
+                  </Form.Item>
+                  <Row>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.label_spot_latitute")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("spotLatitute")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 4, ...val})} dropDownData={this.state.level4DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.label_spot_longitude")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("spotLongitude")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={6} offset={2}>
+                      <Form.Item>
+                        <Button>{intl.get("components.newSpots.label_spot_selectFromMap")}</Button>
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Form.Item>
+                    <span>{intl.get("components.newSpots.label_spot_time")}</span>
+                  </Form.Item>
+                  <Form.Item>
                     {getFieldDecorator("spotTime", {rules: [{ required: true, message: intl.get("components.newSpots.reminder_spot_time")}]})(
                         <DatePicker showTime placeholder="Select Time"/>,
                       )}
