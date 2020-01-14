@@ -1,7 +1,7 @@
 
 import React from "react";
 import "./index.module.scss";
-import { Modal, Form, Row, Col, Upload, Button, Icon, Input, DatePicker } from "antd";
+import { Modal, Form, Row, Col, Select, Button, Icon, Input, DatePicker } from "antd";
 import MySelect from "@/components/mySelect";
 import { FormComponentProps } from "antd/es/form";
 import intl from "react-intl-universal";
@@ -19,6 +19,8 @@ interface IUserFormProps extends FormComponentProps {
 interface IUserFormStates {
     [index: string]: any[];
   }
+
+const {Option} = Select;
 
 const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
     class extends React.Component<IUserFormProps, IUserFormStates> {
@@ -135,14 +137,14 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                     <Col span={8}>
                       <Form.Item label={intl.get("components.newSpots.label_spot_latitute")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
                         {getFieldDecorator("spotLatitute")(
-                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 4, ...val})} dropDownData={this.state.level4DropDownCurrentData}/>,
+                          <Input/>,
                         )}
                       </Form.Item>
                     </Col>
                     <Col span={8}>
                       <Form.Item label={intl.get("components.newSpots.label_spot_longitude")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
                         {getFieldDecorator("spotLongitude")(
-                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownCurrentData}/>,
+                          <Input/>,
                         )}
                       </Form.Item>
                     </Col>
@@ -160,6 +162,45 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                         <DatePicker showTime placeholder="Select Time"/>,
                       )}
                   </Form.Item>
+                  <Form.Item>
+                    <span>{intl.get("components.newSpots.label_route")}</span>
+                  </Form.Item>
+                  <Form.Item>
+                    {intl.get("components.newSpots.label_route_from")}
+                    {
+                    getFieldDecorator("fromSpot")(
+                      <Select style={{ width: 120, margin: "0 10px" }}>
+                        <Option value="jack">Jack</Option>
+                        <Option value="lucy">Lucy</Option>
+                        <Option value="Yiminghe">yiminghe</Option>
+                      </Select>,
+                      )}
+                    {intl.get("components.newSpots.label_route_to")}
+                    {intl.get("components.newSpots.label_route_here")}
+                  </Form.Item>
+                  <Row>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.label_route_vehicle")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("routeVehicle")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 4, ...val})} dropDownData={this.state.level4DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                      <Form.Item label={intl.get("components.newSpots.label_route_cost")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("routeCost")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                    <Col span={8}>
+                    <Form.Item label={intl.get("components.newSpots.label_route_time")} labelCol={{span: 8}} wrapperCol={{span: 16}}>
+                        {getFieldDecorator("routeTime")(
+                          <MySelect onChange={(val) => this.queryNextDropDownData({level: 5, ...val})} dropDownData={this.state.level5DropDownCurrentData}/>,
+                        )}
+                      </Form.Item>
+                    </Col>
+                  </Row>
                   <Form.Item>
                     {getFieldDecorator("spotDiscription")(
                         <div contentEditable={true} className="editable-content"></div>,

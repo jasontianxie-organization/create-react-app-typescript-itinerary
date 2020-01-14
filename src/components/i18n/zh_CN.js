@@ -19,6 +19,13 @@ export default {
             label_spot_latitute: "纬度",
             label_spot_longitude: "经度",
             label_spot_selectFromMap: "地图选点",
+            label_route: "添加一条路径",
+            label_route_from: "从",
+            label_route_to: "到",
+            label_route_here: "这里",
+            label_route_vehicle: "交通工具",
+            label_route_cost: "花费",
+            label_route_time: "耗时",
             reminder_spot_time: "请选择时间"
         }
     }
