@@ -2,11 +2,15 @@ import * as React from "react";
 import "./index.scss";
 import { Button } from "antd";
 
-type PropsStyle = (input: string) => void;
+type OnChange = (val?: string) => void;
+interface ITineraryEditorProps {
+    value?: any; // 设置默认值
+    onChange: OnChange;
+  }
 
-export default class ItineraryEditor extends React.Component<PropsStyle, any> {
+export default class ItineraryEditor extends React.Component<ITineraryEditorProps, any> {
     private textInput: any;
-    constructor(props: any) {
+    constructor(props: ITineraryEditorProps) {
         super(props);
         this.textInput = React.createRef();
         this.state = {
@@ -44,11 +48,13 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
             range.collapse(false);
             selection.addRange(range);
         }
+        this.onChange();
     }
-    public input(e: any) { // 当用户输入内容后，光标会随着移动，所以需要重新获取光标的位置。
+    public input(e: any) { // 当用户输入或删除内容后，光标会随着移动，所以需要重新获取光标的位置。
         const selection = window.getSelection ? window.getSelection() : document.selection; // window.getSelection是Chrome，FF，等主流浏览器方法，document.selection是IE方法
         const range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
         this.setState({ selection, range });
+        this.onChange();
     }
     public keyup(e: any) {
         if (e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) { // 上下左右键
@@ -68,14 +74,8 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
         const range = selection.createRange ? selection.createRange() : selection.getRangeAt(0);
         this.setState({ selection, range });
     }
-    public submit() {
-        console.log(this.textInput.current.innerHTML);
-        // axios.post(config.mainDomain + "/itineraries", {userId: Cookies.get("userid"), contentHtml: this.textInput.current.innerHTML}).then((response) => {
-        //    console.log("success");
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // });
+    public onChange() {
+        this.props.onChange(this.textInput.current.innerHTML);
     }
     public render() {
         return (
@@ -89,7 +89,7 @@ export default class ItineraryEditor extends React.Component<PropsStyle, any> {
                 onBlur={(e) => this.focus(false, e)}
                 onInput={(e) => this.input(e)}>
             </div>
-            <Button type="primary" styleName = "edit-submit" onClick={() => this.submit()}>保存</Button>
+            {/* <Button type="primary" styleName = "edit-submit" onClick={() => this.submit()}>保存</Button> */}
         </div>
         );
     }

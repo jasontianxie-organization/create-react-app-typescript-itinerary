@@ -3,6 +3,7 @@ import React from "react";
 import "./index.module.scss";
 import { Modal, Form, Row, Col, Select, Button, Icon, Input, DatePicker } from "antd";
 import MySelect from "@/components/mySelect";
+import ItineraryEditor from "@/components/itineraryEditor";
 import { FormComponentProps } from "antd/es/form";
 import intl from "react-intl-universal";
 import {request} from "@/fetchServerData/axios";
@@ -72,7 +73,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
           const { getFieldDecorator } = form;
           return (
             <Modal
-              width="680px"
+              width="1000px"
               visible={visible}
               title={intl.get("components.newSpots.createNewSpot")}
               okText={intl.get("components.newSpots.save")}
@@ -202,9 +203,9 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                     </Col>
                   </Row>
                   <Form.Item>
-                    {getFieldDecorator("spotDiscription")(
-                        <div contentEditable={true} className="editable-content"></div>,
-                      )}
+                    {getFieldDecorator("spotDescription")(
+                      <ItineraryEditor onChange={() => {}}/>,
+                    )}
                   </Form.Item>
                 </Form>
               </div>
