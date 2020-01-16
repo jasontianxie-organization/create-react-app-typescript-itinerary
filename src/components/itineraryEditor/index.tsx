@@ -1,14 +1,18 @@
 import * as React from "react";
-import "./index.scss";
+import "./index.module.scss";
+import UploadModal from "@/components/upload";
 import { Button } from "antd";
 
 type OnChange = (val?: string) => void;
 interface ITineraryEditorProps {
     value?: any; // 设置默认值
     onChange: OnChange;
+    style?: any;
+    uploadFile: any;
   }
 
 export default class ItineraryEditor extends React.Component<ITineraryEditorProps, any> {
+    public uploadFormRef: any;
     private textInput: any;
     constructor(props: ITineraryEditorProps) {
         super(props);
@@ -17,6 +21,7 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
             focused: false,
             selection: null,
             range: null,
+            uploadModalVisible: false,
         };
     }
     public insertPicOrPaste(e: any) { // 只允许用户粘贴纯文本，安全考虑
@@ -77,10 +82,35 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
     public onChange() {
         this.props.onChange(this.textInput.current.innerHTML);
     }
+    public saveFormRef = (formRef: any) => {
+        this.uploadFormRef = formRef;
+      }
+    public showModal = () => {
+        this.setState({ uploadModalVisible: true });
+    }
+    public handleUploadCancel = () => {
+        this.setState({ uploadModalVisible: false });
+    }
+    public handleSave() {
+        this.setState({ uploadModalVisible: false });
+    }
+    public handleUpload = () => {
+        const { form } = this.uploadFormRef.props;
+        form.validateFields((err: any, values: any) => {
+            if (err) {
+            return;
+            }
+            console.log("Received values of form: ", values);
+            this.props.uploadFile({destUrl: "/api/uploads/parts", file: values});
+            form.resetFields();
+            this.setState({ uploadModalVisible: false });
+        });
+    }
     public render() {
+        const {style = {}} = this.props;
         return (
-        <div styleName="edit-wrap">
-            <Button onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</Button>
+        <div styleName="edit-wrap" style={style}>
+            {/* <Button onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</Button> */}
             <div contentEditable={true} styleName = "edit" ref={this.textInput}
                 onPaste={(e) => this.insertPicOrPaste(e)}
                 onClick={(e) => this.click(e)}
@@ -89,6 +119,15 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
                 onBlur={(e) => this.focus(false, e)}
                 onInput={(e) => this.input(e)}>
             </div>
+            <div styleName="media">
+                <Button onClick={() => this.showModal()}>上传</Button>
+            </div>
+            <UploadModal
+                wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
+                visible={this.state.uploadModalVisible}
+                onCancel={this.handleUploadCancel}
+                onUpload={this.handleUpload}
+            />
             {/* <Button type="primary" styleName = "edit-submit" onClick={() => this.submit()}>保存</Button> */}
         </div>
         );

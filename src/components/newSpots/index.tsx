@@ -11,11 +11,13 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 moment.locale("zh-cn");
 
+
 interface IUserFormProps extends FormComponentProps {
     wrappedComponentRef: any;
     visible: any;
     onCancel: any;
     onSave: any;
+    uploadFile: any;
   }
 interface IUserFormStates {
     [index: string]: any[];
@@ -203,9 +205,9 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                     </Col>
                   </Row>
                   <Form.Item>
-                    {getFieldDecorator("spotDescription")(
-                      <ItineraryEditor onChange={() => {}}/>,
-                    )}
+                      {getFieldDecorator("spotDescription")(
+                        <ItineraryEditor onChange={() => {}} uploadFile={this.props.uploadFile}/>,
+                      )}
                   </Form.Item>
                 </Form>
               </div>

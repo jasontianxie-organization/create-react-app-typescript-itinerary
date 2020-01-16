@@ -23,18 +23,6 @@ class NewItinerary extends React.Component<any, any> {
     public handleSave() {
       this.setState({ newSpotsModalVisible: false });
     }
-    public handleUpload = () => {
-      const { form } = this.formRef.props;
-      form.validateFields((err: any, values: any) => {
-        if (err) {
-          return;
-        }
-        // console.log("Received values of form: ", values);
-        this.props.uploadFile({destUrl: "/api/uploads/parts", file: values});
-        form.resetFields();
-        this.setState({ newSpotsModalVisible: false });
-      });
-    }
     public saveFormRef = (formRef: any) => {
       this.formRef = formRef;
     }
@@ -105,6 +93,7 @@ class NewItinerary extends React.Component<any, any> {
                         visible={this.state.newSpotsModalVisible}
                         onCancel={() => this.handleCancel()}
                         onSave={() => this.handleSave()}
+                        uploadFile={this.props.uploadFile}
                       />
                      {/* <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>
                      <UploadModal
