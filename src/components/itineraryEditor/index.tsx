@@ -1,7 +1,7 @@
 import * as React from "react";
 import "./index.module.scss";
 import UploadModal from "@/components/upload";
-import { Button } from "antd";
+import { Button, Icon } from "antd";
 
 type OnChange = (val?: string) => void;
 interface ITineraryEditorProps {
@@ -22,6 +22,7 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
             selection: null,
             range: null,
             uploadModalVisible: false,
+            tabOnDisplay: 1,
         };
     }
     public insertPicOrPaste(e: any) { // 只允许用户粘贴纯文本，安全考虑
@@ -94,6 +95,12 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
     public handleSave() {
         this.setState({ uploadModalVisible: false });
     }
+    public showMedia() {
+        this.setState({ tabOnDisplay: 1 });
+    }
+    public showEmoji() {
+        this.setState({ tabOnDisplay: 2 });
+    }
     public handleUpload = () => {
         const { form } = this.uploadFormRef.props;
         form.validateFields((err: any, values: any) => {
@@ -109,9 +116,10 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
     public render() {
         const {style = {}} = this.props;
         return (
-        <div styleName="edit-wrap" style={style}>
+        <div styleName="edit-wrap">
             {/* <Button onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</Button> */}
             <div contentEditable={true} styleName = "edit" ref={this.textInput}
+                style={style}
                 onPaste={(e) => this.insertPicOrPaste(e)}
                 onClick={(e) => this.click(e)}
                 onKeyUp={(e) => this.keyup(e)}
@@ -120,7 +128,16 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
                 onInput={(e) => this.input(e)}>
             </div>
             <div styleName="media">
-                <Button onClick={() => this.showModal()}>上传</Button>
+                <ul styleName="tab">
+                    <li onClick={() => this.showMedia()}><Icon style={{fontSize: "20px"}} type="file-jpg" /></li>
+                    <li onClick={() => this.showEmoji()}><Icon style={{fontSize: "20px"}} type="smile" /></li>
+                </ul>
+                <ul styleName="tab-content">
+                    <li style={{display: (this.state.tabOnDisplay === 1 ? "block" : "none")}}>
+                        <Button onClick={() => this.showModal()}>上传</Button>
+                    </li>
+                    <li style={{display: (this.state.tabOnDisplay === 2 ? "block" : "none")}}>点击添加表情</li>
+                </ul>
             </div>
             <UploadModal
                 wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
