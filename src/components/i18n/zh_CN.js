@@ -27,6 +27,15 @@ export default {
             label_route_cost: "花费",
             label_route_time: "耗时",
             reminder_spot_time: "请选择时间"
+        },
+        upload: {
+            title_modal: "上传",
+            btn_ok: "上传",
+            label_upload: "选择文件",
+            label_icon: "点击上传",
+            label_file_name: "文件名：",
+            label_file_size: "文件大小：",
+            remider_empty_file: "请选择文件",
         }
     }
 }
