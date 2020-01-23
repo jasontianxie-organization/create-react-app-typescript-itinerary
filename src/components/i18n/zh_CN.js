@@ -1,8 +1,5 @@
 export default {
     components: {
-        upload: {
-            uploadButton: "点击上传"
-        },
         newSpots: {
             level1: "第1级",
             level2: "第2级",
@@ -35,7 +32,9 @@ export default {
             label_icon: "点击上传",
             label_file_name: "文件名：",
             label_file_size: "文件大小：",
+            label_file_type: "请选择jpg、jpeg、png、mp4类型的文件，文件最大10M",
             remider_empty_file: "请选择文件",
+            remider_big_file: "文件不能大于10M"
         }
     }
 }

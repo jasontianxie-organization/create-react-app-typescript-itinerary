@@ -31,6 +31,7 @@ const UploadModal = Form.create<IUserFormProps>({ name: "form_in_modal" })(
             onChange: (val: any) => {
               this.setState({...this.state, uploadFileName: val.file.name, uploadFileSize: val.file.size});
             },
+            accept: "image/jpeg, image/png, video/mp4" // 设置接收的文件类型
           };
         return (
           <Modal
@@ -41,9 +42,18 @@ const UploadModal = Form.create<IUserFormProps>({ name: "form_in_modal" })(
             onOk={onUpload}
           >
             <Form layout="vertical">
-              <Form.Item>
+              <Form.Item label={intl.get("components.upload.label_file_type")}>
                 {getFieldDecorator("antdFile", {
-                  rules: [{ required: true, message: intl.get("components.upload.remider_empty_file")}],
+                  rules: [{ required: true, message: intl.get("components.upload.remider_empty_file")}, {validator: (rule, value, callback) => {
+                    try {
+                      if (value.file.size > 10 * Math.pow(1024, 2)) { // 文件最大不能超过10M
+                        callback(intl.get("components.upload.remider_big_file"))
+                      } else {
+                        callback()
+                      }
+                    } catch (err) {
+                      callback(err);
+                    }}}],
                 })(<Upload {...props}>
                     <Button>
                       <Icon type="upload" /> {intl.get("components.upload.label_icon")}
