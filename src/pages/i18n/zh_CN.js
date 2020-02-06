@@ -1,3 +1,5 @@
+import { placeholder } from "@babel/types";
+
 export default {
     pages: {
         main: {
@@ -9,7 +11,10 @@ export default {
         },
         newItinerary: {
             content: "新建行程",
-            uploadBotton: "点击上传文件"
+            uploadBotton: "点击上传文件",
+            placeholder_title: "输入行程标题",
+            btn_save: "保存",
+            btn_add: "添加"
         }
     }
 }

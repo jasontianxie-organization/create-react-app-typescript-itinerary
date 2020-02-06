@@ -27,9 +27,16 @@ export default class Uploader {
                     formData.append("file", chunk, fileName + pieceNumber);
                     formData.append("fileId", fileId);
                     formData.append("pieceNumber", pieceNumber);
-                    request.post(destUrl, formData).then(() => {
-                        start = end;
-                        uploadChunk()
+                    formData.append("fileName", fileName);
+                    request.post(destUrl, formData).then((data) => {
+                        if (data.code === 1) {
+                            console.log(data.message)
+                        } else {
+                            start = end;
+                            uploadChunk()
+                        }
+                    }).catch(({message}) => {
+                        console.log(message)
                     })
                 } else { //所有切片上传成功后，发送合并分片的请求
                     request.post("/api/uploads/merge", {fileId, fileName}).then((data) => {

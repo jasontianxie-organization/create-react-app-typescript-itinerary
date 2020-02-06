@@ -1,0 +1,30 @@
+@import '~@/variables';
+.edit-wrap {
+  display: flex;
+}
+.edit {
+  flex: 1;
+  padding: 10px;
+  min-height: 300px;
+  overflow-y: auto;
+  line-height: 1.5;
+  border: solid 1px $main-color;
+}
+.media {
+  display: flex;
+  width: 320px;
+  max-height: 500px;
+  overflow-y: auto;
+  .tab {
+    margin: 0;
+    padding: 0 10px;
+    li {
+      cursor: pointer;
+    }
+  }
+  .tab-content {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
+}

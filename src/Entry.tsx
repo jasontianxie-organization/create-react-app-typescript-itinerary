@@ -4,6 +4,7 @@ import NewItinerary from "@/pages/newItinerary/index";
 import LoadingBar from "@/components/loadingBar";
 import {Route} from "react-router-dom";
 import intl from "react-intl-universal";
+import "./init.scss";
 
 import en_US from "@/i18n/en_US";
 import zh_CN from "@/i18n/zh_CN";

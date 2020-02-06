@@ -67,3 +67,15 @@ declare module '*.scss' {
   const classes: any;
   export default classes;
 }
+
+interface Window {
+  clipboardData:any
+ }
+
+ declare var window:Window;
+
+ interface Document {
+  selection:any
+ }
+
+ declare var document:Document;

@@ -1,0 +1,18 @@
+.new-spot-modal {
+  :global(.ant-form-item) {
+    margin: 0;
+    }
+}
+.label-spot {
+
+}
+.label-time {
+  margin-right: 40px;
+}
+.label-coordinate {
+
+}
+:global(.editable-content) {
+  height: 300px;
+  overflow-y: auto;
+}
