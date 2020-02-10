@@ -11,7 +11,6 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 moment.locale("zh-cn");
 
-
 interface IUserFormProps extends FormComponentProps {
     wrappedComponentRef: any;
     visible: any;

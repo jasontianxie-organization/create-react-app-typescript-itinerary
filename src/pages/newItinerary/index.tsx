@@ -5,6 +5,7 @@ import NewSpots from "@/components/newSpots";
 // import ItineraryEditor from "@/components/itineraryEditor";
 import { Button, Input } from "antd";
 import { connect } from "react-redux";
+import { uploadFileAction } from "@/redux/actions/newItinerary";
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
@@ -116,7 +117,8 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    uploadFile: (combinedFile: any) => dispatch({type: "UPLOAD_FILE", payload: combinedFile}),
+    // uploadFile: (combinedFile: any) => dispatch({type: "UPLOAD_FILE", payload: combinedFile}),
+    uploadFile: (combinedFile: any) => dispatch(uploadFileAction(combinedFile)),
   };
 }
 
