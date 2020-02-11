@@ -55,7 +55,7 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
         // if (!this.state.focused || !range) { // 当用户没有点击输入框的时候，如果点击插入图片，则插入操作不生效
         //     return;
         // }
-        if (!range) {
+        if (!range) { // 当用户没有点击输入框的时候，如果点击插入图片，则插入操作不生效
             return;
         }
         if (e.type && e.type === "insertPic") { // 如果是插入图片或者表情
