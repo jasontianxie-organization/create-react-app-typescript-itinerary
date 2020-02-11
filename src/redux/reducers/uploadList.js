@@ -1,8 +1,5 @@
-import Uploader from "@/utils/uploader.js"
-
 let initState = []
-
-export const newItinerary = (state=initState,action)=>{
+export const uploadList = (state=initState,action)=>{
     switch (action.type){
         case 'UPLOAD_START':
         case 'UPLOAD_SUCCESS':

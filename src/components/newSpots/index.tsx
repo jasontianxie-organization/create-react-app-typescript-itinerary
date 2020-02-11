@@ -7,6 +7,7 @@ import ItineraryEditor from "@/components/itineraryEditor";
 import { FormComponentProps } from "antd/es/form";
 import intl from "react-intl-universal";
 import {request} from "@/fetchServerData/axios";
+import { connect } from "react-redux";
 import moment from "moment";
 import "moment/locale/zh-cn";
 moment.locale("zh-cn");
@@ -17,6 +18,7 @@ interface IUserFormProps extends FormComponentProps {
     onCancel: any;
     onSave: any;
     uploadFile: any;
+    uploadList: any[];
   }
 interface IUserFormStates {
     [index: string]: any[];
@@ -205,7 +207,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                   </Row>
                   <Form.Item>
                       {getFieldDecorator("spotDescription")(
-                        <ItineraryEditor onChange={() => {}} uploadFile={this.props.uploadFile}/>,
+                        <ItineraryEditor onChange={() => {}} uploadFile={this.props.uploadFile} uploadList={this.props.uploadList}/>,
                       )}
                   </Form.Item>
                 </Form>
@@ -216,4 +218,14 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
     },
   );
 
-export default NewSpots;
+function mapStateToProps(state: any) {
+  return {
+    uploadList: state.uploadList,
+  };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {};
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NewSpots);
+// export default NewSpots;

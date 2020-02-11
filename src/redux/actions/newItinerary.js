@@ -5,17 +5,17 @@ function uploadFileAction(file) {
     return function (dispatch, getState) {
         dispatch({
             type: 'UPLOAD_START',
-            payload: {fileId: File.fileId, file: File, status: 'start'}
+            payload: {fileId: File.fileId, file: File, status: 'start', path:''}
         });
         File.upload().then((data) => {
             dispatch({
                 type: 'UPLOAD_SUCCESS',
-                payload: {fileId: File.fileId, file: File, status: 'success'}
+                payload: {fileId: File.fileId, file: File, status: 'success', path: data.path}
             })
         }).catch((err) => {
             dispatch({
                 type: 'UPLOAD_FAIL',
-                payload: {fileId: File.fileId, file: File, status: 'fail'}
+                payload: {fileId: File.fileId, file: File, status: 'fail', path:''}
             })
         })
         // axios.post(config.mainDomain + '/users', values).then((response) => {

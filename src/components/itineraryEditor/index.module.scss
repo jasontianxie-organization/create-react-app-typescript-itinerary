@@ -27,4 +27,33 @@
     padding: 0;
     flex: 1;
   }
+  .upload-item {
+    display: flex;
+    width: 120px;
+    flex-direction: column;
+    span {
+      text-align: center;
+    }
+    .upload-item-success {
+      width: 120px;
+      height: 90px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    .upload-item-start {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 90px;
+    }
+    .upload-item-fail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 90px;
+    }
+  }
 }
