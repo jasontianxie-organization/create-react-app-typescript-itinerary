@@ -143,7 +143,6 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
         const {style = {}, uploadList = []} = this.props;
         return (
         <div styleName="edit-wrap">
-            {/* <Button onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</Button> */}
             <div contentEditable={true} styleName = "edit" ref={this.textInput}
                 style={style}
                 onPaste={(e) => this.insertPicOrPaste(e)}
