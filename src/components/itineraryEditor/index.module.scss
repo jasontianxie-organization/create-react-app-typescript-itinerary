@@ -26,6 +26,10 @@
     margin: 0;
     padding: 0;
     flex: 1;
+    .upload-list-wrap {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
   .upload-item {
     display: flex;
@@ -33,6 +37,9 @@
     flex-direction: column;
     span {
       text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .upload-item-success {
       width: 120px;

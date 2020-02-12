@@ -159,7 +159,7 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
                 </ul>
                 <ul styleName="tab-content">
                     <li style={{display: (this.state.tabOnDisplay === 1 ? "block" : "none")}}>
-                        <div>
+                        <div styleName="upload-list-wrap">
                             {uploadList.map((item: any, index: number) => {
                                 return <PicStatus key={index} item={item} insert={() => this.insertPicOrPaste({type: "insertPic", path: item.path})}/>;
                             })}
