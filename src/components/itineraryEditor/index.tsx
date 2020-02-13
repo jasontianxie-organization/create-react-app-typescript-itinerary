@@ -9,8 +9,31 @@ interface ITineraryEditorProps {
     onChange: OnChange;
     style?: any;
     uploadFile: any;
+    uploadList: any[];
   }
-
+function PicStatus(props: any) {
+    const {item, insert} = props;
+    return (
+        <div styleName="upload-item">
+            {
+                item.status === "start" ? (
+                    <div styleName={`upload-item-${item.status}`}>
+                        <Icon type="loading" style={{fontSize: "35px"}}/>
+                    </div>
+                ) : (
+                    item.status === "success" ? (
+                        <div title="点击插入" onClick={insert} styleName={`upload-item-${item.status}`} style={{backgroundImage: `url(${item.path})`}}></div>
+                    ) : (
+                        <div styleName={`upload-item-${item.status}`}>
+                            <Icon type="frown" style={{color: "red", fontSize: "35px"}}/>
+                        </div>
+                    )
+                )
+            }
+            <span>{item.file.file.name}</span>
+        </div>
+    );
+}
 export default class ItineraryEditor extends React.Component<ITineraryEditorProps, any> {
     public uploadFormRef: any;
     private textInput: any;
@@ -29,12 +52,15 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
         let str = "";
         const {selection, range} = this.state;
 
-        if (!this.state.focused || !range) { // 当用户没有点击输入框的时候，如果点击插入图片，则插入操作不生效
+        // if (!this.state.focused || !range) { // 当用户没有点击输入框的时候，如果点击插入图片，则插入操作不生效
+        //     return;
+        // }
+        if (!range) { // 当用户没有点击输入框的时候，如果点击插入图片，则插入操作不生效
             return;
         }
-        if (e === "insertPic") { // 如果是插入图片或者表情
-            const background = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2310514390,3580363630&amp;fm=27&amp;gp=0.jpg";
-            str = "<img src='" + background + "' style='width:100px;height:100px;'/>";
+        if (e.type && e.type === "insertPic") { // 如果是插入图片或者表情
+            const background = e.path;
+            str = "<img src='" + background + "' style='width:100%;'/>";
         } else { // 如果是用户粘贴内容
             e.preventDefault(); // 不使用默认的粘贴方法，而是使用下面的range来插入内容
             str = window.clipboardData && window.clipboardData.getData ?
@@ -114,10 +140,9 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
         });
     }
     public render() {
-        const {style = {}} = this.props;
+        const {style = {}, uploadList = []} = this.props;
         return (
         <div styleName="edit-wrap">
-            {/* <Button onClick={() => this.insertPicOrPaste("insertPic")}>插入测试图片</Button> */}
             <div contentEditable={true} styleName = "edit" ref={this.textInput}
                 style={style}
                 onPaste={(e) => this.insertPicOrPaste(e)}
@@ -134,6 +159,11 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
                 </ul>
                 <ul styleName="tab-content">
                     <li style={{display: (this.state.tabOnDisplay === 1 ? "block" : "none")}}>
+                        <div styleName="upload-list-wrap">
+                            {uploadList.map((item: any, index: number) => {
+                                return <PicStatus key={index} item={item} insert={() => this.insertPicOrPaste({type: "insertPic", path: item.path})}/>;
+                            })}
+                        </div>
                         <Button onClick={() => this.showModal()}>上传</Button>
                     </li>
                     <li style={{display: (this.state.tabOnDisplay === 2 ? "block" : "none")}}>点击添加表情</li>
@@ -145,7 +175,6 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
                 onCancel={this.handleUploadCancel}
                 onUpload={this.handleUpload}
             />
-            {/* <Button type="primary" styleName = "edit-submit" onClick={() => this.submit()}>保存</Button> */}
         </div>
         );
     }

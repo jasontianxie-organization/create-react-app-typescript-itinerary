@@ -31,7 +31,7 @@ const UploadModal = Form.create<IUserFormProps>({ name: "form_in_modal" })(
             onChange: (val: any) => {
               this.setState({...this.state, uploadFileName: val.file.name, uploadFileSize: val.file.size});
             },
-            accept: "image/jpeg, image/png, video/mp4" // 设置接收的文件类型
+            accept: "image/jpeg, image/png, video/mp4", // 设置接收的文件类型
           };
         return (
           <Modal
@@ -47,9 +47,9 @@ const UploadModal = Form.create<IUserFormProps>({ name: "form_in_modal" })(
                   rules: [{ required: true, message: intl.get("components.upload.remider_empty_file")}, {validator: (rule, value, callback) => {
                     try {
                       if (value.file.size > 10 * Math.pow(1024, 2)) { // 文件最大不能超过10M
-                        callback(intl.get("components.upload.remider_big_file"))
+                        callback(intl.get("components.upload.remider_big_file"));
                       } else {
-                        callback()
+                        callback();
                       }
                     } catch (err) {
                       callback(err);

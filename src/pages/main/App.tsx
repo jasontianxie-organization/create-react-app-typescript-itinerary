@@ -2,6 +2,7 @@ import React from "react";
 import "./App.module.scss";
 import intl from "react-intl-universal";
 import { Carousel, Button, List, Avatar, Icon, Input, Tag } from "antd";
+import {withRouter} from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Footer from "@/components/footer";
 import {request} from "@/fetchServerData/axios";
@@ -75,7 +76,7 @@ class App extends React.Component<any, any> {
             <div styleName="nav">
               <Button onClick={() => this.toggleSearch()}>{intl.get("pages.main.navHeader.searchItinerary")}</Button>
               <Button onClick={() => this.getData()}>{intl.get("pages.main.navHeader.schedule")}</Button>
-              <Button>{intl.get("pages.main.navHeader.recordItinerary")}</Button>
+              <Button onClick={() => this.props.history.push("newItinerary")}>{intl.get("pages.main.navHeader.recordItinerary")}</Button>
             </div>
             <CSSTransition timeout={500} in={this.state.inProps} classNames="search">
               <div styleName="search-detail">
@@ -167,4 +168,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

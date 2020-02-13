@@ -26,5 +26,49 @@
     margin: 0;
     padding: 0;
     flex: 1;
+    .upload-list-wrap {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .upload-item {
+    display: flex;
+    width: 120px;
+    flex-direction: column;
+    span {
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .upload-item-success {
+      width: 120px;
+      height: 90px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+    .upload-item-start {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 90px;
+    }
+    .upload-item-fail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 90px;
+    }
+  }
+}
+@media screen and (max-width: 688px) {
+  .edit-wrap {
+    flex-direction: column;
+  }
+  .media {
+    width: 100%;
   }
 }
