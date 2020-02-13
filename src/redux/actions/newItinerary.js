@@ -18,24 +18,6 @@ function uploadFileAction(file) {
                 payload: {fileId: File.fileId, file: File, status: 'fail', path:''}
             })
         })
-        // axios.post(config.mainDomain + '/users', values).then((response) => {
-        //         if (response.data.length > 0) {
-        //             Cookies.set("username", response.data[0].name);
-        //             Cookies.set("userpass", response.data[0].pass);
-        //             Cookies.set("userid", response.data[0].id);
-        //         }
-        //         dispatch({
-        //             type: 'LOGIN_SUCCESS',
-        //             payload: response.data
-        //         })
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //         dispatch({
-        //             type: 'LOGIN_FAIL',
-        //             payload: error
-        //         })
-        //     });
     }
 }
 

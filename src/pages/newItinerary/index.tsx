@@ -117,7 +117,6 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    // uploadFile: (combinedFile: any) => dispatch({type: "UPLOAD_FILE", payload: combinedFile}),
     uploadFile: (combinedFile: any) => dispatch(uploadFileAction(combinedFile)),
   };
 }
