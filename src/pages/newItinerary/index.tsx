@@ -6,6 +6,7 @@ import NewSpots from "@/components/newSpots";
 import { Button, Input } from "antd";
 import { connect } from "react-redux";
 import { uploadFileAction } from "@/redux/actions/uploadFile";
+import { request } from "@/fetchServerData/axios"
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
@@ -22,9 +23,13 @@ class NewItinerary extends React.Component<any, any> {
       this.setState({ newSpotsModalVisible: false });
       this.props.updateCurrentSpotId(null);
     }
-    public handleSave() {
-      this.setState({ newSpotsModalVisible: false });
-      this.props.updateCurrentSpotId(null);
+    public handleSave(data: any) {
+      request.post("/api/spots/update", data).then(() => {
+        this.setState({ newSpotsModalVisible: false });
+        this.props.updateCurrentSpotId(null);
+      }).catch((err) => {
+        console.log(err);
+      });
     }
     public saveFormRef = (formRef: any) => {
       this.formRef = formRef;
@@ -95,7 +100,7 @@ class NewItinerary extends React.Component<any, any> {
                         wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
                         visible={this.state.newSpotsModalVisible}
                         onCancel={() => this.handleCancel()}
-                        onSave={() => this.handleSave()}
+                        onSave={(data: any) => this.handleSave(data)}
                         uploadFile={this.props.uploadFile}
                       />
                      {/* <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>

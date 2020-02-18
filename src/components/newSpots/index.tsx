@@ -46,7 +46,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            // this.props.onSave();
+            this.props.onSave({...values, spotId: this.props.spots.currentSpotId});
           }
         });
       }
