@@ -5,7 +5,7 @@ import NewSpots from "@/components/newSpots";
 // import ItineraryEditor from "@/components/itineraryEditor";
 import { Button, Input } from "antd";
 import { connect } from "react-redux";
-import { uploadFileAction } from "@/redux/actions/newItinerary";
+import { uploadFileAction } from "@/redux/actions/uploadFile";
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
@@ -20,9 +20,11 @@ class NewItinerary extends React.Component<any, any> {
     }
     public handleCancel = () => {
       this.setState({ newSpotsModalVisible: false });
+      this.props.updateCurrentSpotId(null);
     }
     public handleSave() {
       this.setState({ newSpotsModalVisible: false });
+      this.props.updateCurrentSpotId(null);
     }
     public saveFormRef = (formRef: any) => {
       this.formRef = formRef;
@@ -118,6 +120,7 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     uploadFile: (combinedFile: any) => dispatch(uploadFileAction(combinedFile)),
+    updateCurrentSpotId: (id: any) => dispatch({type: "UPDATE_CURRENT_SPOT_ID", payload: id}),
   };
 }
 

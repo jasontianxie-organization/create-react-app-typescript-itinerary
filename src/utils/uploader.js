@@ -7,13 +7,15 @@ export default class Uploader {
     fileId = uuid()
     file = null
     destUrl = ''
+    spotId = null
     options = {
         chunkSize: 1024 * 1024,
         chunkStart: 0
       }
-    constructor(file, destUrl, options = {}) {
+    constructor(file, destUrl, spotId = null, options = {}) {
         this.options = {...this.options, options};
         this.file = file;
+        this.spotId = spotId;
         this.destUrl = destUrl;
         // this.upload(file, destUrl);
     }
@@ -52,7 +54,7 @@ export default class Uploader {
                         reject({message})
                     })
                 } else { //所有切片上传成功后，发送合并分片的请求
-                    request.post("/api/uploads/merge", {fileId: this.fileId, fileName}).then((data) => {
+                    request.post("/api/uploads/merge", {fileId: this.fileId, fileName, spotId: this.spotId}).then((data) => {
                         console.log(data);
                         this.uploadedFilePath = data.path
                         resolve(data)

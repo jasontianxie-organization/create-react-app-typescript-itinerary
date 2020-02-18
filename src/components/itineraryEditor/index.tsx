@@ -10,6 +10,7 @@ interface ITineraryEditorProps {
     style?: any;
     uploadFile: any;
     uploadList: any[];
+    currentSpotId: number;
   }
 function PicStatus(props: any) {
     const {item, insert} = props;
@@ -134,7 +135,7 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
             return;
             }
             console.log("Received values of form: ", values);
-            this.props.uploadFile({destUrl: "/api/uploads/parts", file: values});
+            this.props.uploadFile({destUrl: "/api/uploads/parts", file: values, spotId: this.props.currentSpotId});
             form.resetFields();
             this.setState({ uploadModalVisible: false });
         });
