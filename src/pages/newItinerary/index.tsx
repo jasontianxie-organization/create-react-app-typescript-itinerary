@@ -5,7 +5,8 @@ import NewSpots from "@/components/newSpots";
 // import ItineraryEditor from "@/components/itineraryEditor";
 import { Button, Input } from "antd";
 import { connect } from "react-redux";
-import { uploadFileAction } from "@/redux/actions/newItinerary";
+import { uploadFileAction } from "@/redux/actions/uploadFile";
+import { request } from "@/fetchServerData/axios"
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
@@ -20,9 +21,15 @@ class NewItinerary extends React.Component<any, any> {
     }
     public handleCancel = () => {
       this.setState({ newSpotsModalVisible: false });
+      this.props.updateCurrentSpotId(null);
     }
-    public handleSave() {
-      this.setState({ newSpotsModalVisible: false });
+    public handleSave(data: any) {
+      request.post("/api/spots/update", data).then(() => {
+        this.setState({ newSpotsModalVisible: false });
+        this.props.updateCurrentSpotId(null);
+      }).catch((err) => {
+        console.log(err);
+      });
     }
     public saveFormRef = (formRef: any) => {
       this.formRef = formRef;
@@ -93,7 +100,7 @@ class NewItinerary extends React.Component<any, any> {
                         wrappedComponentRef={this.saveFormRef} // 经过 Form.create 包装的组件将会自带 this.props.form 属性
                         visible={this.state.newSpotsModalVisible}
                         onCancel={() => this.handleCancel()}
-                        onSave={() => this.handleSave()}
+                        onSave={(data: any) => this.handleSave(data)}
                         uploadFile={this.props.uploadFile}
                       />
                      {/* <Button type="primary" onClick={this.showModal}>{intl.get("pages.newItinerary.uploadBotton")}</Button>
@@ -118,6 +125,7 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     uploadFile: (combinedFile: any) => dispatch(uploadFileAction(combinedFile)),
+    updateCurrentSpotId: (id: any) => dispatch({type: "UPDATE_CURRENT_SPOT_ID", payload: id}),
   };
 }
 

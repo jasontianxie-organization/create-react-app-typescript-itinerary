@@ -14,7 +14,6 @@ export const uploadList = (state=initState,action)=>{
                 newState = [...state]
                 newState[idx] = action.payload
             }
-            console.log(newState)
             return newState
         default:
         return state;

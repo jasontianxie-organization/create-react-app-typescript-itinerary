@@ -5,6 +5,7 @@ import "./index.module.scss";
 import { Input, Dropdown, Menu } from "antd";
 
 type OnChange = (val: {id?: number, name: string}) => any;
+// type OnChange = (val: string) => any;
 
 interface IMyselectProps {
   value?: any; // 设置默认值
@@ -34,6 +35,7 @@ class MySelect extends React.Component<IMyselectProps, IMyselectStates> {
   public dropDownClick(val: {id: number, name: string}) {
     this.setState({inputValue: val.name});
     this.props.onChange(val);
+    // this.props.onChange(val.name);
   }
   public render() {
     const menu = (

@@ -19,6 +19,7 @@ interface IUserFormProps extends FormComponentProps {
     onSave: any;
     uploadFile: any;
     uploadList: any[];
+    spots: any;
   }
 interface IUserFormStates {
     [index: string]: any[];
@@ -45,7 +46,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            // this.props.onSave();
+            this.props.onSave({...values, spotId: this.props.spots.currentSpotId});
           }
         });
       }
@@ -207,7 +208,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                   </Row>
                   <Form.Item>
                       {getFieldDecorator("spotDescription")(
-                        <ItineraryEditor onChange={() => {}} uploadFile={this.props.uploadFile} uploadList={this.props.uploadList}/>,
+                        <ItineraryEditor currentSpotId={this.props.spots.currentSpotId} onChange={() => {}} uploadFile={this.props.uploadFile} uploadList={this.props.uploadList}/>,
                       )}
                   </Form.Item>
                 </Form>
@@ -221,6 +222,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
 function mapStateToProps(state: any) {
   return {
     uploadList: state.uploadList,
+    spots: state.spots,
   };
 }
 
