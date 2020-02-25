@@ -140,6 +140,11 @@ export default class ItineraryEditor extends React.Component<ITineraryEditorProp
             this.setState({ uploadModalVisible: false });
         });
     }
+    public componentWillReceiveProps(nextProps: ITineraryEditorProps) {
+        if (nextProps.value === "") {
+            this.textInput.current.innerHTML = nextProps.value;
+        }
+    }
     public render() {
         const {style = {}, uploadList = []} = this.props;
         return (

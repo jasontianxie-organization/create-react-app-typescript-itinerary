@@ -6,7 +6,7 @@ import NewSpots from "@/components/newSpots";
 import { Button, Input } from "antd";
 import { connect } from "react-redux";
 import { uploadFileAction } from "@/redux/actions/uploadFile";
-import { request } from "@/fetchServerData/axios"
+import { request } from "@/fetchServerData/axios";
 
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
@@ -20,11 +20,13 @@ class NewItinerary extends React.Component<any, any> {
       this.setState({ newSpotsModalVisible: true });
     }
     public handleCancel = () => {
+      // this.formRef.props.form.resetFields();
       this.setState({ newSpotsModalVisible: false });
       this.props.updateCurrentSpotId(null);
     }
     public handleSave(data: any) {
       request.post("/api/spots/update", data).then(() => {
+        this.formRef.props.form.resetFields();
         this.setState({ newSpotsModalVisible: false });
         this.props.updateCurrentSpotId(null);
       }).catch((err) => {
