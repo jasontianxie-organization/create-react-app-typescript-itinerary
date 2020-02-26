@@ -13,6 +13,10 @@ function uploadFileAction(file) {
                 payload: data.spotId
             })
             dispatch({
+                type: 'UPDATE_SPOTS',
+                payload: data.spotId
+            })
+            dispatch({
                 type: 'UPLOAD_SUCCESS',
                 payload: {fileId: File.fileId, file: File, status: 'success', path: data.path}
             })

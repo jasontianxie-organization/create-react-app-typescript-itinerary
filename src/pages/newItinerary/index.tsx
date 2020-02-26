@@ -24,10 +24,11 @@ class NewItinerary extends React.Component<any, any> {
       this.setState({ newSpotsModalVisible: false });
       this.props.updateCurrentSpotId(null);
     }
-    public handleSave(data: any) {
-      request.post("/api/spots/update", data).then(() => {
+    public handleSave(data: any) { // 保存当前地点的信息
+      request.post("/api/spots/update", data).then((res: any) => {
         this.formRef.props.form.resetFields();
         this.setState({ newSpotsModalVisible: false });
+        this.props.updateSpots(res.spotId);
         this.props.updateCurrentSpotId(null);
       }).catch((err) => {
         console.log(err);
@@ -70,7 +71,11 @@ class NewItinerary extends React.Component<any, any> {
     public render() {
         return (<div styleName="new-itinerary">
                       <div styleName="wrap">
-                        <div styleName="abstract"></div>
+                        <div styleName="abstract">
+                          {this.props.spots.spots.map((item: number, index: number) => {
+                          return <div key={index}>{item}</div>;
+                          })}
+                        </div>
                         <div styleName="content">
                           <div styleName="title">
                             <Input
@@ -121,6 +126,7 @@ class NewItinerary extends React.Component<any, any> {
 function mapStateToProps(state: any) {
     return {
       uploadList: state.uploadList,
+      spots: state.spots,
     };
   }
 
@@ -128,6 +134,7 @@ function mapDispatchToProps(dispatch: any) {
   return {
     uploadFile: (combinedFile: any) => dispatch(uploadFileAction(combinedFile)),
     updateCurrentSpotId: (id: any) => dispatch({type: "UPDATE_CURRENT_SPOT_ID", payload: id}),
+    updateSpots: (spotId: number) => dispatch({type: "UPDATE_SPOTS", payload: spotId}),
   };
 }
 
