@@ -10,6 +10,7 @@ export const spots = (state=initState,action)=>{
             if(!(state.spots.includes(action.payload))) {
                 return {...state, spots: [...state.spots, action.payload]}
             }
+            break;
         default:
         return state;
     }

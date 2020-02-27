@@ -73,7 +73,7 @@ class NewItinerary extends React.Component<any, any> {
                       <div styleName="wrap">
                         <div styleName="abstract">
                           {this.props.spots.spots.map((item: number, index: number) => {
-                          return <div key={index}>{item}</div>;
+                          return <div key={index}>{index}-> {item}</div>;
                           })}
                         </div>
                         <div styleName="content">
