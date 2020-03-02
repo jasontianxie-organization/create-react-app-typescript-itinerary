@@ -20,6 +20,7 @@ interface IUserFormProps extends FormComponentProps {
     uploadFile: any;
     uploadList: any[];
     spots: any;
+    itineraries: any;
   }
 interface IUserFormStates {
     [index: string]: any[];
@@ -46,7 +47,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            this.props.onSave({...values, spotId: this.props.spots.currentSpotId});
+            this.props.onSave({...values, spotId: this.props.spots.currentSpotId, itinerariId: this.props.itineraries.currentItineraryId}); //如果是新建的地点，则没有spotId，如果是编辑地点，则有spotId
           }
         });
       }
@@ -226,7 +227,11 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                       {getFieldDecorator("spotDescription", {
                         initialValue: "",
                       })(
-                        <ItineraryEditor currentSpotId={this.props.spots.currentSpotId} onChange={() => {}} uploadFile={this.props.uploadFile} uploadList={this.props.uploadList}/>,
+                        <ItineraryEditor 
+                          currentItineraryId={this.props.spots.currentItineraryId}
+                          currentSpotId={this.props.spots.currentSpotId}
+                          onChange={() => {}} uploadFile={this.props.uploadFile}
+                          uploadList={this.props.uploadList}/>,
                       )}
                   </Form.Item>
                 </Form>
@@ -241,6 +246,7 @@ function mapStateToProps(state: any) {
   return {
     uploadList: state.uploadList,
     spots: state.spots,
+    itineraries: state.itineraries,
   };
 }
 

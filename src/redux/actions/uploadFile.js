@@ -13,8 +13,16 @@ function uploadFileAction(file) {
                 payload: data.spotId
             })
             dispatch({
+                type: 'UPDATE_CURRENT_ITINERARY_ID',
+                payload: data.itineraryId
+            })
+            dispatch({
                 type: 'UPDATE_SPOTS',
                 payload: data.spotId
+            })
+            dispatch({
+                type: 'UPDATE_ITINERARIES',
+                payload: data.itineraryId
             })
             dispatch({
                 type: 'UPLOAD_SUCCESS',

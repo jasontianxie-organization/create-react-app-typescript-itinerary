@@ -30,6 +30,7 @@ class NewItinerary extends React.Component<any, any> {
         this.setState({ newSpotsModalVisible: false });
         this.props.updateSpots(res.spotId);
         this.props.updateCurrentSpotId(null);
+        this.props.updateItineraries(res.itineraryId);
       }).catch((err) => {
         console.log(err);
       });
@@ -135,6 +136,7 @@ function mapDispatchToProps(dispatch: any) {
     uploadFile: (combinedFile: any) => dispatch(uploadFileAction(combinedFile)),
     updateCurrentSpotId: (id: any) => dispatch({type: "UPDATE_CURRENT_SPOT_ID", payload: id}),
     updateSpots: (spotId: number) => dispatch({type: "UPDATE_SPOTS", payload: spotId}),
+    updateItineraries: (itineraryId: number) => dispatch({type: "UPDATE_CURRENT_ITINERARY_ID", payload: itineraryId})
   };
 }
 
