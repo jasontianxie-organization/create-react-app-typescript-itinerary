@@ -9,8 +9,9 @@ export const itineraries = (state=initState,action)=>{
       case 'UPDATE_ITINERARIES':
           if(!(state.Itineraries.includes(action.payload))) {
               return {...state, Itineraries: [...state.Itineraries, action.payload]}
-          }
-          break;
+          } else {
+            return state;
+        }
       default:
       return state;
   }

@@ -9,8 +9,9 @@ export const spots = (state=initState,action)=>{
         case 'UPDATE_SPOTS':
             if(!(state.spots.includes(action.payload))) {
                 return {...state, spots: [...state.spots, action.payload]}
+            } else {
+                return state;
             }
-            break;
         default:
         return state;
     }
