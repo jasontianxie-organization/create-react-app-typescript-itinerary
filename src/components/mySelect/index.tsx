@@ -18,6 +18,17 @@ interface IMyselectStates {
 }
 
 class MySelect extends React.Component<IMyselectProps, IMyselectStates> {
+  private static getDerivedStateFromProps(nextProps: IMyselectProps) {
+    // Should be a controlled component.
+    if ("value" in nextProps) {
+      return {
+        inputValue: nextProps.value.name,
+      };
+    }
+    return {
+      inputValue: "",
+    };
+  }
   public timer: any = null;
   public state = {
     inputValue: "",
@@ -29,7 +40,7 @@ class MySelect extends React.Component<IMyselectProps, IMyselectStates> {
       clearTimeout(this.timer);
     }
     this.timer = setTimeout(() => {
-      this.props.onChange(val);
+      this.props.onChange({name: val});
     }, 500);
   }
   public dropDownClick(val: {id: number, name: string}) {
