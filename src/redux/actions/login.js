@@ -1,8 +1,4 @@
-import axios from 'axios';
-import {
-    config
-} from '../../src/common/ajaxConfig.js';
-import Cookies from "js-cookie";
+import {request} from '@/fetchServerData/axios';
 
 
 export function login(values) {
@@ -11,12 +7,7 @@ export function login(values) {
             type: 'LOGIN_START',
             payload: ''
         });
-        axios.post(config.mainDomain + '/users', values).then((response) => {
-                if (response.data.length > 0) {
-                    Cookies.set("username", response.data[0].name);
-                    Cookies.set("userpass", response.data[0].pass);
-                    Cookies.set("userid", response.data[0].id);
-                }
+        request.post("/api/users/login", {name: values.name, password: values.password}).then((response) => {
                 dispatch({
                     type: 'LOGIN_SUCCESS',
                     payload: response.data
