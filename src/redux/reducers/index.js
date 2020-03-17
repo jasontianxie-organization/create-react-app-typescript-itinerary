@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import {login} from './login.js';
+import {users} from './users.js';
 import {uploadList} from './uploadList.js';
 import {spots} from './spots.js';
 import {itineraries} from './itineraries.js';
 
 
 export default combineReducers({
-    login,
+    users,
     uploadList,
     spots,
     itineraries,

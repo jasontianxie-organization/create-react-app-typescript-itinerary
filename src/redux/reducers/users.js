@@ -1,8 +1,9 @@
 let initState = {
-    data:null
+    data:null,
+    loggedin: true,
 }
 
-export const login = (state=initState,action)=>{
+export const users = (state=initState,action)=>{
     switch (action.type){
         case 'LOGIN_START':
         console.log('login startting');

@@ -2,22 +2,20 @@ import React from "react";
 import "./index.module.scss";
 import { Modal, Form, Button, Icon, Input, Checkbox } from "antd";
 import { connect } from "react-redux";
-import { func } from "prop-types";
-
 
 class NormalLoginForm extends React.Component<any, any> {
-  public handleSubmit = e => {
+  public handleSubmit(e: any) {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
     });
   };
-  public handleOk = e => {
+  public handleOk(e: any) {
   };
 
-  public handleCancel = e => {
+  public handleCancel(e: any) {
   };
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -71,13 +69,13 @@ class NormalLoginForm extends React.Component<any, any> {
 
 function mapStateToProps(state: any) {
   return {
-    value: state.count,
+    showLogin: state.users.loggedin,
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    onIncreaseClick: () => dispatch({}),
+    // onIncreaseClick: () => dispatch({}),
   };
 }
 
