@@ -4,7 +4,7 @@ import { Modal, Form, Button, Icon, Input, Checkbox } from "antd";
 import { connect } from "react-redux";
 
 class NormalLoginForm extends React.Component<any, any> {
-  public handleSubmit(e: any) {
+  public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
@@ -26,7 +26,7 @@ class NormalLoginForm extends React.Component<any, any> {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-        <Form onSubmit={this.handleSubmit} styleName="login-form">
+        <Form onSubmit={(e) => this.handleSubmit(e)} styleName="login-form">
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
