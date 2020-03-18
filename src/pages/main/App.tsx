@@ -52,6 +52,13 @@ class App extends React.Component<any, any> {
     },
     (err) => console.log(err));
   }
+  public goToNewItinerary() {
+    if (this.props.userData) {
+      this.props.history.push("newItinerary");
+    } else {
+      this.props.showLogin();
+    }
+  }
   public render() {
     return (
       <div styleName="app">
@@ -76,7 +83,7 @@ class App extends React.Component<any, any> {
             <div styleName="nav">
               <Button onClick={() => this.toggleSearch()}>{intl.get("pages.main.navHeader.searchItinerary")}</Button>
               <Button onClick={() => this.getData()}>{intl.get("pages.main.navHeader.schedule")}</Button>
-              <Button onClick={() => this.props.history.push("newItinerary")}>{intl.get("pages.main.navHeader.recordItinerary")}</Button>
+              <Button onClick={() => this.goToNewItinerary()}>{intl.get("pages.main.navHeader.recordItinerary")}</Button>
             </div>
             <CSSTransition timeout={500} in={this.state.inProps} classNames="search">
               <div styleName="search-detail">
@@ -158,13 +165,14 @@ class App extends React.Component<any, any> {
 
 function mapStateToProps(state: any) {
   return {
-    value: state.count,
+    userData: state.users.data,
   };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
     onIncreaseClick: () => dispatch({}),
+    showLogin: () => dispatch({type: "SHOW_LOGIN"}),
   };
 }
 
