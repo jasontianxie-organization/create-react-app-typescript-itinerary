@@ -35,6 +35,18 @@ export default {
             label_file_type: "请选择jpg、jpeg、png、mp4类型的文件，文件最大10M",
             remider_empty_file: "请选择文件",
             remider_big_file: "文件不能大于10M"
+        },
+        login: {
+            title: "请登录",
+            reminder_username: "请输入用户名",
+            reminder_password: "请输入密码",
+            label_remember_me: "记住我",
+            label_forgot: "忘记密码",
+            label_login: "登录",
+            label_or: "或",
+            label_signup: "注册",
+            plhr_username: "用户名",
+            plhr_password: "密码"
         }
     }
 }

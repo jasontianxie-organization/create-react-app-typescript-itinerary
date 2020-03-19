@@ -1,6 +1,7 @@
 import React from "react";
 import App from "@/pages/main/App";
 import NewItinerary from "@/pages/newItinerary/index";
+import Login from "@/components/login";
 import LoadingBar from "@/components/loadingBar";
 import {Route} from "react-router-dom";
 import intl from "react-intl-universal";
@@ -45,6 +46,7 @@ class Entry extends React.Component<any, any> {
             this.state.initDone && (
               <>
                 <LoadingBar ref={this.myRef}/>
+                <Login/>
                 <Route exact path="/" component={() => <App/>}/>
                 <Route path="/newItinerary" component={() => <NewItinerary/>}/>
               </>
