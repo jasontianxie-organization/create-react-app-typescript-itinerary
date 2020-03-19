@@ -3,6 +3,7 @@ import "./index.module.scss";
 import { Modal, Form, Button, Icon, Input, Checkbox } from "antd";
 import { connect } from "react-redux";
 import { login } from "@/redux/actions/users";
+import intl from "react-intl-universal";
 
 class NormalLoginForm extends React.Component<any, any> {
   public handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -22,29 +23,29 @@ class NormalLoginForm extends React.Component<any, any> {
     return (
       <Modal
         footer={null}
-        title="Basic Modal"
+        title={intl.get("components.login.title")}
         onCancel={() => this.onCancel()}
         visible={this.props.showLogin}
       >
         <Form onSubmit={(e) => this.handleSubmit(e)} styleName="login-form">
           <Form.Item>
             {getFieldDecorator("username", {
-              rules: [{ required: true, message: "Please input your username!" }],
+              rules: [{ required: true, message: intl.get("components.login.reminder_username") }],
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />}
-                placeholder="Username"
+                placeholder={intl.get("components.login.plhr_username")}
               />,
             )}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator("password", {
-              rules: [{ required: true, message: "Please input your Password!" }],
+              rules: [{ required: true, message: intl.get("components.login.reminder_password") }],
             })(
               <Input
                 prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
                 type="password"
-                placeholder="Password"
+                placeholder={intl.get("components.login.plhr_password")}
               />,
             )}
           </Form.Item>
@@ -52,14 +53,14 @@ class NormalLoginForm extends React.Component<any, any> {
             {getFieldDecorator("remember", {
               valuePropName: "checked",
               initialValue: true,
-            })(<Checkbox>Remember me</Checkbox>)}
+            })(<Checkbox>{intl.get("components.login.label_remember_me")}</Checkbox>)}
             <a className="login-form-forgot" href="">
-              Forgot password
+              {intl.get("components.login.label_forgot")}
             </a>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Log in
+              {intl.get("components.login.label_login")}
             </Button>
-            Or <a href="">register now!</a>
+            {intl.get("components.login.label_or")} <a href="">{intl.get("components.login.label_signup")}</a>
           </Form.Item>
         </Form>
       </Modal>
