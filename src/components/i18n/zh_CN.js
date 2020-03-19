@@ -47,6 +47,9 @@ export default {
             label_signup: "注册",
             plhr_username: "用户名",
             plhr_password: "密码"
+        },
+        writeItinerary: {
+            title: "写游记"
         }
     }
 }
