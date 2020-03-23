@@ -2,6 +2,8 @@ import React from "react";
 import "./index.module.scss";
 import {Modal} from "antd";
 import intl from "react-intl-universal";
+import {request} from "@/fetchServerData/axios";
+import { connect } from "react-redux";
 
 type funcType = (show: boolean) => void;
 interface IWprops {
@@ -23,4 +25,17 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible}) => {
     );
 };
 
-export default WriteItinerary;
+function mapStateToProps(state: any) {
+    return {
+      userData: state.users.data,
+    };
+  }
+
+function mapDispatchToProps(dispatch: any) {
+    return {
+        // onIncreaseClick: () => dispatch({}),
+        // showLogin: () => dispatch({type: "SHOW_LOGIN"}),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WriteItinerary);
