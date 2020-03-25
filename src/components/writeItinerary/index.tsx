@@ -4,6 +4,7 @@ import {Modal} from "antd";
 import intl from "react-intl-universal";
 import {request} from "@/fetchServerData/axios";
 import { connect } from "react-redux";
+import {AxiosResponse} from "axios";
 
 type funcType = (show: boolean) => void;
 interface IWprops {
@@ -22,8 +23,8 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
             params: {
               userid,
             },
-          }).then(({data}) => {
-            setItineraries(data);
+          }).then((data: AxiosResponse<IItineraries[]>) => {
+            setItineraries(data.data);
         });
     }, [userid]);
     return (
@@ -34,7 +35,7 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
             visible={visible}
         >
             {itineraries && itineraries.map((item, index) => {
-                return <a>{item.itineraryId}</a>;
+                return <a key={index}>{item.itineraryId}</a>;
             })}
             this is content
       </Modal>
