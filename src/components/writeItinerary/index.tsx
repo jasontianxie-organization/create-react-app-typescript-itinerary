@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.module.scss";
 import {Modal} from "antd";
 import intl from "react-intl-universal";
@@ -9,10 +9,23 @@ type funcType = (show: boolean) => void;
 interface IWprops {
     visible: boolean;
     setVisible: funcType;
+    userid: number;
+}
+interface IItineraries {
+    itineraryId: number;
 }
 
-const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible}) => {
-    // const [visible, setVisible] = React.useState(visibleOrNot);
+const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
+    const [itineraries, setItineraries] = useState<IItineraries[]>([]);
+    useEffect(() => {
+        request.get("/api/itineraries/list", {
+            params: {
+              userid,
+            },
+          }).then(({data}) => {
+            setItineraries(data);
+        });
+    }, [userid]);
     return (
         <Modal
             footer={null}
@@ -20,6 +33,9 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible}) => {
             onCancel={() => setVisible(false)}
             visible={visible}
         >
+            {itineraries && itineraries.map((item, index) => {
+                return <a>{item.itineraryId}</a>;
+            })}
             this is content
       </Modal>
     );
@@ -27,7 +43,7 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible}) => {
 
 function mapStateToProps(state: any) {
     return {
-      userData: state.users.data,
+        userid: state.users.data && state.users.data.id,
     };
   }
 
