@@ -13,18 +13,19 @@ interface IWprops {
     userid: number;
 }
 interface IItineraries {
-    itineraryId: number;
+  userId:number;
+  itineraryId: number;
 }
 
 const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
     const [itineraries, setItineraries] = useState<IItineraries[]>([]);
     useEffect(() => {
-        request.get("/api/itineraries/list", {
+        request.get<any, IItineraries[]>("/api/itineraries/list", {
             params: {
               userid,
             },
-          }).then((data: AxiosResponse<IItineraries[]>) => {
-            setItineraries(data.data);
+          }).then((data) => {
+            setItineraries(data);
         });
     }, [userid]);
     return (
