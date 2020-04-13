@@ -13,7 +13,7 @@ interface IWprops {
     userid: number;
 }
 interface IItineraries {
-  userId:number;
+  userId: number;
   itineraryId: number;
 }
 
@@ -38,7 +38,6 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
             {itineraries && itineraries.map((item, index) => {
                 return <a key={index}>{item.itineraryId}</a>;
             })}
-            this is content
       </Modal>
     );
 };
