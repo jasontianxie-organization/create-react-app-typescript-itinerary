@@ -49,7 +49,8 @@ export default {
             plhr_password: "密码"
         },
         writeItinerary: {
-            title: "写游记"
+            title: "写游记",
+            new: "新建游记"
         }
     }
 }
