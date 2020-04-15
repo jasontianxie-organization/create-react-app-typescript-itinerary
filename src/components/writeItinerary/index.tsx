@@ -5,7 +5,7 @@ import intl from "react-intl-universal";
 import {request} from "@/fetchServerData/axios";
 import { connect } from "react-redux";
 import {AxiosResponse} from "axios";
-import {withRouter, RouteComponentProps} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 type funcType = (show: boolean) => void;
 interface IWprops {
@@ -20,14 +20,15 @@ interface IItineraries {
   draft: number;
 }
 
-type PropsType = RouteComponentProps<any> & {
-    visible: boolean;
-    setVisible: funcType;
-    userid: number;
-};
+// type PropsType = RouteComponentProps<any> & {
+//     visible: boolean;
+//     setVisible: funcType;
+//     userid: number;
+// };
 
-const WriteItinerary: React.FC<PropsType> =  ({visible, setVisible, userid, history}) => {
+const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
     const [itineraries, setItineraries] = useState<IItineraries[]>([]);
+    const history = useHistory();
     useEffect(() => {
         request.get<any, IItineraries[]>("/api/itineraries/list", {
             params: {
@@ -44,10 +45,10 @@ const WriteItinerary: React.FC<PropsType> =  ({visible, setVisible, userid, hist
             onCancel={() => setVisible(false)}
             visible={visible}
         >
-            <div>{intl.get("components.writeItinerary.new")}</div>
+            <div onClick={() => history.push("/newItinerary/new")}>{intl.get("components.writeItinerary.new")}</div>
             {itineraries && itineraries.map((item, index) => {
                 if (item.draft === 0) {
-                    return <div key={index} onClick={() => history.push("/newItinerary")}>{item.title}</div>;
+                    return <div key={index} onClick={() => history.push(`/newItinerary/${item.itineraryId}`)}>{item.title}</div>;
                 }
             })}
       </Modal>
@@ -67,4 +68,4 @@ function mapDispatchToProps(dispatch: any) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(WriteItinerary));
+export default connect(mapStateToProps, mapDispatchToProps)(WriteItinerary);

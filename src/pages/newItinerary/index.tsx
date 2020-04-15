@@ -55,8 +55,10 @@ class NewItinerary extends React.Component<any, any> {
       return num;
     }
     public setMainWidth() {
-      this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
-      this.mainRef.style.height = this.mainWrapRef.clientHeight - 40 + "px"; // 这里的40px是main-wrap的padding值
+      if (this.mainRef) {
+        this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
+        this.mainRef.style.height = this.mainWrapRef.clientHeight - 40 + "px"; // 这里的40px是main-wrap的padding值
+      }
     }
     public componentDidMount() {
       this.setMainWidth();

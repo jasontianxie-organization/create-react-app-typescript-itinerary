@@ -50,7 +50,7 @@ export default {
         },
         writeItinerary: {
             title: "写游记",
-            new: "新建游记"
+            new: "新游记"
         }
     }
 }
