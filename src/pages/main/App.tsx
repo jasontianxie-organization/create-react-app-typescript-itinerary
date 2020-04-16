@@ -6,6 +6,7 @@ import {withRouter} from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Footer from "@/components/footer";
 import {request} from "@/fetchServerData/axios";
+import WriteItinerary from "@/components/writeItinerary";
 import { connect } from "react-redux";
 const {Search} = Input;
 
@@ -41,7 +42,9 @@ class App extends React.Component<any, any> {
     super(props);
     this.state = {
       inProps: false,
+      writeItineraryVisible: false,
     };
+    this.setWriteItinerarystatus = this.setWriteItinerarystatus.bind(this);
   }
   public toggleSearch() {
     this.setState({inProps: !this.state.inProps});
@@ -54,10 +57,14 @@ class App extends React.Component<any, any> {
   }
   public goToNewItinerary() {
     if (this.props.userData) {
-      this.props.history.push("newItinerary");
+      // this.props.history.push("newItinerary");
+      this.setWriteItinerarystatus(true);
     } else {
       this.props.showLogin();
     }
+  }
+  public setWriteItinerarystatus(status: boolean) {
+    this.setState({writeItineraryVisible: status});
   }
   public render() {
     return (
@@ -158,6 +165,7 @@ class App extends React.Component<any, any> {
           </div>
         </div>
         <Footer/>
+        <WriteItinerary visible={this.state.writeItineraryVisible} setVisible={this.setWriteItinerarystatus}/>
       </div>
     );
   }

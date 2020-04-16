@@ -48,7 +48,7 @@ class Entry extends React.Component<any, any> {
                 <LoadingBar ref={this.myRef}/>
                 <Login/>
                 <Route exact path="/" component={() => <App/>}/>
-                <Route path="/newItinerary" component={() => <NewItinerary/>}/>
+                <Route path="/newItinerary/:itineraryId" component={() => <NewItinerary/>}/>
               </>
             )
         );
