@@ -60,6 +60,15 @@ class NewItinerary extends React.Component<any, any> {
         this.mainRef.style.height = this.mainWrapRef.clientHeight - 40 + "px"; // 这里的40px是main-wrap的padding值
       }
     }
+    public componentWillMount() {
+      request.get("/api/spots/list", {
+        params: {
+          itineraryId: this.props.match.params.itineraryId,
+        },
+      }).then((res) => {
+        console.log(res);
+      });
+    }
     public componentDidMount() {
       this.setMainWidth();
       window.addEventListener("resize", () => {
