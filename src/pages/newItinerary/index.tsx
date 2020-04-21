@@ -142,7 +142,7 @@ class NewItinerary extends React.Component<any, any> {
                               <div styleName="main" ref={this.getMain}>
                                 {
                                   this.state.content.map((i: {spotOrder: number, description: string}) => {
-                                    return <p key={i.spotOrder}>{i.description}</p>;
+                                    return <p key={i.spotOrder} dangerouslySetInnerHTML={{__html: i.description}}></p>;
                                   })
                                 }
                                 </div>
