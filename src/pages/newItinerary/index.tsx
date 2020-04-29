@@ -8,6 +8,25 @@ import { connect } from "react-redux";
 import { uploadFileAction } from "@/redux/actions/uploadFile";
 import { request } from "@/fetchServerData/axios";
 
+interface ISpotLists {
+  spotId: number;
+  spotOrder: number;
+  description: string;
+  itineraryId: number;
+  level1: string;
+  level2: string;
+  level3: string;
+  level4: string;
+  level5: string;
+  spotName: string;
+  spotNameCN: string;
+  spotNamePY: string;
+  longitude: number;
+  latitude: number;
+  time: number;
+  itinerary: {title: string};
+}
+
 class NewItinerary extends React.Component<any, any> {
     public formRef: any;
     public mainRef: any;
@@ -15,6 +34,8 @@ class NewItinerary extends React.Component<any, any> {
     public resizeTimer: any = null;
     public state = {
       newSpotsModalVisible: false,
+      title: "",
+      content: [],
     };
     public showModal = () => {
       this.setState({ newSpotsModalVisible: true });
@@ -24,7 +45,7 @@ class NewItinerary extends React.Component<any, any> {
       this.setState({ newSpotsModalVisible: false });
       this.props.updateCurrentSpotId(null);
     }
-    public handleSave(data: any) { // 保存当前地点的信息
+    public handleSave(data: {title: string}) { // 保存当前地点的信息
       request.post("/api/spots/update", data).then((res: any) => {
         this.formRef.props.form.resetFields();
         this.setState({ newSpotsModalVisible: false });
@@ -47,18 +68,45 @@ class NewItinerary extends React.Component<any, any> {
     public saveTitle() {
       console.log("title saved");
     }
-    public generate() {
-      const num: number[] = [];
-      for (let i = 0; i < 30; i++) {
-        num[i] = i;
-      }
-      return num;
+    public changeTitle(e: any) {
+      this.setState({title: e.target.value})
+    }
+    public generateContent(data: ISpotLists[]) {
+      const content: Array<{spotOrder: number, spotName: string, description: string}> = [];
+      data.forEach((d) => {
+        if (content.length) {
+          let temp: number = 0;
+          content.forEach((c, index) => {
+            if (d.spotOrder > c.spotOrder) {
+              temp = index;
+            }
+          });
+          content.splice(temp + 1, 0, {spotOrder: d.spotOrder, spotName: d.spotName, description: d.description});
+        } else {
+          content[0] = {spotOrder: d.spotOrder, spotName: d.spotName, description: d.description};
+        }
+      });
+      this.setState({content});
     }
     public setMainWidth() {
       if (this.mainRef) {
         this.mainRef.style.width = this.mainWrapRef.offsetWidth + this.mainRef.offsetWidth - this.mainRef.clientWidth + "px";
         this.mainRef.style.height = this.mainWrapRef.clientHeight - 40 + "px"; // 这里的40px是main-wrap的padding值
       }
+    }
+    public componentWillMount() {
+      const {itineraryId} = this.props.match.params;
+      if (itineraryId === "new") {
+        return;
+      }
+      request.get<any, ISpotLists[]>("/api/spots/list", {
+        params: {
+          itineraryId,
+        },
+      }).then((res: ISpotLists[]) => {
+        this.setState({title: res[0].itinerary.title});
+        this.generateContent(res);
+      });
     }
     public componentDidMount() {
       this.setMainWidth();
@@ -75,13 +123,15 @@ class NewItinerary extends React.Component<any, any> {
         return (<div styleName="new-itinerary">
                       <div styleName="wrap">
                         <div styleName="abstract">
-                          {this.props.spots.spots.map((item: number, index: number) => {
-                          return <div key={index}>{index}-> {item}</div>;
+                          {this.state.content.map((item: {spotOrder: number, spotName: string, description: string}, index: number) => {
+                          return <div key={index}>{item.spotOrder}/ {item.spotName}</div>;
                           })}
                         </div>
                         <div styleName="content">
                           <div styleName="title">
                             <Input
+                            onChange={(e) => this.changeTitle(e)}
+                            value={this.state.title}
                             placeholder={intl.get("pages.newItinerary.placeholder_title")}
                             addonAfter={
                               <span styleName="save-title" onClick={() => this.saveTitle()}>
@@ -95,8 +145,8 @@ class NewItinerary extends React.Component<any, any> {
                             <div styleName="main-wrap" ref={this.getMainWrap}>
                               <div styleName="main" ref={this.getMain}>
                                 {
-                                  this.generate().map((i) => {
-                                    return <p key={i}>this is a test</p>;
+                                  this.state.content.map((i: {spotOrder: number, description: string}) => {
+                                    return <p key={i.spotOrder} dangerouslySetInnerHTML={{__html: i.description}}></p>;
                                   })
                                 }
                                 </div>
