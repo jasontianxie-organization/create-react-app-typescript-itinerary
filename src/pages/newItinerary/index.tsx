@@ -72,7 +72,7 @@ class NewItinerary extends React.Component<any, any> {
       this.setState({title: e.target.value})
     }
     public generateContent(data: ISpotLists[]) {
-      const content: Array<{spotOrder: number, description: string}> = [];
+      const content: Array<{spotOrder: number, spotName: string, description: string}> = [];
       data.forEach((d) => {
         if (content.length) {
           let temp: number = 0;
@@ -81,9 +81,9 @@ class NewItinerary extends React.Component<any, any> {
               temp = index;
             }
           });
-          content.splice(temp + 1, 0, {spotOrder: d.spotOrder, description: d.description});
+          content.splice(temp + 1, 0, {spotOrder: d.spotOrder, spotName: d.spotName, description: d.description});
         } else {
-          content[0] = {spotOrder: d.spotOrder, description: d.description};
+          content[0] = {spotOrder: d.spotOrder, spotName: d.spotName, description: d.description};
         }
       });
       this.setState({content});
@@ -95,9 +95,13 @@ class NewItinerary extends React.Component<any, any> {
       }
     }
     public componentWillMount() {
+      const {itineraryId} = this.props.match.params;
+      if (itineraryId === "new") {
+        return;
+      }
       request.get<any, ISpotLists[]>("/api/spots/list", {
         params: {
-          itineraryId: this.props.match.params.itineraryId,
+          itineraryId,
         },
       }).then((res: ISpotLists[]) => {
         this.setState({title: res[0].itinerary.title});
@@ -119,8 +123,8 @@ class NewItinerary extends React.Component<any, any> {
         return (<div styleName="new-itinerary">
                       <div styleName="wrap">
                         <div styleName="abstract">
-                          {this.props.spots.spots.map((item: number, index: number) => {
-                          return <div key={index}>{index}-> {item}</div>;
+                          {this.state.content.map((item: {spotOrder: number, spotName: string, description: string}, index: number) => {
+                          return <div key={index}>{item.spotOrder}/ {item.spotName}</div>;
                           })}
                         </div>
                         <div styleName="content">
