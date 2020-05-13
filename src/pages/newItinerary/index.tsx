@@ -24,7 +24,7 @@ interface ISpotLists {
   longitude: number;
   latitude: number;
   time: number;
-  itinerary: {title: string};
+  itinerary: {title: string, itineraryId: number};
 }
 
 class NewItinerary extends React.Component<any, any> {
@@ -45,13 +45,13 @@ class NewItinerary extends React.Component<any, any> {
       this.setState({ newSpotsModalVisible: false });
       this.props.updateCurrentSpotId(null);
     }
-    public handleSave(data: {title: string}) { // 保存当前地点的信息
+    public handleSave(data: any) { // 保存当前地点的信息
       request.post("/api/spots/update", data).then((res: any) => {
         this.formRef.props.form.resetFields();
         this.setState({ newSpotsModalVisible: false });
-        this.props.updateSpots(res.spotId);
-        this.props.updateCurrentSpotId(null);
-        this.props.updateItineraries(res.itineraryId);
+        this.props.updateSpots(res);
+        this.props.updateCurrentSpotId(res.spotId);
+        this.props.updateCurrentItineraryId(res.itineraryId);
       }).catch((err) => {
         console.log(err);
       });
@@ -96,6 +96,7 @@ class NewItinerary extends React.Component<any, any> {
     }
     public componentWillMount() {
       const {itineraryId} = this.props.match.params;
+      this.props.updateCurrentItineraryId(itineraryId);
       if (itineraryId === "new") {
         return;
       }
@@ -104,8 +105,11 @@ class NewItinerary extends React.Component<any, any> {
           itineraryId,
         },
       }).then((res: ISpotLists[]) => {
+        this.props.initSpots(res);
         this.setState({title: res[0].itinerary.title});
         this.generateContent(res);
+      }).catch((e) => {
+        console.log(e);
       });
     }
     public componentDidMount() {
@@ -180,6 +184,7 @@ function mapStateToProps(state: any) {
     return {
       uploadList: state.uploadList,
       spots: state.spots,
+      itinerary: state.itineraries,
     };
   }
 
@@ -188,7 +193,8 @@ function mapDispatchToProps(dispatch: any) {
     uploadFile: (combinedFile: any) => dispatch(uploadFileAction(combinedFile)),
     updateCurrentSpotId: (id: any) => dispatch({type: "UPDATE_CURRENT_SPOT_ID", payload: id}),
     updateSpots: (spotId: number) => dispatch({type: "UPDATE_SPOTS", payload: spotId}),
-    updateItineraries: (itineraryId: number) => dispatch({type: "UPDATE_CURRENT_ITINERARY_ID", payload: itineraryId})
+    initSpots: (spots: any) => dispatch({type: "INIT_SPOTS", payload: spots}),
+    updateCurrentItineraryId: (itineraryId: number) => dispatch({type: "UPDATE_CURRENT_ITINERARY_ID", payload: itineraryId})
   };
 }
 
