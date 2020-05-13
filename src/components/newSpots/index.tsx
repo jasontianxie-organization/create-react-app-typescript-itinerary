@@ -47,7 +47,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
         this.props.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values);
-            this.props.onSave({...values, spotId: this.props.spots.currentSpotId, itinerariId: this.props.itineraries.currentItineraryId}); //如果是新建的地点，则没有spotId，如果是编辑地点，则有spotId
+            this.props.onSave({...values, spotId: this.props.spots.currentSpotId, itinerariId: this.props.itineraries.currentItineraryId}); // 如果是新建的地点，则spotId="new"，如果是编辑地点，则有spotId
           }
         });
       }
@@ -186,9 +186,12 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                     {
                     getFieldDecorator("fromSpot")(
                       <Select style={{ width: 120, margin: "0 10px" }}>
-                        <Option value="jack">Jack</Option>
+                        {this.props.spots.map((item: any) => {
+                          return <Option value={item.spotId} key={item.spotId}>{item.spotName}</Option>;
+                        })}
+                        {/* <Option value="jack">Jack</Option>
                         <Option value="lucy">Lucy</Option>
-                        <Option value="Yiminghe">yiminghe</Option>
+                        <Option value="Yiminghe">yiminghe</Option> */}
                       </Select>,
                       )}
                     {intl.get("components.newSpots.label_route_to")}
@@ -227,7 +230,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
                       {getFieldDecorator("spotDescription", {
                         initialValue: "",
                       })(
-                        <ItineraryEditor 
+                        <ItineraryEditor
                           currentItineraryId={this.props.spots.currentItineraryId}
                           currentSpotId={this.props.spots.currentSpotId}
                           onChange={() => {}} uploadFile={this.props.uploadFile}
@@ -245,7 +248,8 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
 function mapStateToProps(state: any) {
   return {
     uploadList: state.uploadList,
-    spots: state.spots,
+    spots: state.spots.spots,
+    currentSpotId: state.spots.currentSpotId,
     itineraries: state.itineraries,
   };
 }

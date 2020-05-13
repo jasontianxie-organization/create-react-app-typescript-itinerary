@@ -1,5 +1,5 @@
 let initState = {
-  currentItineraryId: null,
+  currentItineraryId: "new",
   Itineraries: []
 }
 export const itineraries = (state=initState,action)=>{
