@@ -51,6 +51,10 @@ export default {
         writeItinerary: {
             title: "写游记",
             new: "新游记"
+        },
+        header: {
+            signin: "登录",
+            signup: "注册"
         }
     }
 }

@@ -179,7 +179,6 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    onIncreaseClick: () => dispatch({}),
     showLogin: () => dispatch({type: "SHOW_LOGIN"}),
   };
 }

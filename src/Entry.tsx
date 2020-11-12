@@ -3,8 +3,10 @@ import App from "@/pages/main/App";
 import NewItinerary from "@/pages/newItinerary/index";
 import Login from "@/components/login";
 import LoadingBar from "@/components/loadingBar";
+import Header from "@/components/header";
 import {Route} from "react-router-dom";
 import intl from "react-intl-universal";
+// import { connect } from "react-redux";
 import "./init.scss";
 
 import en_US from "@/i18n/en_US";
@@ -46,7 +48,8 @@ class Entry extends React.Component<any, any> {
             this.state.initDone && (
               <>
                 <LoadingBar ref={this.myRef}/>
-                <Login/>
+                <Header/>
+                {/* <Login/> */}
                 <Route exact path="/" render={() => <App/>}/>
                 <Route path="/newItinerary/:itineraryId" component={NewItinerary}/>
               </>
@@ -55,4 +58,18 @@ class Entry extends React.Component<any, any> {
     }
 }
 
-export default Entry;
+
+// function mapStateToProps(state: any) {
+//   return {
+//     userData: state.users.data,
+//   };
+// }
+
+// function mapDispatchToProps(dispatch: any) {
+//   return {
+    
+//   };
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Entry);
+// export default Entry;
