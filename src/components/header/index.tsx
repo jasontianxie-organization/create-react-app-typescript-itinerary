@@ -2,27 +2,42 @@ import React, { useEffect, useState } from "react";
 import "./index.module.scss";
 import intl from "react-intl-universal";
 import { connect } from "react-redux";
+import { Dropdown, Menu } from "antd";
+import Login from "@/components/login";
 
-interface IWprops {
+interface IHeaderprops {
   userData: {
-    username: string
+    name: string,
+    email: string
   },
-  showLogin: () => void
+  showLogin: () => void,
+  logout: () => void
 }
 
-const Header: React.FC<IWprops> =  ({userData, showLogin}) => {
+const Header: React.FC<IHeaderprops> =  ({userData, showLogin, logout}) => {
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <div onClick={() => logout()}>{intl.get("components.header.logout")}</div>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <div styleName="header">
       {
-        userData.username ? (
-          <span>{userData.username}</span>
+        userData ? (
+          <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+            <span>{userData.name || userData.email}</span>
+          </Dropdown>
         ) :  (
           <span>
-            <span onClick={() => showLogin()}>{intl.get("components.header.signin")}</span>
-            <span>{intl.get("components.header.signup")}</span>
+            <span styleName="btn" onClick={() => showLogin()}>{intl.get("components.header.signin")}</span> |
+            <span styleName="btn" > {intl.get("components.header.signup")}</span>
           </span>
         )
       }
+      <Login/>
     </div>
   )
 }
@@ -37,6 +52,7 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     showLogin: () => dispatch({type: "SHOW_LOGIN"}),
+    logout: () => {console.log('logout')}
   };
 }
 

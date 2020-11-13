@@ -43,8 +43,6 @@ export default {
             label_remember_me: "记住我",
             label_forgot: "忘记密码",
             label_login: "登录",
-            label_or: "或",
-            label_signup: "注册",
             plhr_username: "用户名",
             plhr_password: "密码"
         },
@@ -54,7 +52,8 @@ export default {
         },
         header: {
             signin: "登录",
-            signup: "注册"
+            signup: "注册",
+            logout: "登出"
         }
     }
 }

@@ -60,7 +60,6 @@ class NormalLoginForm extends React.Component<any, any> {
             <Button type="primary" htmlType="submit" className="login-form-button">
               {intl.get("components.login.label_login")}
             </Button>
-            {intl.get("components.login.label_or")} <a href="">{intl.get("components.login.label_signup")}</a>
           </Form.Item>
         </Form>
       </Modal>
