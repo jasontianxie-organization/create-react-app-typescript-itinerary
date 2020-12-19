@@ -62,7 +62,7 @@ export default class Uploader {
                         console.log(err)
                         this.uploadStatus = 'fail'
                         reject(err)
-                    })
+                    }).catch((err) => console.log(err));
                 }
              };
             uploadChunk()

@@ -22,3 +22,22 @@ export function login(data) {
 
     }
 }
+
+export function logout() {
+    return function (dispatch, getState) {
+        request.get("/api/users/logout").then((response) => {
+                dispatch({
+                    type: 'LOGOUT_SUCCESS',
+                    payload: response
+                })
+                dispatch({type: "HIDE_LOGIN"})
+            })
+            .catch(function (error) {
+                console.log(error);
+                dispatch({
+                    type: 'LOGOUT_FAIL'
+                })
+            });
+
+    }
+}

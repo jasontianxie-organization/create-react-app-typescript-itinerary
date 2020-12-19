@@ -53,7 +53,7 @@ class App extends React.Component<any, any> {
     request.get("/api/mainPageSlideData").then((data) => {
       console.log(data);
     },
-    (err) => console.log(err));
+    (err) => console.log(err)).catch((err) => console.log(err));;
   }
   public goToNewItinerary() {
     if (this.props.userData) {

@@ -4,14 +4,15 @@ import intl from "react-intl-universal";
 import { connect } from "react-redux";
 import { Dropdown, Menu } from "antd";
 import Login from "@/components/login";
+import { logout as gologout } from "@/redux/actions/users";
 
 interface IHeaderprops {
   userData: {
     name: string,
-    email: string
-  },
-  showLogin: () => void,
-  logout: () => void
+    email: string,
+  };
+  showLogin: () => void;
+  logout: () => void;
 }
 
 const Header: React.FC<IHeaderprops> =  ({userData, showLogin, logout}) => {
@@ -28,7 +29,7 @@ const Header: React.FC<IHeaderprops> =  ({userData, showLogin, logout}) => {
       {
         userData ? (
           <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
-            <span>{userData.name || userData.email}</span>
+            <span styleName="btn">{userData.name || userData.email}</span>
           </Dropdown>
         ) :  (
           <span>
@@ -52,7 +53,7 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     showLogin: () => dispatch({type: "SHOW_LOGIN"}),
-    logout: () => {console.log('logout')}
+    logout: () => dispatch(gologout()),
   };
 }
 

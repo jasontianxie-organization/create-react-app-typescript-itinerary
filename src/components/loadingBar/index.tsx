@@ -1,9 +1,16 @@
 import React from "react";
 import "./index.module.scss";
+import {request} from "@/fetchServerData/axios";
+import store from "@/redux/store";
 
 class LoadingBar extends React.Component<any, any> {
     public state = {color: "#1890ff", width: 0, show: false};
     public Interval: any;
+    public componentDidMount() {
+        request.get("/api/users/session").then((data) => {
+            store.dispatch({type: "LOGIN_SUCCESS", payload: data});
+        }).catch((err) => console.log(err));
+    }
     public startRequest() {
         let width: number = 0;
         this.endRequest();

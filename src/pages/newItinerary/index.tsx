@@ -106,7 +106,7 @@ class NewItinerary extends React.Component<any, any> {
       }).then((res: ISpotLists[]) => {
         this.setState({title: res[0].itinerary.title});
         this.generateContent(res);
-      });
+      }).catch((err) => console.log(err));;
     }
     public componentDidMount() {
       this.setMainWidth();

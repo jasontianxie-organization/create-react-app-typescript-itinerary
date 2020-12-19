@@ -2,17 +2,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import {HashRouter} from "react-router-dom";
 import "@/init";
 import Entry from "@/Entry";
 import * as serviceWorker from "./serviceWorker";
-import rootReducer from "@/redux/reducers/index";
 import zhCN from "antd/es/locale/zh_CN";
 import { ConfigProvider } from "antd";
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
+import store from "@/redux/store";
 
 ReactDOM.render(
     <Provider store={store}>
