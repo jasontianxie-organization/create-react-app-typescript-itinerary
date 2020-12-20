@@ -60,7 +60,8 @@ class App extends React.Component<any, any> {
       // this.props.history.push("newItinerary");
       this.setWriteItinerarystatus(true);
     } else {
-      this.props.showLogin();
+      this.props.history.push("/signin");
+      // this.props.showLogin();
     }
   }
   public setWriteItinerarystatus(status: boolean) {
@@ -179,7 +180,7 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    showLogin: () => dispatch({type: "SHOW_LOGIN"}),
+    // showLogin: () => dispatch({type: "SHOW_LOGIN"}),
   };
 }
 

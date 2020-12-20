@@ -3,9 +3,9 @@ import App from "@/pages/main/App";
 import NewItinerary from "@/pages/newItinerary/index";
 import LoadingBar from "@/components/loadingBar";
 import Header from "@/components/header";
-import {Route} from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
 import intl from "react-intl-universal";
-// import { connect } from "react-redux";
+import Signin from "@/pages/Signin";
 import "./init.scss";
 
 import en_US from "@/i18n/en_US";
@@ -47,9 +47,21 @@ class Entry extends React.Component<any, any> {
             this.state.initDone && (
               <>
                 <LoadingBar ref={this.myRef}/>
-                <Header/>
-                <Route exact path="/" render={() => <App/>}/>
-                <Route path="/newItinerary/:itineraryId" component={NewItinerary}/>
+                <Switch>
+                  <Route exact path="/signin" render={() => <Signin/>}/>
+                  <Route exact path="/signup" render={() => <Signin/>}/>
+                  <Route exact path="/">
+                    <Redirect to="/main" />
+                  </Route>
+                  <>
+                    <Header/>
+                    <Route path="/main" render={() => <App/>}></Route>
+                    <Route path="/newItinerary/:itineraryId" component={NewItinerary}/>
+                  </>
+                  <Route path="*">
+                    <h1>404</h1>
+                  </Route>
+                </Switch>
               </>
             )
         );

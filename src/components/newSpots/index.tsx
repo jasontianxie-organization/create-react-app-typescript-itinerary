@@ -71,7 +71,7 @@ const NewSpots = Form.create<IUserFormProps>({ name: "new_spots" })(
       public componentWillMount() {
         request.get("/public/address/1.json").then((data: any) => {
           this.setState({...this.state, level1DropDownData: [{id: 0, data}], level1DropDownCurrentData: data});
-        }).catch((err) => console.log(err));;
+        }).catch((err) => console.log(err));
       }
       public render() {
           const { visible, onCancel, onSave, form } = this.props;

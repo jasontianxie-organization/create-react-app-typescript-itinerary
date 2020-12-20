@@ -3,19 +3,20 @@ import "./index.module.scss";
 import intl from "react-intl-universal";
 import { connect } from "react-redux";
 import { Dropdown, Menu } from "antd";
-import Login from "@/components/login";
 import { logout as gologout } from "@/redux/actions/users";
+import { useHistory } from "react-router-dom";
 
 interface IHeaderprops {
   userData: {
     name: string,
     email: string,
   };
-  showLogin: () => void;
+  // showLogin: () => void;
   logout: () => void;
 }
 
-const Header: React.FC<IHeaderprops> =  ({userData, showLogin, logout}) => {
+const Header: React.FC<IHeaderprops> =  ({userData, logout}) => {
+  const history = useHistory();
   const menu = (
     <Menu>
       <Menu.Item>
@@ -33,12 +34,11 @@ const Header: React.FC<IHeaderprops> =  ({userData, showLogin, logout}) => {
           </Dropdown>
         ) :  (
           <span>
-            <span styleName="btn" onClick={() => showLogin()}>{intl.get("components.header.signin")}</span> |
+            <span styleName="btn" onClick={() => history.push("/signin")}>{intl.get("components.header.signin")}</span> |
             <span styleName="btn" > {intl.get("components.header.signup")}</span>
           </span>
         )
       }
-      <Login/>
     </div>
   )
 }
@@ -52,7 +52,7 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    showLogin: () => dispatch({type: "SHOW_LOGIN"}),
+    // showLogin: () => dispatch({type: "SHOW_LOGIN"}),
     logout: () => dispatch(gologout()),
   };
 }

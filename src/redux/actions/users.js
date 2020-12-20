@@ -11,7 +11,6 @@ export function login(data) {
                     type: 'LOGIN_SUCCESS',
                     payload: response
                 })
-                dispatch({type: "HIDE_LOGIN"})
             })
             .catch(function (error) {
                 console.log(error);
@@ -25,12 +24,14 @@ export function login(data) {
 
 export function logout() {
     return function (dispatch, getState) {
+        dispatch({
+            type: 'LOGOUT_START'
+        });
         request.get("/api/users/logout").then((response) => {
                 dispatch({
                     type: 'LOGOUT_SUCCESS',
                     payload: response
                 })
-                dispatch({type: "HIDE_LOGIN"})
             })
             .catch(function (error) {
                 console.log(error);

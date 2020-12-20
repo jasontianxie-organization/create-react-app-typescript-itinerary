@@ -42,7 +42,7 @@ request.interceptors.response.use(res => {
     //     router.push(`/signin${router.currentRoute.fullPath ? `?redirect=${router.currentRoute.fullPath}` : ''}`)
     //     return Promise.reject(new HttpError({code: 401, message: 'Unauthorized'}))
     //   } else {
-      store.dispatch({type: "SHOW_LOGIN", payload: {}});
+      store.dispatch({type: "LOGIN_FAIL"});
       return Promise.reject(new HttpError({code: 401, message: 'Unauthorized'}))
     //   }
     } else {
