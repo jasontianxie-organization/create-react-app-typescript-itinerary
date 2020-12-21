@@ -1,37 +1,27 @@
-import React, { Component } from "react";
+import React from "react";
+import { Redirect, Route, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
- 
-export const PrivateRoute = ({ component, ...rest }) => {
-  class Authentication extends Component {
-    render() {
-      let isLogin= this.props.isLogin
-        ? this.props.isLogin
-        : sessionStorage.getItem("userinfo")
-          ? sessionStorage.getItem("userinfo")
-          : "";
-      return (
-        <Route
-          {...rest}
-          render={props =>
-            !isLogin? (
-              <Redirect
-                to={{
-                  pathname: "/login",
-                  state: { from: props.location }
-                }}
-              />
-            ) : (
-              <ComposedComponent {...props} />
-            )
-          }
-        />
-      );
-    }
-  }
- 
-  const AuthenticationContainer = connect(state => ({
-    isLogin: state.loginInfo.isLogin
-  }))(Authentication);
-  return <AuthenticationContainer />;
+
+interface IHeaderprops {
+  userData: {
+    name: string,
+    email: string,
+  };
+  [props: string]: any;
+}
+
+// function PrivateRoute({ children, ...rest }) {
+const PrivateRoute: React.FC<IHeaderprops> =  ({children, userData, ...rest}) => {
+  const location = useLocation();
+  return (
+    userData ? <Route {...rest}>{children}</Route> : <Redirect to={`/signin?redirect=${location.pathname}`}/>
+  );
 };
+
+function mapStateToProps(state: any) {
+  return {
+    userData: state.users.data,
+  };
+}
+
+export default connect(mapStateToProps)(PrivateRoute);

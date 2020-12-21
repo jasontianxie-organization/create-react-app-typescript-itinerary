@@ -4,6 +4,7 @@ import NewItinerary from "@/pages/newItinerary/index";
 import LoadingBar from "@/components/loadingBar";
 import Header from "@/components/header";
 import {Route, Switch, Redirect} from "react-router-dom";
+import PrivateRoute from '@/router/auth';
 import intl from "react-intl-universal";
 import Signin from "@/pages/Signin";
 import "./init.scss";
@@ -56,7 +57,7 @@ class Entry extends React.Component<any, any> {
                   <>
                     <Header/>
                     <Route path="/main" render={() => <App/>}></Route>
-                    <Route path="/newItinerary/:itineraryId" component={NewItinerary}/>
+                    <PrivateRoute path="/newItinerary/:itineraryId" component={NewItinerary}/>
                   </>
                   <Route path="*">
                     <h1>404</h1>

@@ -2,6 +2,7 @@ import React from "react";
 import "./index.module.scss";
 import { Form, Button, Icon, Input, Checkbox } from "antd";
 import { connect } from "react-redux";
+import { Redirect, withRouter } from "react-router-dom";
 import { login } from "@/redux/actions/users";
 import intl from "react-intl-universal";
 
@@ -11,12 +12,15 @@ class NormalLoginForm extends React.Component<any, any> {
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
         this.props.login(values);
+        // console.log(this.props.location.search.split("redirect=")[1]);
+        // this.props.history.push(this.props.location.search.split("redirect=")[1]);
       }
     });
   }
   public render() {
     const { getFieldDecorator } = this.props.form;
     return (
+        this.props.userData ? <Redirect to={this.props.location.search.split("redirect=")[1]}/> :
         <Form onSubmit={(e) => this.handleSubmit(e)} styleName="login-form">
           <Form.Item>
             {getFieldDecorator("username", {
@@ -57,13 +61,14 @@ class NormalLoginForm extends React.Component<any, any> {
 }
 
 function mapStateToProps(state: any) {
+  return { userData: state.users.data };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    login: (data: any) => dispatch(login(data))
+    login: (data: any) => dispatch(login(data)),
   };
 }
 
-const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(NormalLoginForm);
+const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(withRouter(NormalLoginForm));
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedNormalLoginForm);

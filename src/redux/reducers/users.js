@@ -9,7 +9,7 @@ export const users = (state=initState,action)=>{
             console.log('login startting');
             return {...state};
         case 'LOGIN_SUCCESS':
-            console.log('login success');
+            console.log('login success', window.location);
             return {...state, data:action.payload}
         case 'LOGIN_FAIL':
             console.log('login fail');
