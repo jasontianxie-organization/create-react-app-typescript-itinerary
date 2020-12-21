@@ -12,8 +12,6 @@ class NormalLoginForm extends React.Component<any, any> {
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
         this.props.login(values);
-        // console.log(this.props.location.search.split("redirect=")[1]);
-        // this.props.history.push(this.props.location.search.split("redirect=")[1]);
       }
     });
   }
