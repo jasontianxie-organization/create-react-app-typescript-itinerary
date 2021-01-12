@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import {request} from "@/fetchServerData/axios";
 import WriteItinerary from "@/components/writeItinerary";
 import { connect } from "react-redux";
+import Header from "@/components/header";
 const {Search} = Input;
 
 // 模拟假数据
@@ -69,6 +70,8 @@ class App extends React.Component<any, any> {
   }
   public render() {
     return (
+      <>
+      <Header/>
       <div styleName="app">
         <header styleName="app-header">
           <Carousel autoplay>
@@ -168,6 +171,7 @@ class App extends React.Component<any, any> {
         <Footer/>
         <WriteItinerary visible={this.state.writeItineraryVisible} setVisible={this.setWriteItinerarystatus}/>
       </div>
+      </>
     );
   }
 }

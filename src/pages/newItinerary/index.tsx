@@ -7,6 +7,7 @@ import { Button, Input } from "antd";
 import { connect } from "react-redux";
 import { uploadFileAction } from "@/redux/actions/uploadFile";
 import { request } from "@/fetchServerData/axios";
+import Header from "@/components/header";
 
 interface ISpotLists {
   spotId: number;
@@ -106,7 +107,7 @@ class NewItinerary extends React.Component<any, any> {
       }).then((res: ISpotLists[]) => {
         this.setState({title: res[0].itinerary.title});
         this.generateContent(res);
-      }).catch((err) => console.log(err));;
+      }).catch((err) => console.log(err));
     }
     public componentDidMount() {
       this.setMainWidth();
@@ -120,7 +121,10 @@ class NewItinerary extends React.Component<any, any> {
       });
     }
     public render() {
-        return (<div styleName="new-itinerary">
+        return (
+          <>
+            <Header/>
+            <div styleName="new-itinerary">
                       <div styleName="wrap">
                         <div styleName="abstract">
                           {this.state.content.map((item: {spotOrder: number, spotName: string, description: string}, index: number) => {
@@ -172,7 +176,8 @@ class NewItinerary extends React.Component<any, any> {
                     />
                     <ItineraryEditor/>
                     <div>{intl.get("pages.newItinerary.content")}</div> */}
-                </div>);
+                  </div>
+                </>);
     }
 }
 
