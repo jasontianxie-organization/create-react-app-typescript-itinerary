@@ -35,7 +35,7 @@ const Header: React.FC<IHeaderprops> =  ({userData, logout}) => {
         ) :  (
           <span>
             <span styleName="btn" onClick={() => history.push("/signin")}>{intl.get("components.header.signin")}</span> |
-            <span styleName="btn" > {intl.get("components.header.signup")}</span>
+            <span styleName="btn" onClick={() => history.push("/signup")}> {intl.get("components.header.signup")}</span>
           </span>
         )
       }

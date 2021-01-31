@@ -6,6 +6,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import PrivateRoute from "@/router/auth";
 import intl from "react-intl-universal";
 import Signin from "@/pages/Signin";
+import Signup from "@/pages/Signup";
 import "./init.scss";
 
 import en_US from "@/i18n/en_US";
@@ -49,7 +50,7 @@ class Entry extends React.Component<any, any> {
                 <LoadingBar ref={this.myRef}/>
                 <Switch>
                   <Route exact path="/signin" render={() => <Signin/>}/>
-                  <Route exact path="/signup" render={() => <Signin/>}/>
+                  <Route exact path="/signup" render={() => <Signup/>}/>
                   <Route exact path="/">
                     <Redirect to="/main" />
                   </Route>

@@ -46,12 +46,13 @@ class NormalLoginForm extends React.Component<any, any> {
               valuePropName: "checked",
               initialValue: true,
             })(<Checkbox>{intl.get("components.login.label_remember_me")}</Checkbox>)}
-            <a className="login-form-forgot" href="">
-              {intl.get("components.login.label_forgot")}
+            <a className="login-form-forgot" href="javascript:void(0);">
+              {intl.get("components.login.btn_forgot")}
             </a>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              {intl.get("components.login.label_login")}
+              {intl.get("components.login.btn_login")}
             </Button>
+            {intl.get("components.login.label_or")} <a href="javascript:void(0);" onClick={() => this.props.history.push("/signup")}>{intl.get("components.login.btn_signup")}</a>
           </Form.Item>
         </Form>
     );
