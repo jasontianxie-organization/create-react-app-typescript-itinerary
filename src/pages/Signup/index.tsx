@@ -1,6 +1,7 @@
 import React from "react";
 import "./index.module.scss";
 import { withRouter } from "react-router-dom";
+import {request} from "@/fetchServerData/axios";
 import intl from "react-intl-universal";
 import {
     Form,
@@ -9,6 +10,7 @@ import {
     Col,
     Checkbox,
     Button,
+    message,
   } from "antd";
 
 class RegistrationForm extends React.Component<any, any> {
@@ -23,6 +25,15 @@ class RegistrationForm extends React.Component<any, any> {
         if (!err) {
           // tslint:disable-next-line:no-console
           console.log("Received values of form: ", values);
+          request.post("/api/users/signup", values).then((res) => {
+            if (res.data.code === 0) {
+              message.success("注册成功");
+            } else {
+              message.error(res.data.message);
+            }
+          }).catch(() => {
+            message.error("注册失败");
+          });
         }
       });
     }
@@ -49,16 +60,16 @@ class RegistrationForm extends React.Component<any, any> {
       callback();
     }
 
-    public handleWebsiteChange = (value: any) => {
-      let autoCompleteResult: any;
-      // tslint:disable-next-line:prefer-conditional-expression
-      if (!value) {
-        autoCompleteResult = [];
-      } else {
-        autoCompleteResult = [".com", ".org", ".net"].map((domain) => `${value}${domain}`);
-      }
-      this.setState({ autoCompleteResult });
-    }
+    // public handleWebsiteChange = (value: any) => {
+    //   let autoCompleteResult: any;
+    //   // tslint:disable-next-line:prefer-conditional-expression
+    //   if (!value) {
+    //     autoCompleteResult = [];
+    //   } else {
+    //     autoCompleteResult = [".com", ".org", ".net"].map((domain) => `${value}${domain}`);
+    //   }
+    //   this.setState({ autoCompleteResult });
+    // }
 
     public render() {
       const { getFieldDecorator } = this.props.form;
@@ -154,7 +165,7 @@ class RegistrationForm extends React.Component<any, any> {
           <Form.Item {...tailFormItemLayout}>
             {getFieldDecorator("agreement", {
               valuePropName: "checked",
-              rules: [{ required: true, message: intl.get("components.signup.reminder_check_agreement") }]
+              rules: [{ required: true, message: intl.get("components.signup.reminder_check_agreement") }],
             })(
               <Checkbox>
                 {intl.get("components.signup.label_read_agreement")} <a href="">{intl.get("components.signup.btn_agreement")}</a>

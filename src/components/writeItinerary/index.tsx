@@ -36,7 +36,7 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
             },
           }).then((data) => {
             setItineraries(data);
-        }).catch((err) => console.log(err));;
+        }).catch((err) => console.log(err));
     }, [userid]);
     return (
         <Modal
