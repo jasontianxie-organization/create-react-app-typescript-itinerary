@@ -31,6 +31,7 @@ class RegistrationForm extends React.Component<any, any> {
           request.post("/api/users/signup", values).then((res: any) => {
             if (res.code === 0) {
               message.success(res.message);
+              this.props.history.push("/signin");
             } else {
               message.error(res.message);
             }
