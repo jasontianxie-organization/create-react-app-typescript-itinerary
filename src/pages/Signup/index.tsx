@@ -13,10 +13,13 @@ import {
     message,
   } from "antd";
 
+let intervalObj = null;
+
 class RegistrationForm extends React.Component<any, any> {
     public state = {
       confirmDirty: false,
       autoCompleteResult: [],
+      countDownSec: 0,
     };
 
     public handleSubmit = (e: any) => {
@@ -25,11 +28,11 @@ class RegistrationForm extends React.Component<any, any> {
         if (!err) {
           // tslint:disable-next-line:no-console
           console.log("Received values of form: ", values);
-          request.post("/api/users/signup", values).then((res) => {
-            if (res.data.code === 0) {
-              message.success("注册成功");
+          request.post("/api/users/signup", values).then((res: any) => {
+            if (res.code === 0) {
+              message.success(res.message);
             } else {
-              message.error(res.data.message);
+              message.error(res.message);
             }
           }).catch(() => {
             message.error("注册失败");
@@ -60,16 +63,37 @@ class RegistrationForm extends React.Component<any, any> {
       callback();
     }
 
-    // public handleWebsiteChange = (value: any) => {
-    //   let autoCompleteResult: any;
-    //   // tslint:disable-next-line:prefer-conditional-expression
-    //   if (!value) {
-    //     autoCompleteResult = [];
-    //   } else {
-    //     autoCompleteResult = [".com", ".org", ".net"].map((domain) => `${value}${domain}`);
-    //   }
-    //   this.setState({ autoCompleteResult });
-    // }
+    public countDownSec = () => {
+      setTimeout(() => {
+        if (this.state.countDownSec > 0) {
+          this.setState({
+            countDownSec: this.state.countDownSec - 1,
+          }, () => this.countDownSec());
+        }
+    }, 1000);
+    }
+
+    public getCaptcha = async () => {
+      try {
+        const values = await this.props.form.validateFields(["email"]);
+        this.setState({
+          countDownSec: 60,
+        }, () => this.countDownSec());
+        request.get("http://129.28.183.129:3456/email_code", {
+        params: {
+          email: values.email,
+        },
+      }).then((res: any) => {
+        if (res.code === 0) {
+          message.success(res.message);
+        } else {
+          message.error(res.message);
+        }
+      });
+      } catch (errorInfo) {
+        console.log(errorInfo);
+      }
+    }
 
     public render() {
       const { getFieldDecorator } = this.props.form;
@@ -158,7 +182,9 @@ class RegistrationForm extends React.Component<any, any> {
                 })(<Input />)}
               </Col>
               <Col span={12}>
-                <Button>{intl.get("components.signup.btn_captcha")}</Button>
+                <Button onClick={this.getCaptcha} disabled={this.state.countDownSec > 0}>
+                  {intl.get("components.signup.btn_captcha")}{this.state.countDownSec > 0 ? `(${this.state.countDownSec})` : ""}
+                </Button>
               </Col>
             </Row>
           </Form.Item>

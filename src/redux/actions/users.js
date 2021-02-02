@@ -1,4 +1,5 @@
 import {request} from '@/fetchServerData/axios';
+import { message } from 'antd';
 
 
 export function login(data) {
@@ -7,13 +8,21 @@ export function login(data) {
             type: 'LOGIN_START'
         });
         request.post("/api/users/login", {username: data.username, password: data.password}).then((response) => {
+            if(response.code === 0) {
+                message.success('登录成功')
                 dispatch({
                     type: 'LOGIN_SUCCESS',
                     payload: response
                 })
+            } else {
+                message.error('登录失败')
+                dispatch({
+                    type: 'LOGIN_FAIL'
+                })
+            }
             })
             .catch(function (error) {
-                console.log(error);
+                message.error('登录失败')
                 dispatch({
                     type: 'LOGIN_FAIL'
                 })
