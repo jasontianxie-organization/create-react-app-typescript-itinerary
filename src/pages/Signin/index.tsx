@@ -1,7 +1,8 @@
 import React from "react";
 import "./index.module.scss";
-import { Modal, Form, Button, Icon, Input, Checkbox } from "antd";
+import { Form, Button, Icon, Input, Checkbox } from "antd";
 import { connect } from "react-redux";
+import { Redirect, withRouter } from "react-router-dom";
 import { login } from "@/redux/actions/users";
 import intl from "react-intl-universal";
 
@@ -10,23 +11,14 @@ class NormalLoginForm extends React.Component<any, any> {
     e.preventDefault();
     this.props.form.validateFields((err: any, values: any) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         this.props.login(values);
       }
     });
   }
-  public onCancel() {
-    this.props.hideLogin();
-  }
   public render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Modal
-        footer={null}
-        title={intl.get("components.login.title")}
-        onCancel={() => this.onCancel()}
-        visible={this.props.showLogin}
-      >
+        this.props.userData ? <Redirect to={this.props.location.search.split("redirect=")[1]}/> :
         <Form onSubmit={(e) => this.handleSubmit(e)} styleName="login-form">
           <Form.Item>
             {getFieldDecorator("username", {
@@ -54,31 +46,28 @@ class NormalLoginForm extends React.Component<any, any> {
               valuePropName: "checked",
               initialValue: true,
             })(<Checkbox>{intl.get("components.login.label_remember_me")}</Checkbox>)}
-            <a className="login-form-forgot" href="">
-              {intl.get("components.login.label_forgot")}
+            <a className="login-form-forgot" href="javascript:void(0);">
+              {intl.get("components.login.btn_forgot")}
             </a>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              {intl.get("components.login.label_login")}
+              {intl.get("components.login.btn_login")}
             </Button>
+            {intl.get("components.login.label_or")} <a href="javascript:void(0);" onClick={() => this.props.history.push("/signup")}>{intl.get("components.login.btn_signup")}</a>
           </Form.Item>
         </Form>
-      </Modal>
     );
   }
 }
 
 function mapStateToProps(state: any) {
-  return {
-    showLogin: state.users.showLogin,
-  };
+  return { userData: state.users.data };
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
     login: (data: any) => dispatch(login(data)),
-    hideLogin: () => dispatch({type: "HIDE_LOGIN"}),
   };
 }
 
-const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(NormalLoginForm);
+const WrappedNormalLoginForm = Form.create({ name: "normal_login" })(withRouter(NormalLoginForm));
 export default connect(mapStateToProps, mapDispatchToProps)(WrappedNormalLoginForm);

@@ -8,6 +8,7 @@ import Footer from "@/components/footer";
 import {request} from "@/fetchServerData/axios";
 import WriteItinerary from "@/components/writeItinerary";
 import { connect } from "react-redux";
+import Header from "@/components/header";
 const {Search} = Input;
 
 // 模拟假数据
@@ -53,14 +54,15 @@ class App extends React.Component<any, any> {
     request.get("/api/mainPageSlideData").then((data) => {
       console.log(data);
     },
-    (err) => console.log(err));
+    (err) => console.log(err)).catch((err) => console.log(err));;
   }
   public goToNewItinerary() {
     if (this.props.userData) {
       // this.props.history.push("newItinerary");
       this.setWriteItinerarystatus(true);
     } else {
-      this.props.showLogin();
+      this.props.history.push("/signin");
+      // this.props.showLogin();
     }
   }
   public setWriteItinerarystatus(status: boolean) {
@@ -68,6 +70,8 @@ class App extends React.Component<any, any> {
   }
   public render() {
     return (
+      <>
+      <Header/>
       <div styleName="app">
         <header styleName="app-header">
           <Carousel autoplay>
@@ -167,6 +171,7 @@ class App extends React.Component<any, any> {
         <Footer/>
         <WriteItinerary visible={this.state.writeItineraryVisible} setVisible={this.setWriteItinerarystatus}/>
       </div>
+      </>
     );
   }
 }
@@ -179,8 +184,7 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    onIncreaseClick: () => dispatch({}),
-    showLogin: () => dispatch({type: "SHOW_LOGIN"}),
+    // showLogin: () => dispatch({type: "SHOW_LOGIN"}),
   };
 }
 

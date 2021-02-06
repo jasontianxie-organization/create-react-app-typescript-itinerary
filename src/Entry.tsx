@@ -1,10 +1,12 @@
 import React from "react";
 import App from "@/pages/main/App";
 import NewItinerary from "@/pages/newItinerary/index";
-import Login from "@/components/login";
 import LoadingBar from "@/components/loadingBar";
-import {Route} from "react-router-dom";
+import {Route, Switch, Redirect} from "react-router-dom";
+import PrivateRoute from "@/router/auth";
 import intl from "react-intl-universal";
+import Signin from "@/pages/Signin";
+import Signup from "@/pages/Signup";
 import "./init.scss";
 
 import en_US from "@/i18n/en_US";
@@ -46,9 +48,18 @@ class Entry extends React.Component<any, any> {
             this.state.initDone && (
               <>
                 <LoadingBar ref={this.myRef}/>
-                <Login/>
-                <Route exact path="/" render={() => <App/>}/>
-                <Route path="/newItinerary/:itineraryId" component={NewItinerary}/>
+                <Switch>
+                  <Route exact path="/signin" render={() => <Signin/>}/>
+                  <Route exact path="/signup" render={() => <Signup/>}/>
+                  <Route exact path="/">
+                    <Redirect to="/main" />
+                  </Route>
+                  <Route path="/main" render={() => <App/>}></Route>
+                  <PrivateRoute path="/newItinerary/:itineraryId" component={NewItinerary}/>
+                  <Route path="*">
+                    <h1>404</h1>
+                  </Route>
+                </Switch>
               </>
             )
         );

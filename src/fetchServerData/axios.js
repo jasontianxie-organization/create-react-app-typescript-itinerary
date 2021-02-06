@@ -1,6 +1,7 @@
 import axios from 'axios'
 // import router from '@/router'
 import {loadingBarRef} from '@/Entry'
+import store from "@/redux/store";
 
 const request = axios.create({
   // baseURL: '/api',
@@ -41,7 +42,8 @@ request.interceptors.response.use(res => {
     //     router.push(`/signin${router.currentRoute.fullPath ? `?redirect=${router.currentRoute.fullPath}` : ''}`)
     //     return Promise.reject(new HttpError({code: 401, message: 'Unauthorized'}))
     //   } else {
-        return Promise.reject(new HttpError({code: 401, message: 'Unauthorized'}))
+      store.dispatch({type: "LOGIN_FAIL"});
+      return Promise.reject(new HttpError({code: 401, message: 'Unauthorized'}))
     //   }
     } else {
       let {code} = data
