@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./index.module.scss";
-import {Modal} from "antd";
+import {Modal, message} from "antd";
 import intl from "react-intl-universal";
 import {request} from "@/fetchServerData/axios";
 import { connect } from "react-redux";
@@ -38,6 +38,18 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
             setItineraries(data);
         }).catch((err) => console.log(err));
     }, [userid]);
+    const newItinerary = () => {
+        request.post<any, any>("/api/itineraries/create", {
+            userId: userid,
+          }).then((data) => {
+              if (data.code === 0) {
+                message.success(data.message);
+                history.push(`/newItinerary/${data.data.itineraryId}`);
+              } else {
+                message.error(data.message);
+              }
+        }).catch((err) => console.log(err));
+    };
     return (
         <Modal
             footer={null}
@@ -45,10 +57,10 @@ const WriteItinerary: React.FC<IWprops> =  ({visible, setVisible, userid}) => {
             onCancel={() => setVisible(false)}
             visible={visible}
         >
-            <div onClick={() => history.push("/newItinerary/new")}>{intl.get("components.writeItinerary.new")}</div>
+            <div onClick={newItinerary}>{intl.get("components.writeItinerary.new")}</div>
             {itineraries && itineraries.map((item, index) => {
                 if (item.draft === 0) {
-                    return <div key={index} onClick={() => history.push(`/newItinerary/${item.itineraryId}`)}>{item.title}</div>;
+                    return <div key={index} onClick={() => history.push(`/newItinerary/${item.itineraryId}`)}>{item.title || "无标题游记"}</div>;
                 }
             })}
       </Modal>

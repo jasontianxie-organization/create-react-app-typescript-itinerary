@@ -70,7 +70,7 @@ class NewItinerary extends React.Component<any, any> {
       console.log("title saved");
     }
     public changeTitle(e: any) {
-      this.setState({title: e.target.value})
+      this.setState({title: e.target.value});
     }
     public generateContent(data: ISpotLists[]) {
       const content: Array<{spotOrder: number, spotName: string, description: string}> = [];

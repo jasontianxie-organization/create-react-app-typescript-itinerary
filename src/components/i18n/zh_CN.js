@@ -71,7 +71,7 @@ export default {
         },
         writeItinerary: {
             title: "写游记",
-            new: "新游记"
+            new: "创建新游记"
         },
         header: {
             signin: "登录",
