@@ -3,10 +3,11 @@ import "./index.module.scss";
 import intl from "react-intl-universal";
 import NewSpots from "@/components/newSpots";
 // import ItineraryEditor from "@/components/itineraryEditor";
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import { connect } from "react-redux";
 import { uploadFileAction } from "@/redux/actions/uploadFile";
 import { request } from "@/fetchServerData/axios";
+import {withRouter} from "react-router-dom";
 import Header from "@/components/header";
 
 interface ISpotLists {
@@ -28,7 +29,22 @@ interface ISpotLists {
   itinerary: {title: string};
 }
 
-class NewItinerary extends React.Component<any, any> {
+interface IProps {
+  match: any;
+  updateCurrentSpotId: (params: any) => any;
+  updateSpots: (params: any) => any;
+  updateItineraries: (params: any) => any;
+  uploadFile: () => any;
+}
+
+interface IState {
+  newSpotsModalVisible: boolean;
+  title: string;
+  content: any[];
+  currentSpoyId: number;
+}
+
+class NewItinerary extends React.Component<IProps, IState> {
     public formRef: any;
     public mainRef: any;
     public mainWrapRef: any;
@@ -37,9 +53,22 @@ class NewItinerary extends React.Component<any, any> {
       newSpotsModalVisible: false,
       title: "",
       content: [],
+      currentSpoyId: 0,
     };
     public showModal = () => {
-      this.setState({ newSpotsModalVisible: true });
+      request.post("/api/spots/create", {itineraryId: this.props.match.params.itineraryId, spotOrder: this.state.content.length}).then((res: any) => {
+        if (res.code === 0) {
+          this.setState({
+            currentSpoyId: res.spotId,
+          }, () => {
+            this.setState({ newSpotsModalVisible: true });
+          });
+        } else {
+          message.error(res.message);
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
     }
     public handleCancel = () => {
       // this.formRef.props.form.resetFields();
@@ -197,4 +226,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewItinerary);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewItinerary as any));
