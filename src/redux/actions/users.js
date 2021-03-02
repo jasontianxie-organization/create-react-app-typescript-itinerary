@@ -12,7 +12,7 @@ export function login(data) {
                 message.success('登录成功')
                 dispatch({
                     type: 'LOGIN_SUCCESS',
-                    payload: response
+                    payload: response.data
                 })
             } else {
                 message.error('登录失败')
