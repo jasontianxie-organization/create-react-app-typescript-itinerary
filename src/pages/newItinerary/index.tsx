@@ -26,7 +26,6 @@ interface ISpotLists {
   longitude: number;
   latitude: number;
   time: number;
-  itinerary: {title: string};
 }
 
 interface IProps {
@@ -42,6 +41,7 @@ interface IState {
   title: string;
   content: any[];
   currentSpoyId: number;
+  spots: any[];
 }
 
 class NewItinerary extends React.Component<IProps, IState> {
@@ -54,6 +54,7 @@ class NewItinerary extends React.Component<IProps, IState> {
       title: "",
       content: [],
       currentSpoyId: 0,
+      spots: []
     };
     public showModal = () => {
       request.post("/api/spots/create", {itineraryId: this.props.match.params.itineraryId, spotOrder: this.state.content.length}).then((res: any) => {
@@ -69,6 +70,20 @@ class NewItinerary extends React.Component<IProps, IState> {
       }).catch((err) => {
         console.log(err);
       });
+    }
+    public editSpot = (e: any, spotId: number) => {
+      console.log('edit spot')
+      request.get("/api/spots/info",{
+        params: {
+          spotId,
+        },
+      }).then((res: any) => {
+        if (res.code === 0) {
+          console.log(res.data);
+        } else {
+          message.error(res.message);
+        }
+      }).catch((err) => console.log(err))
     }
     public handleCancel = () => {
       // this.formRef.props.form.resetFields();
@@ -134,7 +149,7 @@ class NewItinerary extends React.Component<IProps, IState> {
           itineraryId,
         },
       }).then((res: ISpotLists[]) => {
-        this.setState({title: res[0].itinerary.title});
+        this.setState({spots: res});
         this.generateContent(res);
       }).catch((err) => console.log(err));
     }
@@ -156,8 +171,8 @@ class NewItinerary extends React.Component<IProps, IState> {
             <div styleName="new-itinerary">
                       <div styleName="wrap">
                         <div styleName="abstract">
-                          {this.state.content.map((item: {spotOrder: number, spotName: string, description: string}, index: number) => {
-                          return <div key={index}>{item.spotOrder}/ {item.spotName}</div>;
+                          {this.state.spots.map((item: ISpotLists, index: number) => {
+                          return <div key={item.spotId} onClick={(e) =>this.editSpot(e, item.spotId)}>{item.spotOrder}/ {item.spotName}</div>;
                           })}
                         </div>
                         <div styleName="content">
@@ -178,7 +193,7 @@ class NewItinerary extends React.Component<IProps, IState> {
                             <div styleName="main-wrap" ref={this.getMainWrap}>
                               <div styleName="main" ref={this.getMain}>
                                 {
-                                  this.state.content.map((i: {spotOrder: number, description: string}) => {
+                                  this.state.content.map((i: {spotOrder: number, spotName: string, description: string}) => {
                                     return <p key={i.spotOrder} dangerouslySetInnerHTML={{__html: i.description}}></p>;
                                   })
                                 }
